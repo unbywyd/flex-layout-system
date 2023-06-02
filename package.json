@@ -40,7 +40,7 @@
   "dependencies": {},
   "version": "0.0.1",
   "description": "Flex Layout System",
-  "name": "flex-webcomponents-layout",
+  "name": "flex-layout-system",
   "main": "dist/full.min.js",
   "files": [
     "dist",
