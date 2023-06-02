@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Webpack App</title>
+    <script src="base.min.js"></script>
+
+    <style>
+        .mobile {
+            background-color: red;
+        }
+
+        .test {
+            background-color: red;
+        }
+
+        .test2 {
+            background-color: green;
+        }
+
+        .test3 {
+            background-color: blue;
+        }
+
+        .test4 {
+            background-color: #fff;
+        }
+
+        .test6 {
+            background-color: aqua;
+        }
+
+        .container {
+            max-width: 1000px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+
+
+        <my-component>
+            <div>
+                VISIBLE
+            </div>
+        </my-component>
+
+        <flex-cell>
+            <div>
+                VISIBLE 2
+            </div>
+        </flex-cell>
+
+        <flex-mediabox target="window" breakpoints="780,1200,1400,1600,1800">
+
+
+            <space-box height="30px"></space-box>
+
+            <fill-container width="50px" height="50px" round>
+                <img src="https://placehold.co/600x400" width="200" alt="">
+            </fill-container>
+
+            <fill-container width="250px" height="200px" class="test">
+                <stacked-container class="test2">
+                    <stacked-item xa="0" xb="0" yb="0" class="test3">
+                        test
+                        <stacked-container>
+                            <stacked-item>Layer 2</stacked-item>
+                        </stacked-container>
+                    </stacked-item>
+
+                </stacked-container>
+            </fill-container>
+
+
+
+            <flex-centerbox viewport>
+                <aspect-ratio ratio="1/1">
+                    Test
+                </aspect-ratio>
+                asdasd
+                asdasd
+            </flex-centerbox>
+            <flex-canvas>
+
+                <flex-grid gap="40px">
+                    <flex-container>
+                        <flex-cell class="cell-4">
+                            <flex-container class="flex-column flex-row-sm" nowrap row gap="20px">
+                                <flex-cell>
+                                    <img src="https://placehold.co/600x400" width="200" alt="">
+                                </flex-cell>
+                                <flex-cell class="reset-spaces" stretch>
+                                    <flex-container column gap="5px">
+                                        <h2>Title</h2>
+                                        <p>Sub title</p>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, sed!
+                                            Error
+                                            impedit,
+                                            natus
+                                            consequatur ab sapiente, corporis non et reprehenderit consectetur animi
+                                            officiis
+                                            dolorem
+                                            delectus ducimus sit vero nisi odit?
+                                            Quod laboriosam rem dignissimos magnam at cupiditate minus placeat sit
+                                            dolorem,
+                                            ut,
+                                            voluptatibus laudantium expedita dolore voluptatum earum animi quasi
+                                            doloribus
+                                            error?
+                                            Maxime
+                                            quisquam voluptate voluptates expedita. Ducimus, sunt odio.
+                                            Est sed, quod sint repellendus rerum vel aut? Optio eum ipsa nesciunt rem
+                                            veritatis odio
+                                            harum est dolorem esse facere. Voluptate fugiat asperiores quo dolore, porro
+                                            tempore
+                                            omnis
+                                            quisquam dolorem.</p>
+                                    </flex-container>
+                                </flex-cell>
+                            </flex-container>
+                        </flex-cell>
+                        <flex-cell class="cell-4">
+                            <flex-container class="flex-column flex-row-sm" nowrap row gap="20px">
+                                <flex-cell>
+                                    <img src="https://placehold.co/600x400" width="200" alt="">
+                                </flex-cell>
+                                <flex-cell class="reset-spaces" stretch>
+                                    <flex-container column gap="5px">
+                                        <h2>Title</h2>
+                                        <p>Sub title</p>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, sed!
+                                            Error
+                                            impedit,
+                                            natus
+                                            consequatur ab sapiente, corporis non et reprehenderit consectetur animi
+                                            officiis
+                                            dolorem
+                                            delectus ducimus sit vero nisi odit?
+                                            Quod laboriosam rem dignissimos magnam at cupiditate minus placeat sit
+                                            dolorem,
+                                            ut,
+                                            voluptatibus laudantium expedita dolore voluptatum earum animi quasi
+                                            doloribus
+                                            error?
+                                            Maxime
+                                            quisquam voluptate voluptates expedita. Ducimus, sunt odio.
+                                            Est sed, quod sint repellendus rerum vel aut? Optio eum ipsa nesciunt rem
+                                            veritatis odio
+                                            harum est dolorem esse facere. Voluptate fugiat asperiores quo dolore, porro
+                                            tempore
+                                            omnis
+                                            quisquam dolorem.</p>
+                                    </flex-container>
+                                </flex-cell>
+                            </flex-container>
+                        </flex-cell>
+                        <flex-cell class="cell-4">
+                            <flex-container class="flex-column flex-row-sm" nowrap row gap="20px">
+                                <flex-cell>
+                                    <img src="https://placehold.co/600x400" width="200" alt="">
+                                </flex-cell>
+                                <flex-cell class="reset-spaces" stretch>
+                                    <flex-container column gap="5px">
+                                        <h2>Title</h2>
+                                        <p>Sub title</p>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, sed!
+                                            Error
+                                            impedit,
+                                            natus
+                                            consequatur ab sapiente, corporis non et reprehenderit consectetur animi
+                                            officiis
+                                            dolorem
+                                            delectus ducimus sit vero nisi odit?
+                                            Quod laboriosam rem dignissimos magnam at cupiditate minus placeat sit
+                                            dolorem,
+                                            ut,
+                                            voluptatibus laudantium expedita dolore voluptatum earum animi quasi
+                                            doloribus
+                                            error?
+                                            Maxime
+                                            quisquam voluptate voluptates expedita. Ducimus, sunt odio.
+                                            Est sed, quod sint repellendus rerum vel aut? Optio eum ipsa nesciunt rem
+                                            veritatis odio
+                                            harum est dolorem esse facere. Voluptate fugiat asperiores quo dolore, porro
+                                            tempore
+                                            omnis
+                                            quisquam dolorem.</p>
+                                    </flex-container>
+                                </flex-cell>
+                            </flex-container>
+                        </flex-cell>
+                        <flex-cell class="cell-4">
+                            <flex-container class="flex-column flex-row-sm" nowrap row gap="20px">
+                                <flex-cell>
+                                    <img src="https://placehold.co/600x400" width="200" alt="">
+                                </flex-cell>
+                                <flex-cell class="reset-spaces" stretch>
+                                    <flex-container column gap="5px">
+                                        <h2>Title</h2>
+                                        <p>Sub title</p>
+                                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique, sed!
+                                            Error
+                                            impedit,
+                                            natus
+                                            consequatur ab sapiente, corporis non et reprehenderit consectetur animi
+                                            officiis
+                                            dolorem
+                                            delectus ducimus sit vero nisi odit?
+                                            Quod laboriosam rem dignissimos magnam at cupiditate minus placeat sit
+                                            dolorem,
+                                            ut,
+                                            voluptatibus laudantium expedita dolore voluptatum earum animi quasi
+                                            doloribus
+                                            error?
+                                            Maxime
+                                            quisquam voluptate voluptates expedita. Ducimus, sunt odio.
+                                            Est sed, quod sint repellendus rerum vel aut? Optio eum ipsa nesciunt rem
+                                            veritatis odio
+                                            harum est dolorem esse facere. Voluptate fugiat asperiores quo dolore, porro
+                                            tempore
+                                            omnis
+                                            quisquam dolorem.</p>
+                                    </flex-container>
+                                </flex-cell>
+                            </flex-container>
+                        </flex-cell>
+                    </flex-container>
+                </flex-grid>
+            </flex-canvas>
+        </flex-mediabox>
+    </div>
+</body>
+
+</html>
