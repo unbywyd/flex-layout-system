@@ -4,9 +4,6 @@ import { customElement, property } from "lit/decorators.js";
 import "../utils/resize-observer";
 
 declare global {
-  interface Window {
-    resizeObserver: ResizeObserver;
-  }
   interface HTMLElement {
     startResizeListener(): void;
     stopResizeListener(): void;

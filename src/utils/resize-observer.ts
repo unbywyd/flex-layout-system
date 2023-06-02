@@ -1,25 +1,25 @@
-export class resizeObserver {
+export class ResizeObserverWrapper {
   observer: ResizeObserver | null;
+
   constructor(
     private options: { resizeObserverOptions?: ResizeObserverOptions } = {}
   ) {
     this.observer = null;
   }
+
   create() {
     if (this.observer) return;
-    this.observer = window.resizeObserver
-      ? window.resizeObserver
-      : new ResizeObserver((entries) => {
-          for (let entry of entries) {
-            entry.target.dispatchEvent(
-              new CustomEvent("resize", {
-                detail: entry.contentRect,
-              })
-            );
-          }
-        });
-    window.resizeObserver = this.observer;
+    this.observer = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        entry.target.dispatchEvent(
+          new CustomEvent("resize", {
+            detail: entry.contentRect,
+          })
+        );
+      }
+    });
   }
+
   addElement(element: Element) {
     this.create();
     if (element instanceof Element) {
@@ -28,19 +28,21 @@ export class resizeObserver {
       });
     }
   }
+
   removeElement(element: Element) {
     if (!(element instanceof Element)) return;
     this.observer.unobserve(element as Element);
   }
+
   destroy() {
     if (this.observer) {
       this.observer.disconnect();
     }
     this.observer = null;
-    delete window.resizeObserver;
   }
 }
-const resizeObserverInstance = new resizeObserver();
+
+const resizeObserverInstance = new ResizeObserverWrapper();
 
 HTMLElement.prototype.startResizeListener = function () {
   resizeObserverInstance.addElement(this);

@@ -1,2 +1,2 @@
 import "./components/index";
-import "./styles/responsive.scss";
+import "./styles/media-responsive.scss";

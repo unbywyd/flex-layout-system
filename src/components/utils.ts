@@ -118,6 +118,15 @@ export class FillConainer extends LitElement {
     :host([flex]) {
       display: flex;
     }
+    :host([stretch]) {
+      width: 100%;
+      height: 100%;
+    }
+    :host([center]) {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
     :host ::slotted(*) {
       width: 100%;
       height: 100%;
