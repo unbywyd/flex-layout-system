@@ -38,13 +38,14 @@
     "Chrome > 67"
   ],
   "dependencies": {},
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Flex Layout System",
   "name": "flex-layout-system",
   "main": "dist/full.min.js",
   "files": [
     "dist",
-    "dist/src"
+    "dist/src",
+    "index.d.ts"
   ],
   "types": "dist/src/**/*.d.ts",
   "scripts": {
