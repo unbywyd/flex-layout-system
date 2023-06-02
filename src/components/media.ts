@@ -14,7 +14,7 @@ declare global {
 }
 
 @customElement("flex-mediabox")
-export class MediaBox extends LitElement {
+export class FlexMediaBox extends LitElement {
   _targetEl: HTMLElement | Window | null = null;
   _resizeListener: any = null;
   static styles = css`

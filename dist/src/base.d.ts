@@ -1,2 +1,2 @@
-import "./layout/base";
+import "./components/index";
 import "./styles/responsive.scss";
