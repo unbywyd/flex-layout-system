@@ -35,6 +35,9 @@ export class FlexCanvas extends LitElement {
         ${unsafeCSS(FlexCanvas.defaultProps.padding)}
       );
     }
+    :host([flex]) {
+      display: flex;
+    }
 
     :host ::slotted(*) {
       --flex-canvas-display: ${unsafeCSS(FlexCanvas.defaultProps.display)};
@@ -50,12 +53,18 @@ export class FlexCanvas extends LitElement {
   @property({ type: String, reflect: true })
   margin: string | null = null;
 
+  @property({ type: String, reflect: true })
+  padding: string | null = null;
+
   render() {
+    if (this.padding) {
+      this.style.setProperty("--flex-canvas-padding", this.padding);
+    }
     if (this.width) {
-      this.style.setProperty("--flex-container-max-width", this.width);
+      this.style.setProperty("--flex-canvas-max-width", this.width);
     }
     if (this.margin) {
-      this.style.setProperty("--flex-container-margin", this.margin);
+      this.style.setProperty("--flex-canvas-margin", this.margin);
     }
     return html`<slot></slot>`;
   }
