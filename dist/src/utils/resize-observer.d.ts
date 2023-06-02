@@ -1,4 +1,4 @@
-export declare class resizeObserver {
+export declare class ResizeObserverWrapper {
     private options;
     observer: ResizeObserver | null;
     constructor(options?: {

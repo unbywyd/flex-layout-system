@@ -1,9 +1,6 @@
 import { LitElement } from "lit";
 import "../utils/resize-observer";
 declare global {
-    interface Window {
-        resizeObserver: ResizeObserver;
-    }
     interface HTMLElement {
         startResizeListener(): void;
         stopResizeListener(): void;
