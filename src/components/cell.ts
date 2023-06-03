@@ -46,6 +46,17 @@ export class FlexCell extends LitElement {
       flex-basis: 33.3333333333%;
       max-width: 33.3333333333%;
     }
+    :host([scrollable]:not([flex])) {
+      flex-grow: 1;
+      overflow: auto;
+    }
+    :host([scrollable][flex]) {
+      min-height: 0;
+      flex-grow: 1;
+    }
+    :host([scrollable][flex]) ::slotted(*) {
+      overflow: auto;
+    }
     :host(.cell-5) {
       flex-basis: 41.6666666667%;
       max-width: 41.6666666667%;

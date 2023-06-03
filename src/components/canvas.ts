@@ -51,20 +51,20 @@ export class FlexCanvas extends LitElement {
   width: string | null = null;
 
   @property({ type: String, reflect: true })
-  margin: string | null = null;
+  mg: string | null = null;
 
   @property({ type: String, reflect: true })
-  padding: string | null = null;
+  pd: string | null = null;
 
   render() {
-    if (this.padding) {
-      this.style.setProperty("--flex-canvas-padding", this.padding);
+    if (this.pd) {
+      this.style.setProperty("--flex-canvas-padding", this.pd);
     }
     if (this.width) {
       this.style.setProperty("--flex-canvas-max-width", this.width);
     }
-    if (this.margin) {
-      this.style.setProperty("--flex-canvas-margin", this.margin);
+    if (this.mg) {
+      this.style.setProperty("--flex-canvas-margin", this.mg);
     }
     return html`<slot></slot>`;
   }

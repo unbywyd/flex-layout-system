@@ -57,6 +57,9 @@ export class FlexContainer extends LitElement {
     :host([spread]) {
       justify-content: space-between;
     }
+    :host([stretch]) {
+      align-items: stretch;
+    }
     :host([start]) {
       justify-content: flex-start;
       align-items: flex-start;
@@ -180,13 +183,17 @@ export class FlexContainer extends LitElement {
       --flex-container-gap: ${unsafeCSS(FlexContainer.defaultProps.gap)};
     }
 
-    :host([fill]) ::slotted(flex-cell:not([priority])) {
+    :host([column][stretch]) ::slotted(*) {
+      width: 100%;
+    }
+
+    :host([fill]) ::slotted(*:not([priority])) {
       flex: 1 1 auto;
     }
-    :host([fit]) ::slotted(flex-cell:not([priority])) {
+    :host([fit]) ::slotted(*:not([priority])) {
       flex: 1;
     }
-    :host([snug]) ::slotted(flex-cell:not([priority])) {
+    :host([snug]) ::slotted(*:not([priority])) {
       flex: 0;
     }
   `;

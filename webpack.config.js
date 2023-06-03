@@ -13,7 +13,8 @@ const config = {
   entry: {
     base: "./src/base.ts",
     full: "./src/full.ts",
-    fulljs: "./src/full-js.ts",
+    "css-responsive": "./src/css-responsive.ts",
+    "js-responsive": "./src/js-responsive.ts",
   },
   output: {
     filename: "[name].min.js",

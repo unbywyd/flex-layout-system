@@ -1,3 +1,8 @@
+declare global {
+    interface Window {
+        FlexResizeObserver: ResizeObserverWrapper;
+    }
+}
 export declare class ResizeObserverWrapper {
     private options;
     observer: ResizeObserver | null;

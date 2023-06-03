@@ -13,6 +13,10 @@ export class FlexGrid extends LitElement {
     :host([flex]) {
       display: flex;
     }
+
+    :host([compact]) {
+      padding: 0;
+    }
     :host ::slotted(flex-container) {
       --flex-grid-padding: var(--flex-grid-gap);
     }
