@@ -3,7 +3,7 @@ export declare class StackedBox extends LitElement {
     static styles: import("lit").CSSResult;
     render(): import("lit-html").TemplateResult<1>;
 }
-export declare class StackedItem extends LitElement {
+export declare class StackedCell extends LitElement {
     static styles: import("lit").CSSResult;
     xa: string | null;
     xb: string | null;
@@ -28,7 +28,7 @@ export declare class AspectRatio extends LitElement {
     ratio: string | null;
     render(): import("lit-html").TemplateResult<1>;
 }
-export declare class HorizontalDivider extends LitElement {
+export declare class FlexDivider extends LitElement {
     static styles: import("lit").CSSResult;
     mg: string | null;
     width: string | null;
