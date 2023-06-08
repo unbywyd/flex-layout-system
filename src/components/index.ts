@@ -1,5 +1,4 @@
 import "./canvas";
-import "./container";
+import "./box";
 import "./cell";
 import "./grid";
-import "./centerbox";

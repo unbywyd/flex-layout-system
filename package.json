@@ -38,7 +38,7 @@
     "Chrome > 67"
   ],
   "dependencies": {},
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Flex Layout System",
   "name": "flex-layout-system",
   "main": "dist/full.min.js",

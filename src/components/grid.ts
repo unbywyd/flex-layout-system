@@ -8,7 +8,7 @@ export class FlexGrid extends LitElement {
       box-sizing: border-box;
       display: block;
       overflow: hidden;
-      padding: var(--flex-grid-gap, 0);
+      padding: var(--f-g-gap, 0);
     }
     :host([flex]) {
       display: flex;
@@ -17,11 +17,11 @@ export class FlexGrid extends LitElement {
     :host([compact]) {
       padding: 0;
     }
-    :host ::slotted(flex-container) {
-      --flex-grid-padding: var(--flex-grid-gap);
+    :host ::slotted(*) {
+      --f-g-pd: var(--f-g-gap);
     }
-    :host ::slotted(flex-container) {
-      margin: calc(-1 * var(--flex-grid-gap));
+    :host ::slotted(*) {
+      margin: calc(-1 * var(--f-g-gap));
     }
   `;
 
@@ -29,7 +29,7 @@ export class FlexGrid extends LitElement {
   gap: string | null = null;
   render() {
     if (this.gap) {
-      this.style.setProperty("--flex-grid-gap", this.gap);
+      this.style.setProperty("--f-g-gap", this.gap);
     }
     return html`<slot></slot>`;
   }

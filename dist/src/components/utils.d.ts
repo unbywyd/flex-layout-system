@@ -1,5 +1,5 @@
 import { LitElement } from "lit";
-export declare class StackedContainer extends LitElement {
+export declare class StackedBox extends LitElement {
     static styles: import("lit").CSSResult;
     render(): import("lit-html").TemplateResult<1>;
 }
@@ -13,11 +13,7 @@ export declare class StackedItem extends LitElement {
     oc: string | null;
     render(): import("lit-html").TemplateResult<1>;
 }
-export declare class FitConainer extends LitElement {
-    static styles: import("lit").CSSResult;
-    render(): import("lit-html").TemplateResult<1>;
-}
-export declare class FillConainer extends LitElement {
+export declare class FitBox extends LitElement {
     static styles: import("lit").CSSResult;
     width: string | null;
     height: string | null;
@@ -32,24 +28,19 @@ export declare class AspectRatio extends LitElement {
     ratio: string | null;
     render(): import("lit-html").TemplateResult<1>;
 }
+export declare class HorizontalDivider extends LitElement {
+    static styles: import("lit").CSSResult;
+    mg: string | null;
+    width: string | null;
+    color: string | null;
+    size: string | null;
+    render(): import("lit-html").TemplateResult<1>;
+}
 export declare class SpaceBox extends LitElement {
     static styles: import("lit").CSSResult;
     width: string | null;
     height: string | null;
-    pd: string | null;
-    mg: string | null;
-    pis: string | null;
-    px: string | null;
-    py: string | null;
-    mx: string | null;
-    my: string | null;
-    pie: string | null;
-    pbs: string | null;
-    pbe: string | null;
-    mbs: string | null;
-    mbe: string | null;
-    mis: string | null;
-    mie: string | null;
+    size: string | null;
     render(): import("lit-html").TemplateResult<1>;
 }
 export declare class StyleBox extends LitElement {

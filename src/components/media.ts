@@ -10,7 +10,7 @@ declare global {
   }
 }
 
-@customElement("flex-mediabox")
+@customElement("flex-media")
 export class FlexMediaBox extends LitElement {
   _targetEl: HTMLElement | Window | null = null;
   _resizeListener: any = null;

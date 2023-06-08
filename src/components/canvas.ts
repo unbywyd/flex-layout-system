@@ -19,31 +19,22 @@ export class FlexCanvas extends LitElement {
     :host {
       box-sizing: border-box;
       display: var(
-        --flex-canvas-display,
+        --f-cs-db,
         ${unsafeCSS(FlexCanvas.defaultProps.display)}
       );
-      margin: var(
-        --flex-canvas-margin,
-        ${unsafeCSS(FlexCanvas.defaultProps.margin)}
-      );
-      max-width: var(
-        --flex-canvas-max-width,
-        ${unsafeCSS(FlexCanvas.defaultProps.maxWidth)}
-      );
-      padding: var(
-        --flex-canvas-padding,
-        ${unsafeCSS(FlexCanvas.defaultProps.padding)}
-      );
+      margin: var(--f-cs-mg, ${unsafeCSS(FlexCanvas.defaultProps.margin)});
+      max-width: var(--f-cs-mw, ${unsafeCSS(FlexCanvas.defaultProps.maxWidth)});
+      padding: var(--f-cs-pd, ${unsafeCSS(FlexCanvas.defaultProps.padding)});
     }
     :host([flex]) {
       display: flex;
     }
 
     :host ::slotted(*) {
-      --flex-canvas-display: ${unsafeCSS(FlexCanvas.defaultProps.display)};
-      --flex-canvas-margin: ${unsafeCSS(FlexCanvas.defaultProps.margin)};
-      --flex-canvas-max-width: ${unsafeCSS(FlexCanvas.defaultProps.maxWidth)};
-      --flex-canvas-padding: ${unsafeCSS(FlexCanvas.defaultProps.padding)};
+      --f-cs-db: ${unsafeCSS(FlexCanvas.defaultProps.display)};
+      --f-cs-mg: ${unsafeCSS(FlexCanvas.defaultProps.margin)};
+      --f-cs-mw: ${unsafeCSS(FlexCanvas.defaultProps.maxWidth)};
+      --f-cs-pd: ${unsafeCSS(FlexCanvas.defaultProps.padding)};
     }
   `;
 
@@ -58,13 +49,13 @@ export class FlexCanvas extends LitElement {
 
   render() {
     if (this.pd) {
-      this.style.setProperty("--flex-canvas-padding", this.pd);
+      this.style.setProperty("--f-cs-pd", this.pd);
     }
     if (this.width) {
-      this.style.setProperty("--flex-canvas-max-width", this.width);
+      this.style.setProperty("--f-cs-mw", this.width);
     }
     if (this.mg) {
-      this.style.setProperty("--flex-canvas-margin", this.mg);
+      this.style.setProperty("--f-cs-mg", this.mg);
     }
     return html`<slot></slot>`;
   }

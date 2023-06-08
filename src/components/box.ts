@@ -1,8 +1,8 @@
 import { LitElement, html, css, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 
-@customElement("flex-container")
-export class FlexContainer extends LitElement {
+@customElement("flex-box")
+export class FlexBox extends LitElement {
   static defaultProps: {
     reverse: boolean;
     display: "flex" | "inline-flex";
@@ -24,7 +24,7 @@ export class FlexContainer extends LitElement {
   };
   get mode() {
     if (!this.row && !this.column) {
-      return FlexContainer.defaultProps.mode;
+      return FlexBox.defaultProps.mode;
     }
     return this.row ? "row" : "column";
   }
@@ -130,60 +130,65 @@ export class FlexContainer extends LitElement {
     }
     :host {
       box-sizing: border-box;
-      display: var(
-        --flex-container-display,
-        ${unsafeCSS(FlexContainer.defaultProps.display)}
-      );
+      display: var(--f-b-db, ${unsafeCSS(FlexBox.defaultProps.display)});
       flex-direction: var(
-        --flex-container-direction,
+        --f-b-dir,
         ${unsafeCSS(
-          FlexContainer.defaultProps.reverse
-            ? FlexContainer.defaultProps.mode + "-reverse"
-            : FlexContainer.defaultProps.mode
+          FlexBox.defaultProps.reverse
+            ? FlexBox.defaultProps.mode + "-reverse"
+            : FlexBox.defaultProps.mode
         )}
       );
-      gap: var(
-        --flex-container-gap,
-        ${unsafeCSS(FlexContainer.defaultProps.gap)}
-      );
+      gap: var(--f-b-gap, ${unsafeCSS(FlexBox.defaultProps.gap)});
       flex-wrap: var(
-        --flex-container-wrap,
-        ${unsafeCSS(FlexContainer.defaultProps.wrap ? "wrap" : "nowrap")}
+        --f-b-wp,
+        ${unsafeCSS(FlexBox.defaultProps.wrap ? "wrap" : "nowrap")}
       );
       justify-content: var(
-        --flex-container-justify-content,
-        ${unsafeCSS(FlexContainer.defaultProps.justifyContent)}
+        --f-b-jc,
+        ${unsafeCSS(FlexBox.defaultProps.justifyContent)}
       );
-      align-items: var(
-        --flex-container-align-items,
-        ${unsafeCSS(FlexContainer.defaultProps.alignItems)}
-      );
+      align-items: var(--f-b-ai, ${unsafeCSS(FlexBox.defaultProps.alignItems)});
       align-content: var(
-        --flex-container-align-content,
-        ${unsafeCSS(FlexContainer.defaultProps.alignContent)}
+        --f-b-ac,
+        ${unsafeCSS(FlexBox.defaultProps.alignContent)}
       );
     }
 
     :host ::slotted(*) {
-      --flex-container-display: ${unsafeCSS(
-        FlexContainer.defaultProps.display
+      --f-b-dir: ${unsafeCSS(
+        FlexBox.defaultProps.reverse
+          ? FlexBox.defaultProps.mode + "-reverse"
+          : FlexBox.defaultProps.mode
       )};
-      --flex-container-wrap: ${unsafeCSS(
-        FlexContainer.defaultProps.wrap ? "wrap" : "nowrap"
-      )};
-      --flex-container-justify-content: ${unsafeCSS(
-        FlexContainer.defaultProps.justifyContent
-      )};
-      --flex-container-align-items: ${unsafeCSS(
-        FlexContainer.defaultProps.alignItems
-      )};
-      --flex-container-align-content: ${unsafeCSS(
-        FlexContainer.defaultProps.alignContent
-      )};
-      --flex-container-gap: ${unsafeCSS(FlexContainer.defaultProps.gap)};
+      --f-b-db: ${unsafeCSS(FlexBox.defaultProps.display)};
+      --f-b-wp: ${unsafeCSS(FlexBox.defaultProps.wrap ? "wrap" : "nowrap")};
+      --f-b-jc: ${unsafeCSS(FlexBox.defaultProps.justifyContent)};
+      --f-b-ai: ${unsafeCSS(FlexBox.defaultProps.alignItems)};
+      --f-b-ac: ${unsafeCSS(FlexBox.defaultProps.alignContent)};
+      --f-b-gap: ${unsafeCSS(FlexBox.defaultProps.gap)};
     }
 
     :host([column][stretch]) ::slotted(*) {
+      width: 100%;
+    }
+
+    :host(:not([column])) ::slotted(f-divider:not([h]):not([v])) {
+      min-width: var(--f-vd-w, var(--f-divider-size));
+      width: var(--f-vd-w, var(--f-divider-size));
+      height: var(--f-vd-ops-size, auto);
+      margin: 0 var(--f-divider-m, 0);
+    }
+
+    :host([column]) ::slotted(f-divider:not([h]):not([v])) {
+      min-height: var(--f-divider-h, var(--f-divider-size));
+      height: var(--f-divider-h, var(--f-divider-size));
+      margin: var(--f-divider-m, 0) 0;
+      width: var(--f-vd-ops-size, auto);
+      max-width: var(--f-vd-ops-size, 100%);
+    }
+    
+    :host([column]) ::slotted(f-divider[stretch]:not([h]):not([v])) {
       width: 100%;
     }
 
@@ -209,10 +214,10 @@ export class FlexContainer extends LitElement {
 
   render() {
     if (this.gap) {
-      this.style.setProperty("--flex-container-gap", this.gap);
+      this.style.setProperty("--f-b-gap", this.gap);
     }
     if (this.row && this.column) {
-      throw new Error("flex-container cannot be both row and column");
+      throw new Error("flex-box cannot be both row and column");
     }
     return html`<slot></slot>`;
   }

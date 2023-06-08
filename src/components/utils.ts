@@ -7,8 +7,8 @@
 import { LitElement, html, css, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 
-@customElement("stacked-container")
-export class StackedContainer extends LitElement {
+@customElement("stacked-box")
+export class StackedBox extends LitElement {
   static styles = css`
     :host {
       display: block;
@@ -30,31 +30,31 @@ export class StackedContainer extends LitElement {
 }
 
 @customElement("stacked-cell")
-export class StackedItem extends LitElement {
+export class StackedCell extends LitElement {
   static styles = css`
     :host {
       position: absolute;
       box-sizing: border-box;
-      inset-inline-start: var(--stacked-cell-start, auto);
-      inset-inline-end: var(--stacked-cell-end, auto);
-      inset-block-start: var(--stacked-cell-top, auto);
-      inset-block-end: var(--stacked-cell-bottom, auto);
-      z-index: var(--stacked-cell-z-index, auto);
+      inset-inline-start: var(--f-sc-s, auto);
+      inset-inline-end: var(--f-sc-e, auto);
+      inset-block-start: var(--f-sc-t, auto);
+      inset-block-end: var(--f-sc-b, auto);
+      z-index: var(--f-sc-z, auto);
     }
     :host([rel]) {
       position: relative;
     }
 
     :host ::slotted(*) {
-      --stacked-cell-start: auto;
-      --stacked-cell-end: auto;
-      --stacked-cell-top: auto;
-      --stacked-cell-bottom: auto;
-      --stacked-cell-z-index: auto;
+      --f-sc-s: auto;
+      --f-sc-e: auto;
+      --f-sc-t: auto;
+      --f-sc-b: auto;
+      --f-sc-z: auto;
     }
 
     :host([overlay]) {
-      background: var(--stacked-cell-overlay-color, rgba(0, 0, 0, 0.5));
+      background: var(--f-sc-oc, rgba(0, 0, 0, 0.5));
     }
 
     :host([stretch]) {
@@ -81,58 +81,25 @@ export class StackedItem extends LitElement {
   oc: string | null = null;
 
   render() {
-    if (this.oc)
-      this.style.setProperty("--stacked-cell-overlay-color", this.oc);
-    if (this.xa) this.style.setProperty("--stacked-cell-start", this.xa);
-    if (this.xb) this.style.setProperty("--stacked-cell-end", this.xb);
-    if (this.ya) this.style.setProperty("--stacked-cell-top", this.ya);
-    if (this.yb) this.style.setProperty("--stacked-cell-bottom", this.yb);
-    if (this.z) this.style.setProperty("--stacked-cell-z-index", this.z);
+    if (this.oc) this.style.setProperty("--f-sc-oc", this.oc);
+    if (this.xa) this.style.setProperty("--f-sc-s", this.xa);
+    if (this.xb) this.style.setProperty("--f-sc-e", this.xb);
+    if (this.ya) this.style.setProperty("--f-sc-t", this.ya);
+    if (this.yb) this.style.setProperty("--f-sc-b", this.yb);
+    if (this.z) this.style.setProperty("--f-sc-z", this.z);
     return html`<slot></slot>`;
   }
 }
 
-@customElement("fit-container")
-export class FitConainer extends LitElement {
-  static styles = css`
-    :host {
-      display: block;
-      width: 100%;
-      height: 100%;
-      box-sizing: border-box;
-    }
-    :host ::slotted(img) {
-      max-width: 100%;
-      object-fit: contain;
-    }
-    :host([flex]) {
-      display: flex;
-    }
-    :host([crop]) {
-      overflow: hidden;
-    }
-    :host([scrollable]) {
-      overflow: auto;
-    }
-    :host ::slotted(fill-container) {
-      width: 100%;
-      height: 100%;
-    }
-  `;
-  render() {
-    return html` <slot></slot> `;
-  }
-}
-
-@customElement("fill-container")
-export class FillConainer extends LitElement {
+@customElement("fit-box")
+export class FitBox extends LitElement {
   static styles = css`
     :host {
       display: block;
       box-sizing: border-box;
       position: relative;
-      width: var(--fill-container-width, 100%);
-      height: var(--fill-container-height, auto);
+      width: var(--f-fb-w, 100%);
+      height: var(--f-fb-h, auto);
     }
     :host([flex]) {
       display: flex;
@@ -140,44 +107,48 @@ export class FillConainer extends LitElement {
     :host([stretch]) {
       width: 100%;
       height: 100%;
+      flex-grow: 1;
+    }
+    :host([crop]) {
+      overflow: hidden;
+    }
+    :host([scrollable]) {
+      overflow: auto;
     }
     :host([center]) {
       display: flex;
       justify-content: center;
       align-items: center;
     }
-    :host ::slotted(*) {
+    :host([fill]) ::slotted(*) {
       width: 100%;
       height: 100%;
-      --fill-container-width: 100%;
-      --fill-container-height: auto;
-    }
-    :host([force]) ::slotted(*) {
-      width: 100% !important;
-      height: 100% !important;
-      display: block !important;
-    }
-    :host ::slotted(img) {
-      object-fit: contain;
-      object-position: center;
-      height: auto;
-      width: auto;
-      max-width: 100%;
-      max-height: 100%;
-    }
-    :host([cover]) ::slotted(img) {
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
+      --f-fb-w: 100%;
+      --f-fb-h: auto;
     }
     :host([round]) {
       overflow: hidden;
       border-radius: 50%;
     }
-    :host([round]) ::slotted(img) {
+    :host([cover]) ::slotted(img) {
       object-fit: cover;
-      width: 100%;
-      height: 100%;
+      object-position: center;
+    }
+    :host([contain]) ::slotted(img) {
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    :host([stretch][force]) {
+      width: 100% !important;
+      height: 100% !important;
+    }
+    :host([force][fill]) ::slotted(*) {
+      width: 100% !important;
+      height: 100% !important;
+      display: block !important;
     }
   `;
 
@@ -188,15 +159,13 @@ export class FillConainer extends LitElement {
   height: string | null = null;
 
   render() {
-    if (this.width)
-      this.style.setProperty("--fill-container-width", this.width);
-    if (this.height)
-      this.style.setProperty("--fill-container-height", this.height);
+    if (this.width) this.style.setProperty("--f-fb-w", this.width);
+    if (this.height) this.style.setProperty("--f-fb-h", this.height);
     return html`<slot></slot>`;
   }
 }
 
-@customElement("aspect-ratio")
+@customElement("a-ratio")
 export class AspectRatio extends LitElement {
   static defaultProps: {
     display: string;
@@ -207,10 +176,10 @@ export class AspectRatio extends LitElement {
   static styles = css`
     :host {
       box-sizing: border-box;
-      aspect-ratio: var(--aspect-ratio, auto);
+      aspect-ratio: var(--f-ar-v, auto);
     }
     :host ::slotted(*) {
-      --aspect-ratio: auto;
+      --f-ar-v: auto;
     }
     :host([fit]) ::slotted(*) {
       width: 100%;
@@ -227,55 +196,55 @@ export class AspectRatio extends LitElement {
       justify-content: center;
     }
     :host([ratio="1/1"]) {
-      --aspect-ratio: 1/1;
+      --f-ar-v: 1/1;
     }
     :host([ratio="4/3"]) {
-      --aspect-ratio: 4/3;
+      --f-ar-v: 4/3;
     }
     :host([ratio="16/9"]) {
-      --aspect-ratio: 16/9;
+      --f-ar-v: 16/9;
     }
     :host([ratio="21/9"]) {
-      --aspect-ratio: 21/9;
+      --f-ar-v: 21/9;
     }
     :host([ratio="3/4"]) {
-      --aspect-ratio: 3/4;
+      --f-ar-v: 3/4;
     }
     :host([ratio="9/16"]) {
-      --aspect-ratio: 9/16;
+      --f-ar-v: 9/16;
     }
     :host([ratio="9/21"]) {
-      --aspect-ratio: 9/21;
+      --f-ar-v: 9/21;
     }
     :host([ratio="1/2"]) {
-      --aspect-ratio: 1/2;
+      --f-ar-v: 1/2;
     }
     :host([ratio="2/1"]) {
-      --aspect-ratio: 2/1;
+      --f-ar-v: 2/1;
     }
     :host([ratio="1/3"]) {
-      --aspect-ratio: 1/3;
+      --f-ar-v: 1/3;
     }
     :host([ratio="3/1"]) {
-      --aspect-ratio: 3/1;
+      --f-ar-v: 3/1;
     }
     :host([ratio="1/4"]) {
-      --aspect-ratio: 1/4;
+      --f-ar-v: 1/4;
     }
     :host([ratio="4/1"]) {
-      --aspect-ratio: 4/1;
+      --f-ar-v: 4/1;
     }
     :host([ratio="1/5"]) {
-      --aspect-ratio: 1/5;
+      --f-ar-v: 1/5;
     }
     :host([ratio="5/1"]) {
-      --aspect-ratio: 5/1;
+      --f-ar-v: 5/1;
     }
     :host([ratio="1/6"]) {
-      --aspect-ratio: 1/6;
+      --f-ar-v: 1/6;
     }
     :host([ratio="6/1"]) {
-      --aspect-ratio: 6/1;
+      --f-ar-v: 6/1;
     }
   `;
 
@@ -290,39 +259,81 @@ export class AspectRatio extends LitElement {
   }
 }
 
+@customElement("flex-divider")
+export class FlexDivider extends LitElement {
+  static styles = css`
+    :host {
+      --f-divider-size: 1px;
+      --f-divider-bg-dark: rgba(255, 255, 255, 0.12);
+      --f-divider-bg-light: rgba(0, 0, 0, 0.12);
+      box-sizing: border-box;
+      display: var(--f-divider-db, block);
+      align-self: center;
+    }
+    :host([v]) {
+      min-width: var(--f-vd-w, var(--f-divider-size));
+      width: var(--f-vd-w, var(--f-divider-size));
+      height: var(--f-vd-ops-size, auto);
+      margin: 0 var(--f-divider-m, 0);
+    }
+
+    :host([h]) {
+      min-height: var(--f-divider-h, var(--f-divider-size));
+      height: var(--f-divider-h, var(--f-divider-size));
+      margin: var(--f-divider-m, 0) 0;
+      width: var(--f-vd-ops-size, auto);
+      max-width: var(--f-vd-ops-size, 100%);
+    }
+    :host([stretch][h]) {
+      width: 100%;
+    }
+    :host([stretch]) {
+      align-self: stretch;
+    }
+
+    :host([dark]) {
+      background-color: var(
+        --f-divider-bg,
+        var(--f-divider-fallback-bg-dark, var(--f-divider-bg-dark))
+      );
+    }
+    :host(:not([dark])) {
+      background-color: var(
+        --f-divider-bg,
+        var(--f-divider-fallback-bg-light, var(--f-divider-bg-light))
+      );
+    }
+  `;
+
+  @property({ type: String, reflect: true })
+  mg: string | null = null;
+
+  @property({ type: String, reflect: true })
+  width: string | null = null;
+
+  @property({ type: String, reflect: true })
+  color: string | null = null;
+
+  @property({ type: String, reflect: true })
+  size: string | null = null;
+
+  render() {
+    if (this.size) this.style.setProperty("--f-vd-ops-size", this.size);
+    if (this.color) this.style.setProperty("--f-divider-bg", this.color);
+    if (this.width) this.style.setProperty("--f-divider-size", this.width);
+    if (this.mg) this.style.setProperty("--f-divider-m", this.mg);
+    return html``;
+  }
+}
+
 @customElement("space-box")
 export class SpaceBox extends LitElement {
   static styles = css`
     :host {
       box-sizing: border-box;
-      display: var(--sbox-display, block);
-      width: var(--sbox-width, 100%) !important;
-      height: var(--sbox-height, auto) !important;
-      padding-inline-start: var(--sbox-pis, var(--sbox-pd-gb, 0));
-      padding-inline-end: var(--sbox-pie, var(--sbox-pd-gb, 0));
-      padding-block-start: var(--sbox-pbs, var(--sbox-pd-gb, 0));
-      padding-block-end: var(--sbox-pbe, var(--sbox-pd-gb, 0));
-      margin-inline-start: var(--sbox-mis, var(--sbox-mg-gb, 0));
-      margin-inline-end: var(--sbox-mie, var(--sbox-mg-gb, 0));
-      margin-block-start: var(--sbox-mbs, var(--sbox-mg-gb, 0));
-      margin-block-end: var(--sbox-mbe, var(--sbox-mg-gb, 0));
-    }
-
-    :host ::slotted(*) {
-      --sbox-width: 100%;
-      --sbox-height: auto;
-      --sbox-padding: 0;
-      --sbox-margin: 0;
-      --sbox-pd-gb: 0;
-      --sbox-mg-gb: 0;
-      --sbox-pis: 0;
-      --sbox-pie: 0;
-      --sbox-pbs: 0;
-      --sbox-pbe: 0;
-      --sbox-mis: 0;
-      --sbox-mie: 0;
-      --sbox-mbs: 0;
-      --sbox-mbe: 0;
+      display: var(--f-sbx-db, block);
+      width: var(--f-sbx-w, 100%);
+      height: var(--f-sbx-h, auto);
     }
   `;
 
@@ -333,83 +344,16 @@ export class SpaceBox extends LitElement {
   height: string | null = null;
 
   @property({ type: String, reflect: true })
-  pd: string | null = null;
-
-  @property({ type: String, reflect: true })
-  mg: string | null = null;
-
-  @property({ type: String, reflect: true })
-  pis: string | null = null;
-
-  @property({ type: String, reflect: true })
-  px: string | null = null;
-
-  @property({ type: String, reflect: true })
-  py: string | null = null;
-
-  @property({ type: String, reflect: true })
-  mx: string | null = null;
-
-  @property({ type: String, reflect: true })
-  my: string | null = null;
-
-  @property({ type: String, reflect: true })
-  pie: string | null = null;
-
-  @property({ type: String, reflect: true })
-  pbs: string | null = null;
-
-  @property({ type: String, reflect: true })
-  pbe: string | null = null;
-
-  @property({ type: String, reflect: true })
-  mbs: string | null = null;
-
-  @property({ type: String, reflect: true })
-  mbe: string | null = null;
-
-  @property({ type: String, reflect: true })
-  mis: string | null = null;
-
-  @property({ type: String, reflect: true })
-  mie: string | null = null;
+  size: string | null = null;
 
   render() {
-    if (this.width) this.style.setProperty("--sbox-width", this.width);
-    if (this.height) this.style.setProperty("--sbox-height", this.height);
-    if (this.pd) {
-      this.style.setProperty("--sbox-pd-gb", this.pd);
+    if (this.width) this.style.setProperty("--f-sbx-w", this.width);
+    if (this.height) this.style.setProperty("--f-sbx-h", this.height);
+    if (this.size) {
+      this.style.setProperty("--f-sbx-w", this.size);
+      this.style.setProperty("--f-sbx-h", this.size);
     }
-    if (this.mg) {
-      this.style.setProperty("--sbox-mg-gb", this.mg);
-    }
-    if (this.px) {
-      this.style.setProperty("--sbox-pis", this.px);
-      this.style.setProperty("--sbox-pie", this.px);
-    }
-    if (this.py) {
-      this.style.setProperty("--sbox-pbs", this.py);
-      this.style.setProperty("--sbox-pbe", this.py);
-    }
-    if (this.mx) {
-      this.style.setProperty("--sbox-mis", this.mx);
-      this.style.setProperty("--sbox-mie", this.mx);
-    }
-    if (this.my) {
-      this.style.setProperty("--sbox-mbs", this.my);
-      this.style.setProperty("--sbox-mbe", this.my);
-    }
-    if (this.pis) this.style.setProperty("--sbox-pis", this.pis);
-    if (this.pie) this.style.setProperty("--sbox-pie", this.pie);
-    if (this.pbs) this.style.setProperty("--sbox-pbs", this.pbs);
-    if (this.pbe) this.style.setProperty("--sbox-pbe", this.pbe);
-
-    if (this.mis) this.style.setProperty("--sbox-mis", this.mis);
-    if (this.mie) this.style.setProperty("--sbox-mie", this.mie);
-    if (this.mbs) this.style.setProperty("--sbox-mbs", this.mbs);
-    if (this.mbe) this.style.setProperty("--sbox-mbe", this.mbe);
-
-    return html`<slot></slot>`;
+    return html``;
   }
 }
 
@@ -417,35 +361,35 @@ export class SpaceBox extends LitElement {
 export class StyleBox extends LitElement {
   static styles = css`
     :host {
-      --s-box-fb-display: var(--s-box-fallback-display, inline-block);
-      --s-box-fb-fsz: var(--s-box-fallback-font-size, 1rem);
-      --s-box-fb-lh: var(--s-box-fallback-line-height, normal);
-      --s-box-fb-fw: var(--s-box-fallback-font-weight, normal);
+      --f-sb-fb-display: var(--f-sb-fallback-display, inline-block);
+      --f-sb-fb-fsz: var(--f-sb-fallback-font-size, 1rem);
+      --f-sb-fb-lh: var(--f-sb-fallback-line-height, normal);
+      --f-sb-fb-fw: var(--f-sb-fallback-font-weight, normal);
 
-      display: var(--s-box-display, var(--s-box-fb-display));
-      font-size: var(--s-box-fsz, inherit);
-      font-weight: var(--s-box-fw, inherit);
-      line-height: var(--s-box-lh, inherit);
+      display: var(--f-sb-db, var(--f-sb-fb-display));
+      font-size: var(--f-sb-fsz, inherit);
+      font-weight: var(--f-sb-fw, inherit);
+      line-height: var(--f-sb-lh, inherit);
       box-sizing: border-box;
-      width: var(--s-box-w, auto);
-      height: var(--s-box-h, auto);
-      min-width: var(--s-box-mw, auto);
-      max-width: var(--s-box-mxw, auto);
-      min-height: var(--s-box-mh, auto);
-      max-height: var(--s-box-mxh, auto);
-      padding-inline-start: var(--s-box-pis, var(--s-box-pd-gb, 0));
-      padding-inline-end: var(--s-box-pie, var(--s-box-pd-gb, 0));
-      padding-block-start: var(--s-box-pbs, var(--s-box-pd-gb, 0));
-      padding-block-end: var(--s-box-pbe, var(--s-box-pd-gb, 0));
-      margin-inline-start: var(--s-box-mis, var(--s-box-mg-gb, 0));
-      margin-inline-end: var(--s-box-mie, var(--s-box-mg-gb, 0));
-      margin-block-start: var(--s-box-mbs, var(--s-box-mg-gb, 0));
-      margin-block-end: var(--s-box-mbe, var(--s-box-mg-gb, 0));
-      text-align: var(--s-box-ta, start);
-      opacity: var(--s-box-op, 1);
-      text-decoration: var(--s-box-td, none);
-      border-radius: var(--s-box-br, 0);
-      text-transform: var(--s-box-tt, none);
+      width: var(--f-sb-w, auto);
+      height: var(--f-sb-h, auto);
+      min-width: var(--f-sb-mw, auto);
+      max-width: var(--f-sb-mxw, auto);
+      min-height: var(--f-sb-mh, auto);
+      max-height: var(--f-sb-mxh, auto);
+      padding-inline-start: var(--f-sb-pis, var(--f-sb-pd-gb, 0));
+      padding-inline-end: var(--f-sb-pie, var(--f-sb-pd-gb, 0));
+      padding-block-start: var(--f-sb-pbs, var(--f-sb-pd-gb, 0));
+      padding-block-end: var(--f-sb-pbe, var(--f-sb-pd-gb, 0));
+      margin-inline-start: var(--f-sb-mis, var(--f-sb-mg-gb, 0));
+      margin-inline-end: var(--f-sb-mie, var(--f-sb-mg-gb, 0));
+      margin-block-start: var(--f-sb-mbs, var(--f-sb-mg-gb, 0));
+      margin-block-end: var(--f-sb-mbe, var(--f-sb-mg-gb, 0));
+      text-align: var(--f-sb-ta, start);
+      opacity: var(--f-sb-op, 1);
+      text-decoration: var(--f-sb-td, none);
+      border-radius: var(--f-sb-br, 0);
+      text-transform: var(--f-sb-tt, none);
     }
 
     :host([inline]) {
@@ -457,52 +401,51 @@ export class StyleBox extends LitElement {
     }
 
     .box {
-      --s-box-display: inherit;
-      --s-box-w: auto;
-      --s-box-h: auto;
-      --s-box-mw: auto;
-      --s-box-mxw: auto;
-      --s-box-mh: auto;
-      --s-box-mxh: auto;
-      --s-box-pis: 0;
-      --s-box-pie: 0;
-      --s-box-pbs: 0;
-      --s-box-pbe: 0;
-      --s-box-mis: 0;
-      --s-box-mie: 0;
-      --s-box-mbs: 0;
-      --s-box-tt: none;
-      --s-box-mbe: 0;
-      --s-box-ta: start;
-      --s-box-op: 1;
-      --s-box-td: none;
-      --s-box-br: 0;
-      --s-box-fsz: inherit;
-      --s-box-lh: inherit;
-      --s-box-fw: inherit;
+      --f-sb-w: auto;
+      --f-sb-h: auto;
+      --f-sb-mw: auto;
+      --f-sb-mxw: auto;
+      --f-sb-mh: auto;
+      --f-sb-mxh: auto;
+      --f-sb-pis: 0;
+      --f-sb-pie: 0;
+      --f-sb-pbs: 0;
+      --f-sb-pbe: 0;
+      --f-sb-mis: 0;
+      --f-sb-mie: 0;
+      --f-sb-mbs: 0;
+      --f-sb-tt: none;
+      --f-sb-td: none;
+      --f-sb-mbe: 0;
+      --f-sb-ta: start;
+      --f-sb-op: 1;
+      --f-sb-br: 0;
+      --f-sb-fsz: inherit;
+      --f-sb-lh: inherit;
+      --f-sb-fw: inherit;
     }
-    :host([fallback]) .box {
-      --s-box-fsz: var(--s-box-fb-fsz);
-      --s-box-lh: var(--s-box-fb-lh);
-      --s-box-fw: var(--s-box-fb-fw);
+    :host([fb]) .box {
+      --f-sb-fsz: var(--f-sb-fb-fsz);
+      --f-sb-lh: var(--f-sb-fb-lh);
+      --f-sb-fw: var(--f-sb-fb-fw);
     }
-    :host([fallback][td]) ::slotted(*) {
-      text-decoration: var(--s-box-td);
+    :host([fb][td]) ::slotted(*) {
+      text-decoration: var(--f-sb-td);
     }
-    :host([fallback][fz]) ::slotted(*) {
-      font-size: var(--s-box-fsz);
+    :host([fb][fz]) ::slotted(*) {
+      font-size: var(--f-sb-fsz);
     }
-    :host([fallback][fw]) ::slotted(*) {
-      font-weight: var(--s-box-fw);
+    :host([fb][fw]) ::slotted(*) {
+      font-weight: var(--f-sb-fw);
     }
-    :host([fallback][lh]) ::slotted(*) {
-      line-height: var(--s-box-lh);
+    :host([fb][lh]) ::slotted(*) {
+      line-height: var(--f-sb-lh);
     }
-    :host([fallback][ta]) ::slotted(*) {
-      text-align: var(--s-box-ta);
+    :host([fb][ta]) ::slotted(*) {
+      text-align: var(--f-sb-ta);
     }
-    :host([fallback][tt]) ::slotted(*) {
-      text-transform: var(--s-box-tt);
+    :host([fb][tt]) ::slotted(*) {
+      text-transform: var(--f-sb-tt);
     }
   `;
 
@@ -592,52 +535,52 @@ export class StyleBox extends LitElement {
 
   render() {
     if (this.pd) {
-      this.style.setProperty("--s-box-pd-gb", this.pd);
+      this.style.setProperty("--f-sb-pd-gb", this.pd);
     }
     if (this.mg) {
-      this.style.setProperty("--s-box-mg-gb", this.mg);
+      this.style.setProperty("--f-sb-mg-gb", this.mg);
     }
 
     if (this.px) {
-      this.style.setProperty("--s-box-pis", this.px);
-      this.style.setProperty("--s-box-pie", this.px);
+      this.style.setProperty("--f-sb-pis", this.px);
+      this.style.setProperty("--f-sb-pie", this.px);
     }
     if (this.py) {
-      this.style.setProperty("--s-box-pbs", this.py);
-      this.style.setProperty("--s-box-pbe", this.py);
+      this.style.setProperty("--f-sb-pbs", this.py);
+      this.style.setProperty("--f-sb-pbe", this.py);
     }
     if (this.mx) {
-      this.style.setProperty("--s-box-mis", this.mx);
-      this.style.setProperty("--s-box-mie", this.mx);
+      this.style.setProperty("--f-sb-mis", this.mx);
+      this.style.setProperty("--f-sb-mie", this.mx);
     }
     if (this.my) {
-      this.style.setProperty("--s-box-mbs", this.my);
-      this.style.setProperty("--s-box-mbe", this.my);
+      this.style.setProperty("--f-sb-mbs", this.my);
+      this.style.setProperty("--f-sb-mbe", this.my);
     }
 
-    if (this.tt) this.style.setProperty("--s-box-tt", this.tt);
-    if (this.w) this.style.setProperty("--s-box-w", this.w);
-    if (this.h) this.style.setProperty("--s-box-h", this.h);
-    if (this.mw) this.style.setProperty("--s-box-mw", this.mw);
-    if (this.mxw) this.style.setProperty("--s-box-mxw", this.mxw);
-    if (this.mh) this.style.setProperty("--s-box-mh", this.mh);
-    if (this.mxh) this.style.setProperty("--s-box-mxh", this.mxh);
-    if (this.pis) this.style.setProperty("--s-box-pis", this.pis);
-    if (this.pie) this.style.setProperty("--s-box-pie", this.pie);
-    if (this.pbs) this.style.setProperty("--s-box-pbs", this.pbs);
-    if (this.pbe) this.style.setProperty("--s-box-pbe", this.pbe);
-    if (this.mis) this.style.setProperty("--s-box-mis", this.mis);
-    if (this.mie) this.style.setProperty("--s-box-mie", this.mie);
-    if (this.mbs) this.style.setProperty("--s-box-mbs", this.mbs);
-    if (this.mbe) this.style.setProperty("--s-box-mbe", this.mbe);
-    if (this.ta) this.style.setProperty("--s-box-ta", this.ta);
-    if (this.op) this.style.setProperty("--s-box-op", this.op);
-    if (this.td) this.style.setProperty("--s-box-td", this.td);
-    if (this.br) this.style.setProperty("--s-box-br", this.br);
+    if (this.tt) this.style.setProperty("--f-sb-tt", this.tt);
+    if (this.w) this.style.setProperty("--f-sb-w", this.w);
+    if (this.h) this.style.setProperty("--f-sb-h", this.h);
+    if (this.mw) this.style.setProperty("--f-sb-mw", this.mw);
+    if (this.mxw) this.style.setProperty("--f-sb-mxw", this.mxw);
+    if (this.mh) this.style.setProperty("--f-sb-mh", this.mh);
+    if (this.mxh) this.style.setProperty("--f-sb-mxh", this.mxh);
+    if (this.pis) this.style.setProperty("--f-sb-pis", this.pis);
+    if (this.pie) this.style.setProperty("--f-sb-pie", this.pie);
+    if (this.pbs) this.style.setProperty("--f-sb-pbs", this.pbs);
+    if (this.pbe) this.style.setProperty("--f-sb-pbe", this.pbe);
+    if (this.mis) this.style.setProperty("--f-sb-mis", this.mis);
+    if (this.mie) this.style.setProperty("--f-sb-mie", this.mie);
+    if (this.mbs) this.style.setProperty("--f-sb-mbs", this.mbs);
+    if (this.mbe) this.style.setProperty("--f-sb-mbe", this.mbe);
+    if (this.ta) this.style.setProperty("--f-sb-ta", this.ta);
+    if (this.op) this.style.setProperty("--f-sb-op", this.op);
+    if (this.td) this.style.setProperty("--f-sb-td", this.td);
+    if (this.br) this.style.setProperty("--f-sb-br", this.br);
 
-    if (this.fz) this.style.setProperty("--s-box-fsz", this.fz);
-    if (this.fw) this.style.setProperty("--s-box-fw", this.fw);
-    if (this.lh) this.style.setProperty("--s-box-lh", this.lh);
+    if (this.fz) this.style.setProperty("--f-sb-fsz", this.fz);
+    if (this.fw) this.style.setProperty("--f-sb-fw", this.fw);
+    if (this.lh) this.style.setProperty("--f-sb-lh", this.lh);
     return html`<div class="box"><slot></slot></div>`;
   }
 }

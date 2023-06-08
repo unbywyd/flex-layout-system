@@ -11,24 +11,21 @@ export class FlexCell extends LitElement {
   static styles = css`
     :host {
       box-sizing: border-box;
-      display: var(
-        --flex-cell-display,
-        ${unsafeCSS(FlexCell.defaultProps.display)}
-      );
-      padding: var(--flex-grid-padding, 0);
-      flex-basis: var(--flex-cell-basis, auto);
-      max-width: var(--flex-cell-basis, none);
-      order: var(--flex-cell-order, 0);
-      flex-grow: var(--flex-cell-grow, 0);
-      flex-shrink: var(--flex-cell-shrink, 1);
+      display: var(--f-c-db, ${unsafeCSS(FlexCell.defaultProps.display)});
+      padding: var(--f-g-pd, 0);
+      flex-basis: var(--f-c-b, auto);
+      max-width: var(--f-c-b, none);
+      order: var(--f-c-o, 0);
+      flex-grow: var(--f-c-g, 0);
+      flex-shrink: var(--f-c-sh, 1);
     }
     ::slotted(*) {
-      --flex-grid-padding: 0;
-      --flex-cell-display: ${unsafeCSS(FlexCell.defaultProps.display)};
-      --flex-cell-basis: auto;
-      --flex-cell-order: 0;
-      --flex-cell-grow: 0;
-      --flex-cell-shrink: 1;
+      --f-g-pd: 0;
+      --f-c-db: ${unsafeCSS(FlexCell.defaultProps.display)};
+      --f-c-b: auto;
+      --f-c-o: 0;
+      --f-c-g: 0;
+      --f-c-sh: 1;
     }
     :host(.cell-1) {
       flex-basis: 8.3333333333%;
@@ -228,16 +225,16 @@ export class FlexCell extends LitElement {
 
   render() {
     if (this.width) {
-      this.style.setProperty("--flex-cell-basis", this.width);
+      this.style.setProperty("--f-c-b", this.width);
     }
     if ((this.order && this.order < 0) || this.order > 10) {
-      this.style.setProperty("--flex-cell-order", this.order.toString());
+      this.style.setProperty("--f-c-o", this.order.toString());
     }
     if ((this.grow && this.grow > 10) || this.grow < 0) {
-      this.style.setProperty("--flex-cell-grow", this.grow.toString());
+      this.style.setProperty("--f-c-g", this.grow.toString());
     }
     if ((this.shrink && this.shrink > 10) || this.shrink < 0) {
-      this.style.setProperty("--flex-cell-shrink", this.shrink.toString());
+      this.style.setProperty("--f-c-sh", this.shrink.toString());
     }
     return html`<slot></slot>`;
   }
