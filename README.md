@@ -6,7 +6,7 @@ Key advantages of Flex Layout System include its intuitive component names, whic
 
 By importing Flex Layout System just once, you can seamlessly integrate it into any project and framework. The library offers well-designed components with thoughtful nesting, making it easy to customize gaps, grids, columns, and responsiveness. Additionally, the styles of these components are applied to the host element, allowing for effortless customization and overrides. Supplementary components are also included, providing efficient tools for rapid layout design with minimal CSS requirements.
 
-**See more on official website**: [https://***.com](https://***.com)
+**See more on official website**: [https://flex-layout-system.netlify.app/](https://flex-layout-system.netlify.app/)
 
 ## Get Started
 
