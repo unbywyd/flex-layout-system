@@ -38,10 +38,19 @@
     "Chrome > 67"
   ],
   "dependencies": {},
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Flex Layout System",
   "name": "flex-layout-system",
   "main": "dist/full.min.js",
+  "tags": [
+    "responsive design",
+    "grid system",
+    "front-end development",
+    "Flex layout",
+    "Web Components",
+    "web development",
+    "layout library"
+  ],
   "author": {
     "name": "Unbywyd",
     "url": "https://unbywyd.com"
