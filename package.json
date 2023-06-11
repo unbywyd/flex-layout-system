@@ -38,10 +38,16 @@
     "Chrome > 67"
   ],
   "dependencies": {},
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Flex Layout System",
   "name": "flex-layout-system",
   "main": "dist/full.min.js",
+  "author": {
+    "name": "Unbywyd",
+    "url": "https://unbywyd.com"
+  },
+  "homepage": "https://flex-layout-system.netlify.app/",
+  "repository": "git+https://github.com/unbywyd/flex-layout-system",
   "files": [
     "dist",
     "dist/src",
