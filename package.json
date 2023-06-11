@@ -38,11 +38,11 @@
     "Chrome > 67"
   ],
   "dependencies": {},
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Flex Layout System",
   "name": "flex-layout-system",
   "main": "dist/full.min.js",
-  "tags": [
+  "keywords": [
     "responsive design",
     "grid system",
     "front-end development",
