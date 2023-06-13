@@ -29,6 +29,10 @@ export class StackedBox extends LitElement {
   }
 }
 
+export type StackedBoxProps = {
+  crop?: boolean;
+}
+
 @customElement("stacked-cell")
 export class StackedCell extends LitElement {
   static styles = css`
@@ -90,6 +94,19 @@ export class StackedCell extends LitElement {
     return html`<slot></slot>`;
   }
 }
+
+export type StackedCellProps = {
+  rel?: boolean;
+  overlay?: boolean;
+  stretch?: boolean;
+  xa?: string;
+  xb?: string;
+  ya?: string;
+  yb?: string;
+  z?: string;
+  oc?: string;
+}
+
 
 @customElement("fit-box")
 export class FitBox extends LitElement {
@@ -163,6 +180,21 @@ export class FitBox extends LitElement {
     if (this.height) this.style.setProperty("--f-fb-h", this.height);
     return html`<slot></slot>`;
   }
+}
+
+export type FitBoxProps = {
+  flex?: boolean;
+  stretch?: boolean;
+  crop?: boolean;
+  scrollable?: boolean;
+  center?: boolean;
+  fill?: boolean;
+  round?: boolean;
+  cover?: boolean;
+  contain?: boolean;
+  force?: boolean;
+  width?: string;
+  height?: string;
 }
 
 @customElement("a-ratio")
@@ -259,6 +291,12 @@ export class AspectRatio extends LitElement {
   }
 }
 
+export type AspectRatioProps = {
+  fit?: boolean;
+  center?: boolean;
+  ratio?: string;
+}
+
 @customElement("flex-divider")
 export class FlexDivider extends LitElement {
   static styles = css`
@@ -326,6 +364,17 @@ export class FlexDivider extends LitElement {
   }
 }
 
+export type FlexDividerProps = {
+  v?: boolean;
+  h?: boolean;
+  stretch?: boolean;
+  dark?: boolean;
+  mg?: string;
+  width?: string;
+  color?: string;
+  size?: string;
+}
+
 @customElement("space-box")
 export class SpaceBox extends LitElement {
   static styles = css`
@@ -355,6 +404,12 @@ export class SpaceBox extends LitElement {
     }
     return html``;
   }
+}
+
+export type SpaceBoxProps = {
+  width?: string;
+  height?: string;
+  size?: string;
 }
 
 @customElement("s-box")
@@ -584,3 +639,36 @@ export class StyleBox extends LitElement {
     return html`<div class="box"><slot></slot></div>`;
   }
 }
+
+export type StyleBoxProps = {
+  fz?: string;
+  fw?: string;
+  lh?: string;
+  w?: string;
+  h?: string;
+  mw?: string;
+  mxw?: string;
+  mh?: string;
+  mxh?: string;
+  tt?: string;
+  pis?: string;
+  pie?: string;
+  pbs?: string;
+  pbe?: string;
+  mbs?: string;
+  mbe?: string;
+  mis?: string;
+  mie?: string;
+  mg?: string;
+  pd?: string;
+  ta?: string;
+  op?: string;
+  td?: string;
+  br?: string;
+  px?: string;
+  py?: string;
+  mx?: string;
+  my?: string;
+  inline?: boolean;
+  block?: boolean;
+} 

@@ -60,3 +60,10 @@ export class FlexCanvas extends LitElement {
     return html`<slot></slot>`;
   }
 }
+
+export type FlexCanvasProps = {
+  width?: string;
+  mg?: string;
+  pd?: string;
+  flex?: boolean;
+}

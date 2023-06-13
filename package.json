@@ -5,6 +5,7 @@
     "@babel/preset-env": "^7.22.4",
     "@babel/preset-react": "^7.22.3",
     "@types/node": "^20.2.5",
+    "@types/react": "^18.2.12",
     "@types/webpack": "^5.28.1",
     "@webpack-cli/generators": "^3.0.4",
     "autoprefixer": "^10.4.14",
@@ -12,24 +13,24 @@
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",
+    "css-minimizer-webpack-plugin": "^5.0.0",
     "declaration-bundler-webpack-plugin": "^1.0.3",
+    "lit": "^2.7.4",
     "mini-css-extract-plugin": "^2.7.6",
     "postcss": "^8.4.24",
     "postcss-loader": "^7.3.2",
     "prettier": "^2.8.8",
+    "raw-loader": "^4.0.2",
     "sass": "^1.62.1",
     "sass-loader": "^13.3.1",
     "style-loader": "^3.3.3",
+    "terser-webpack-plugin": "^5.3.9",
     "ts-loader": "^9.4.3",
     "typescript": "^5.0.4",
     "webpack": "^5.84.1",
     "webpack-cli": "^5.1.1",
     "webpack-dev-server": "^4.15.0",
-    "wepack-cli": "^0.0.1-security",
-    "css-minimizer-webpack-plugin": "^5.0.0",
-    "raw-loader": "^4.0.2",
-    "lit": "^2.7.4",
-    "terser-webpack-plugin": "^5.3.9"
+    "wepack-cli": "^0.0.1-security"
   },
   "browserslist": [
     ">2%",
@@ -37,11 +38,13 @@
     "Firefox > 63",
     "Chrome > 67"
   ],
-  "dependencies": {},
-  "version": "0.1.3",
+  "dependencies": {
+    "react": "^18.2.0"
+  },
+  "version": "0.1.5",
   "description": "Flex Layout System",
   "name": "flex-layout-system",
-  "main": "dist/full.min.js",
+  "main": "src/index.ts",
   "keywords": [
     "responsive design",
     "grid system",
@@ -59,7 +62,7 @@
   "repository": "git+https://github.com/unbywyd/flex-layout-system",
   "files": [
     "dist",
-    "dist/src",
+    "src",
     "index.d.ts"
   ],
   "types": "dist/src/**/*.d.ts",

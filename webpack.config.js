@@ -11,6 +11,7 @@ const stylesHandler = MiniCssExtractPlugin.loader;
 
 const config = {
   entry: {
+    index: "./src/index.ts",
     base: "./src/base.ts",
     full: "./src/full.ts",
     "css-responsive": "./src/css-responsive.ts",

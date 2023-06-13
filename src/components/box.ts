@@ -1,3 +1,4 @@
+import React from "react";
 import { LitElement, html, css, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 
@@ -187,7 +188,7 @@ export class FlexBox extends LitElement {
       width: var(--f-vd-ops-size, auto);
       max-width: var(--f-vd-ops-size, 100%);
     }
-    
+
     :host([column]) ::slotted(f-divider[stretch]:not([h]):not([v])) {
       width: 100%;
     }
@@ -222,3 +223,37 @@ export class FlexBox extends LitElement {
     return html`<slot></slot>`;
   }
 }
+
+export type FlexBoxProps = {
+  row?: boolean;
+  column?: boolean;
+  gap?: string;
+  nowrap?: boolean;
+  fill?: boolean;
+  fit?: boolean;
+  snug?: boolean;
+  reverse?: boolean;
+  inline?: boolean;
+  center?: boolean;
+  start?: boolean;
+  end?: boolean;
+  stretch?: boolean;
+  spread?: boolean;
+  middle?: boolean;
+  ai?: "flex-start" | "flex-end" | "center" | "baseline" | "stretch";
+  ac?:
+    | "flex-start"
+    | "flex-end"
+    | "center"
+    | "space-between"
+    | "space-around"
+    | "space-evenly"
+    | "stretch";
+  jc?:
+    | "flex-start"
+    | "flex-end"
+    | "center"
+    | "space-between"
+    | "space-around"
+    | "space-evenly";
+};

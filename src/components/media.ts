@@ -125,3 +125,9 @@ export class FlexMediaBox extends LitElement {
     return html`<slot></slot>`;
   }
 }
+
+export type FlexMediaProps = {
+  breakpoints?: string;
+  target?: string;
+  readonly sizes?: string;
+}
