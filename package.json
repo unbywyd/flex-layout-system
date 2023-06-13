@@ -41,10 +41,10 @@
   "dependencies": {
     "react": "^18.2.0"
   },
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Flex Layout System",
   "name": "flex-layout-system",
-  "main": "src/index.ts",
+  "main": "dist/index.min.js",
   "keywords": [
     "responsive design",
     "grid system",
