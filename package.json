@@ -30,7 +30,8 @@
     "webpack": "^5.84.1",
     "webpack-cli": "^5.1.1",
     "webpack-dev-server": "^4.15.0",
-    "wepack-cli": "^0.0.1-security"
+    "wepack-cli": "^0.0.1-security",
+    "react": "^18.2.0"
   },
   "browserslist": [
     ">2%",
@@ -38,10 +39,8 @@
     "Firefox > 63",
     "Chrome > 67"
   ],
-  "dependencies": {
-    "react": "^18.2.0"
-  },
-  "version": "0.1.6",
+  "dependencies": {},
+  "version": "0.1.7",
   "description": "Flex Layout System",
   "name": "flex-layout-system",
   "main": "dist/index.min.js",

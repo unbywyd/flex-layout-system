@@ -1,4 +1,3 @@
-import React from "react";
 import { LitElement, html, css, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
 
