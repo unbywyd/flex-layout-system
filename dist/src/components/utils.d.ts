@@ -93,6 +93,8 @@ export type SpaceBoxProps = {
 };
 export declare class StyleBox extends Base {
     static styles: import("lit").CSSResult;
+    color: string | null;
+    scale: string | null;
     fz: string | null;
     fw: string | null;
     lh: string | null;

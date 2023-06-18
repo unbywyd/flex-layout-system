@@ -420,13 +420,14 @@ export class StyleBox extends Base {
       --f-sb-fb-fsz: var(--f-sb-fallback-font-size, 1rem);
       --f-sb-fb-lh: var(--f-sb-fallback-line-height, normal);
       --f-sb-fb-fw: var(--f-sb-fallback-font-weight, normal);
-
+      --f-sb-c: var(--f-sb-color, inherit);
       display: var(--f-sb-db, var(--f-sb-fb-display));
       font-size: var(--f-sb-fsz, inherit);
       font-weight: var(--f-sb-fw, inherit);
       line-height: var(--f-sb-lh, inherit);
       box-sizing: border-box;
       width: var(--f-sb-w, auto);
+      color: var(--f-sb-c);
       height: var(--f-sb-h, auto);
       min-width: var(--f-sb-mw, auto);
       max-width: var(--f-sb-mxw, auto);
@@ -456,6 +457,7 @@ export class StyleBox extends Base {
     }
 
     .box {
+      --f-sb-c: var(--f-sb-color, inherit);
       --f-sb-w: auto;
       --f-sb-h: auto;
       --f-sb-mw: auto;
@@ -503,6 +505,12 @@ export class StyleBox extends Base {
       text-transform: var(--f-sb-tt);
     }
   `;
+
+  @property({ type: String, reflect: true })
+  color: string | null = null;
+
+  @property({ type: String, reflect: true })
+  scale: string | null = null;
 
   @property({ type: String, reflect: true })
   fz: string | null = null;
@@ -589,6 +597,12 @@ export class StyleBox extends Base {
   my: string | null = null;
 
   render() {
+    if (this.scale) {
+      this.style.setProperty("transform", `scale(${this.scale})`);
+    }
+    if (this.color) {
+      this.style.setProperty("--f-sb-c", this.color);
+    }
     if (this.pd) {
       this.style.setProperty("--f-sb-pd-gb", this.pd);
     }
