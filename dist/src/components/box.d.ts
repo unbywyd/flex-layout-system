@@ -4,7 +4,6 @@ export declare class FlexBox extends Base {
         reverse: boolean;
         display: "flex" | "inline-flex";
         mode: "row" | "column";
-        wrap: boolean;
         justifyContent: string;
         alignItems: string;
         alignContent: string;

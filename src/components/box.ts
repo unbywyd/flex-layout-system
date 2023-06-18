@@ -8,7 +8,6 @@ export class FlexBox extends Base {
     reverse: boolean;
     display: "flex" | "inline-flex";
     mode: "row" | "column";
-    wrap: boolean;
     justifyContent: string;
     alignItems: string;
     alignContent: string;
@@ -17,7 +16,6 @@ export class FlexBox extends Base {
     reverse: false,
     display: "flex",
     mode: "row",
-    wrap: true,
     gap: "0",
     justifyContent: "flex-start",
     alignItems: "flex-start",
@@ -32,6 +30,9 @@ export class FlexBox extends Base {
   static styles = css`
     :host([nowrap]) {
       flex-wrap: nowrap;
+    }
+    :host([wrap]) {
+      flex-wrap: wrap;
     }
     :host([row]) {
       flex-direction: row;
@@ -141,10 +142,6 @@ export class FlexBox extends Base {
         )}
       );
       gap: var(--f-b-gap, ${unsafeCSS(FlexBox.defaultProps.gap)});
-      flex-wrap: var(
-        --f-b-wp,
-        ${unsafeCSS(FlexBox.defaultProps.wrap ? "wrap" : "nowrap")}
-      );
       justify-content: var(
         --f-b-jc,
         ${unsafeCSS(FlexBox.defaultProps.justifyContent)}
@@ -163,7 +160,6 @@ export class FlexBox extends Base {
           : FlexBox.defaultProps.mode
       )};
       --f-b-db: ${unsafeCSS(FlexBox.defaultProps.display)};
-      --f-b-wp: ${unsafeCSS(FlexBox.defaultProps.wrap ? "wrap" : "nowrap")};
       --f-b-jc: ${unsafeCSS(FlexBox.defaultProps.justifyContent)};
       --f-b-ai: ${unsafeCSS(FlexBox.defaultProps.alignItems)};
       --f-b-ac: ${unsafeCSS(FlexBox.defaultProps.alignContent)};
