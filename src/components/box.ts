@@ -1,8 +1,9 @@
 import { LitElement, html, css, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import { Base } from "./base";
 
 @customElement("flex-box")
-export class FlexBox extends LitElement {
+export class FlexBox extends Base {
   static defaultProps: {
     reverse: boolean;
     display: "flex" | "inline-flex";

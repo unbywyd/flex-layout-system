@@ -1,5 +1,5 @@
-import { LitElement } from "lit";
-export declare class FlexBox extends LitElement {
+import { Base } from "./base";
+export declare class FlexBox extends Base {
     static defaultProps: {
         reverse: boolean;
         display: "flex" | "inline-flex";

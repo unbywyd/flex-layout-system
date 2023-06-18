@@ -1,8 +1,9 @@
 import { LitElement, html, css, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import { Base } from "./base";
 
 @customElement("flex-canvas")
-export class FlexCanvas extends LitElement {
+export class FlexCanvas extends Base {
   static defaultProps: {
     maxWidth: string;
     display: string;

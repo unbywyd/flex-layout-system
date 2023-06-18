@@ -1,5 +1,5 @@
-import { LitElement } from "lit";
-export declare class FlexCanvas extends LitElement {
+import { Base } from "./base";
+export declare class FlexCanvas extends Base {
     static defaultProps: {
         maxWidth: string;
         display: string;

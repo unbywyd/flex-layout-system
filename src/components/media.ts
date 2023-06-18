@@ -2,6 +2,7 @@ import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 
 import "../utils/resize-observer";
+import { Base } from "./base";
 
 declare global {
   interface HTMLElement {
@@ -11,7 +12,7 @@ declare global {
 }
 
 @customElement("flex-media")
-export class FlexMediaBox extends LitElement {
+export class FlexMediaBox extends Base {
   _targetEl: HTMLElement | Window | null = null;
   _resizeListener: any = null;
   static styles = css`

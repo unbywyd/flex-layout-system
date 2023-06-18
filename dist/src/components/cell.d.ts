@@ -1,5 +1,5 @@
-import { LitElement } from "lit";
-export declare class FlexCell extends LitElement {
+import { Base } from "./base";
+export declare class FlexCell extends Base {
     static defaultProps: {
         display: string;
     };

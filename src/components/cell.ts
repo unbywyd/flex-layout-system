@@ -1,8 +1,9 @@
 import { LitElement, html, css, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import { Base } from "./base";
 
 @customElement("flex-cell")
-export class FlexCell extends LitElement {
+export class FlexCell extends Base {
   static defaultProps: {
     display: string;
   } = {

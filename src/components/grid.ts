@@ -1,8 +1,9 @@
 import { LitElement, html, css, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import { Base } from "./base";
 
 @customElement("flex-grid")
-export class FlexGrid extends LitElement {
+export class FlexGrid extends Base {
   static styles = css`
     :host {
       box-sizing: border-box;

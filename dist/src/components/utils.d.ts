@@ -1,12 +1,12 @@
-import { LitElement } from "lit";
-export declare class StackedBox extends LitElement {
+import { Base } from "./base";
+export declare class StackedBox extends Base {
     static styles: import("lit").CSSResult;
     render(): import("lit-html").TemplateResult<1>;
 }
 export type StackedBoxProps = {
     crop?: boolean;
 };
-export declare class StackedCell extends LitElement {
+export declare class StackedCell extends Base {
     static styles: import("lit").CSSResult;
     xa: string | null;
     xb: string | null;
@@ -27,7 +27,7 @@ export type StackedCellProps = {
     z?: string;
     oc?: string;
 };
-export declare class FitBox extends LitElement {
+export declare class FitBox extends Base {
     static styles: import("lit").CSSResult;
     width: string | null;
     height: string | null;
@@ -47,7 +47,7 @@ export type FitBoxProps = {
     width?: string;
     height?: string;
 };
-export declare class AspectRatio extends LitElement {
+export declare class AspectRatio extends Base {
     static defaultProps: {
         display: string;
     };
@@ -61,7 +61,7 @@ export type AspectRatioProps = {
     center?: boolean;
     ratio?: string;
 };
-export declare class FlexDivider extends LitElement {
+export declare class FlexDivider extends Base {
     static styles: import("lit").CSSResult;
     mg: string | null;
     width: string | null;
@@ -79,7 +79,7 @@ export type FlexDividerProps = {
     color?: string;
     size?: string;
 };
-export declare class SpaceBox extends LitElement {
+export declare class SpaceBox extends Base {
     static styles: import("lit").CSSResult;
     width: string | null;
     height: string | null;
@@ -91,7 +91,7 @@ export type SpaceBoxProps = {
     height?: string;
     size?: string;
 };
-export declare class StyleBox extends LitElement {
+export declare class StyleBox extends Base {
     static styles: import("lit").CSSResult;
     fz: string | null;
     fw: string | null;

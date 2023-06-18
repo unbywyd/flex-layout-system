@@ -6,9 +6,10 @@
 
 import { LitElement, html, css, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import { Base } from "./base";
 
 @customElement("stacked-box")
-export class StackedBox extends LitElement {
+export class StackedBox extends Base {
   static styles = css`
     :host {
       display: block;
@@ -31,10 +32,10 @@ export class StackedBox extends LitElement {
 
 export type StackedBoxProps = {
   crop?: boolean;
-}
+};
 
 @customElement("stacked-cell")
-export class StackedCell extends LitElement {
+export class StackedCell extends Base {
   static styles = css`
     :host {
       position: absolute;
@@ -105,11 +106,10 @@ export type StackedCellProps = {
   yb?: string;
   z?: string;
   oc?: string;
-}
-
+};
 
 @customElement("fit-box")
-export class FitBox extends LitElement {
+export class FitBox extends Base {
   static styles = css`
     :host {
       display: block;
@@ -195,10 +195,10 @@ export type FitBoxProps = {
   force?: boolean;
   width?: string;
   height?: string;
-}
+};
 
 @customElement("a-ratio")
-export class AspectRatio extends LitElement {
+export class AspectRatio extends Base {
   static defaultProps: {
     display: string;
   } = {
@@ -295,10 +295,10 @@ export type AspectRatioProps = {
   fit?: boolean;
   center?: boolean;
   ratio?: string;
-}
+};
 
 @customElement("flex-divider")
-export class FlexDivider extends LitElement {
+export class FlexDivider extends Base {
   static styles = css`
     :host {
       --f-divider-size: 1px;
@@ -373,10 +373,10 @@ export type FlexDividerProps = {
   width?: string;
   color?: string;
   size?: string;
-}
+};
 
 @customElement("space-box")
-export class SpaceBox extends LitElement {
+export class SpaceBox extends Base {
   static styles = css`
     :host {
       box-sizing: border-box;
@@ -410,10 +410,10 @@ export type SpaceBoxProps = {
   width?: string;
   height?: string;
   size?: string;
-}
+};
 
 @customElement("s-box")
-export class StyleBox extends LitElement {
+export class StyleBox extends Base {
   static styles = css`
     :host {
       --f-sb-fb-display: var(--f-sb-fallback-display, inline-block);
@@ -671,4 +671,4 @@ export type StyleBoxProps = {
   my?: string;
   inline?: boolean;
   block?: boolean;
-} 
+};
