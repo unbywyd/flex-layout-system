@@ -24,8 +24,3 @@ export declare class FlexMediaBox extends Base {
     setMedia(currentWidth: number): void;
     render(): import("lit-html").TemplateResult<1>;
 }
-export type FlexMediaProps = {
-    breakpoints?: string;
-    target?: string;
-    readonly sizes?: string;
-};

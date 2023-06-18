@@ -35,9 +35,3 @@ export class FlexGrid extends Base {
     return html`<slot></slot>`;
   }
 }
-
-export type FlexGridProps = {
-  gap?: string;
-  compact?: boolean;
-  flex?: boolean;
-}

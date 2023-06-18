@@ -240,19 +240,3 @@ export class FlexCell extends Base {
     return html`<slot></slot>`;
   }
 }
-
-export type FlexCellProps = {
-  order?: number;
-  grow?: number;
-  shrink?: number;
-  width?: string;
-  fill?: boolean;
-  fit?: boolean;
-  snug?: boolean;
-  auto?: boolean;
-  stretch?: boolean;
-  scrollable?: boolean;
-  flex?: boolean;
-  iflex?: boolean;
-  iblock?: boolean;  
-}
