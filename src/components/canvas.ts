@@ -62,9 +62,3 @@ export class FlexCanvas extends Base {
   }
 }
 
-export type FlexCanvasProps = {
-  width?: string;
-  mg?: string;
-  pd?: string;
-  flex?: boolean;
-}

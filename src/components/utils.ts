@@ -426,6 +426,8 @@ export class StyleBox extends Base {
       --f-sb-fsz: inherit;
       --f-sb-lh: inherit;
       --f-sb-fw: inherit;
+      width: 100%;
+      height: 100%;
     }
     :host([fb]) .box {
       --f-sb-fsz: var(--f-sb-fb-fsz);
