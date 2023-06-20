@@ -12,9 +12,3 @@ export declare class FlexCanvas extends Base {
     pd: string | null;
     render(): import("lit-html").TemplateResult<1>;
 }
-export type FlexCanvasProps = {
-    width?: string;
-    mg?: string;
-    pd?: string;
-    flex?: boolean;
-};
