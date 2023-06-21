@@ -1,4 +1,7 @@
-export type StackedCellProps = {
+export type Base = {
+  className?: string;
+};
+export type StackedCellProps = Base & {
   rel?: boolean;
   overlay?: boolean;
   stretch?: boolean;
@@ -9,7 +12,7 @@ export type StackedCellProps = {
   z?: string;
   oc?: string;
 };
-export type StyleBoxProps = {
+export type StyleBoxProps = Base & {
   fz?: string;
   fw?: string;
   lh?: string;
@@ -40,9 +43,10 @@ export type StyleBoxProps = {
   my?: string;
   inline?: boolean;
   block?: boolean;
+  color?: string;
 };
 
-export type FitBoxProps = {
+export type FitBoxProps = Base & {
   flex?: boolean;
   stretch?: boolean;
   crop?: boolean;
@@ -57,11 +61,11 @@ export type FitBoxProps = {
   height?: string;
 };
 
-export type StackedBoxProps = {
+export type StackedBoxProps = Base & {
   crop?: boolean;
 };
 
-export type FlexDividerProps = {
+export type FlexDividerProps = Base & {
   v?: boolean;
   h?: boolean;
   stretch?: boolean;
@@ -71,29 +75,29 @@ export type FlexDividerProps = {
   color?: string;
   size?: string;
 };
-export type SpaceBoxProps = {
+export type SpaceBoxProps = Base & {
   width?: string;
   height?: string;
   size?: string;
 };
 
-export type AspectRatioProps = {
+export type AspectRatioProps = Base & {
   fit?: boolean;
   center?: boolean;
   ratio?: string;
 };
 
-export type FlexMediaProps = {
+export type FlexMediaProps = Base & {
   breakpoints?: string;
   target?: string;
   readonly sizes?: string;
 };
-export type FlexGridProps = {
+export type FlexGridProps = Base & {
   gap?: string;
   compact?: boolean;
   flex?: boolean;
 };
-export type FlexCellProps = {
+export type FlexCellProps = Base & {
   order?: number;
   grow?: number;
   shrink?: number;
@@ -108,17 +112,18 @@ export type FlexCellProps = {
   iflex?: boolean;
   iblock?: boolean;
 };
-export type FlexCanvasProps = {
+export type FlexCanvasProps = Base & {
   width?: string;
   mg?: string;
   pd?: string;
   flex?: boolean;
 };
-export type FlexBoxProps = {
+export type FlexBoxProps = Base & {
   row?: boolean;
   column?: boolean;
   gap?: string;
   nowrap?: boolean;
+  wrap?: boolean;
   fill?: boolean;
   fit?: boolean;
   snug?: boolean;
