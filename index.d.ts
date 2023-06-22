@@ -113,7 +113,7 @@ export type FlexCellProps = Base & {
   flex?: boolean;
   iflex?: boolean;
   iblock?: boolean;
-  as: "center" | "start" | "end" | "stretch" | "baseline" | "auto" | "normal" | "unset";
+  as?: "center" | "start" | "end" | "stretch" | "baseline" | "auto" | "normal" | "unset";
 };
 export type FlexCanvasProps = Base & {
   width?: string;
