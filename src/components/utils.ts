@@ -390,8 +390,8 @@ export class StyleBox extends Base {
       text-align: var(--f-sb-ta, start);
       opacity: var(--f-sb-op, 1);
       text-decoration: var(--f-sb-td, none);
-      border-radius: var(--f-sb-br, 0);
       text-transform: var(--f-sb-tt, none);
+      border-radius: var(--f-sb-br, 0);
     }
 
     :host([inline]) {
@@ -410,18 +410,17 @@ export class StyleBox extends Base {
       --f-sb-mxw: auto;
       --f-sb-mh: auto;
       --f-sb-mxh: auto;
-      --f-sb-pis: 0;
-      --f-sb-pie: 0;
-      --f-sb-pbs: 0;
-      --f-sb-pbe: 0;
-      --f-sb-mis: 0;
-      --f-sb-mie: 0;
-      --f-sb-mbs: 0;
+      --f-sb-pis: var(--f-sb-pd-gb, 0);
+      --f-sb-pie: var(--f-sb-pd-gb, 0);
+      --f-sb-pbs: var(--f-sb-pd-gb, 0);
+      --f-sb-pbe: var(--f-sb-pd-gb, 0);
+      --f-sb-mis: var(--f-sb-mg-gb, 0);
+      --f-sb-mie: var(--f-sb-mg-gb, 0);
+      --f-sb-mbs: var(--f-sb-mg-gb, 0);
+      --f-sb-mbe: var(--f-sb-mg-gb, 0);
       --f-sb-tt: none;
       --f-sb-td: none;
-      --f-sb-mbe: 0;
       --f-sb-ta: start;
-      --f-sb-op: 1;
       --f-sb-br: 0;
       --f-sb-fsz: inherit;
       --f-sb-lh: inherit;
