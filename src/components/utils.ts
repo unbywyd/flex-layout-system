@@ -362,94 +362,88 @@ export class SpaceBox extends Base {
 export class StyleBox extends Base {
   static styles = css`
     :host {
-      --f-sb-fb-display: var(--f-sb-fallback-display, inline-block);
-      --f-sb-fb-fsz: var(--f-sb-fallback-font-size, 1rem);
-      --f-sb-fb-lh: var(--f-sb-fallback-line-height, normal);
-      --f-sb-fb-fw: var(--f-sb-fallback-font-weight, normal);
-      --f-sb-c: var(--f-sb-color, inherit);
-      display: var(--f-sb-db, var(--f-sb-fb-display));
-      font-size: var(--f-sb-fsz, inherit);
-      font-weight: var(--f-sb-fw, inherit);
-      line-height: var(--f-sb-lh, inherit);
+      --f-sb-pis: 0;
+      --f-sb-pie: 0;
+      --f-sb-mis: 0;
+      --f-sb-mie: 0;
+      --f-sb-pbs: 0;
+      --f-sb-pbe: 0;
+      --f-sb-mbs: 0;
+      --f-sb-mbe: 0;
+      --f-sb-display: var(--f-sb-fallback-display, inline-block);
+      --f-sb-color: var(--f-sb-fallback-color, inherit);
+      --f-sb-fsz: var(--f-sb-fallback-font-size, 1rem);
+
+      --f-sb-lh: var(--f-sb-fallback-line-height, normal);
+      --f-sb-fw: var(--f-sb-fallback-font-weight, normal);
+      --f-sb-tt: var(--f-sb-fallback-text-transform, none);
+      --f-sb-td: var(--f-sb-fallback-text-decoration, none);
+
+      --f-sb-w: var(--f-sb-fallback-width, auto);
+      --f-sb-h: var(--f-sb-fallback-height, auto);
+      --f-sb-mw: var(--f-sb-fallback-min-width, auto);
+      --f-sb-mxw: var(--f-sb-fallback-max-width, auto);
+      --f-sb-mh: var(--f-sb-fallback-min-height, auto);
+      --f-sb-mxh: var(--f-sb-fallback-max-height, auto);
+
+      --f-sb-ta: var(--f-sb-fallback-text-align, start);
+      --f-sb-op: var(--f-sb-fallback-opacity, 1);
+      --f-sb-br: var(--f-sb-fallback-border-radius, 0);
+
       box-sizing: border-box;
-      width: var(--f-sb-w, auto);
-      color: var(--f-sb-c);
-      height: var(--f-sb-h, auto);
-      min-width: var(--f-sb-mw, auto);
-      max-width: var(--f-sb-mxw, auto);
-      min-height: var(--f-sb-mh, auto);
-      max-height: var(--f-sb-mxh, auto);
-      padding-inline-start: var(--f-sb-pis, var(--f-sb-pd-gb, 0));
-      padding-inline-end: var(--f-sb-pie, var(--f-sb-pd-gb, 0));
-      padding-block-start: var(--f-sb-pbs, var(--f-sb-pd-gb, 0));
-      padding-block-end: var(--f-sb-pbe, var(--f-sb-pd-gb, 0));
-      margin-inline-start: var(--f-sb-mis, var(--f-sb-mg-gb, 0));
-      margin-inline-end: var(--f-sb-mie, var(--f-sb-mg-gb, 0));
-      margin-block-start: var(--f-sb-mbs, var(--f-sb-mg-gb, 0));
-      margin-block-end: var(--f-sb-mbe, var(--f-sb-mg-gb, 0));
-      text-align: var(--f-sb-ta, start);
-      opacity: var(--f-sb-op, 1);
-      text-decoration: var(--f-sb-td, none);
-      text-transform: var(--f-sb-tt, none);
-      border-radius: var(--f-sb-br, 0);
+      display: var(--f-sb-display);
+      color: var(--f-sb-color);
+      font-size: var(--f-sb-fsz);
+      line-height: var(--f-sb-lh);
+      font-weight: var(--f-sb-fw);
+      text-decoration: var(--f-sb-td);
+      text-transform: var(--f-sb-tt);
+
+      width: var(--f-sb-w);
+      height: var(--f-sb-h);
+      min-width: var(--f-sb-mw);
+      max-width: var(--f-sb-mxw);
+      min-height: var(--f-sb-mh);
+      max-height: var(--f-sb-mxh);
+
+      text-align: var(--f-sb-ta);
+      opacity: var(--f-sb-op);
+      border-radius: var(--f-sb-br);
+
+      padding-inline-start: var(--f-sb-pis);
+      padding-inline-end: var(--f-sb-pie);
+      padding-block-start: var(--f-sb-pbs);
+      padding-block-end: var(--f-sb-pbe);
+      margin-inline-start: var(--f-sb-mis);
+      margin-inline-end: var(--f-sb-mie);
+      margin-block-start: var(--f-sb-mbs);
+      margin-block-end: var(--f-sb-mbe);
     }
 
     :host([inline]) {
-      display: inline;
+      --f-sb-display: inline;
     }
-
     :host([block]) {
-      display: block;
+      --f-sb-display: block;
     }
 
-    .box {
-      --f-sb-c: var(--f-sb-color, inherit);
-      --f-sb-w: auto;
-      --f-sb-h: auto;
-      --f-sb-mw: auto;
-      --f-sb-mxw: auto;
-      --f-sb-mh: auto;
-      --f-sb-mxh: auto;
-      --f-sb-pis: var(--f-sb-pd-gb, 0);
-      --f-sb-pie: var(--f-sb-pd-gb, 0);
-      --f-sb-pbs: var(--f-sb-pd-gb, 0);
-      --f-sb-pbe: var(--f-sb-pd-gb, 0);
-      --f-sb-mis: var(--f-sb-mg-gb, 0);
-      --f-sb-mie: var(--f-sb-mg-gb, 0);
-      --f-sb-mbs: var(--f-sb-mg-gb, 0);
-      --f-sb-mbe: var(--f-sb-mg-gb, 0);
-      --f-sb-tt: none;
-      --f-sb-td: none;
-      --f-sb-ta: start;
-      --f-sb-br: 0;
-      --f-sb-fsz: inherit;
-      --f-sb-lh: inherit;
-      --f-sb-fw: inherit;
-      width: 100%;
-      height: 100%;
+    :host([inherit][td]) ::slotted(*) {
+      text-decoration: inherit;
     }
-    :host([fb]) .box {
-      --f-sb-fsz: var(--f-sb-fb-fsz);
-      --f-sb-lh: var(--f-sb-fb-lh);
-      --f-sb-fw: var(--f-sb-fb-fw);
+    :host([inherit][fz]) ::slotted(*) {
+      font-size: inherit;
     }
-    :host([fb][td]) ::slotted(*) {
-      text-decoration: var(--f-sb-td);
+    :host([inherit][fw]) ::slotted(*) {
+      font-weight: inherit;
     }
-    :host([fb][fz]) ::slotted(*) {
-      font-size: var(--f-sb-fsz);
+    :host([inherit][lh]) ::slotted(*) {
+      line-height: inherit;
     }
-    :host([fb][fw]) ::slotted(*) {
-      font-weight: var(--f-sb-fw);
+    :host([inherit][ta]) ::slotted(*) {
+      text-align: inherit;
     }
-    :host([fb][lh]) ::slotted(*) {
-      line-height: var(--f-sb-lh);
-    }
-    :host([fb][ta]) ::slotted(*) {
-      text-align: var(--f-sb-ta);
-    }
-    :host([fb][tt]) ::slotted(*) {
-      text-transform: var(--f-sb-tt);
+    :host([inherit][tt]) ::slotted(*) {
+      text-transform: inherit;
     }
   `;
 
@@ -548,15 +542,20 @@ export class StyleBox extends Base {
       this.style.setProperty("transform", `scale(${this.scale})`);
     }
     if (this.color) {
-      this.style.setProperty("--f-sb-c", this.color);
+      this.style.setProperty("--f-sb-color", this.color);
     }
     if (this.pd) {
-      this.style.setProperty("--f-sb-pd-gb", this.pd);
+      this.style.setProperty("--f-sb-pis", this.pd);
+      this.style.setProperty("--f-sb-pie", this.pd);
+      this.style.setProperty("--f-sb-pbs", this.pd);
+      this.style.setProperty("--f-sb-pbe", this.pd);
     }
     if (this.mg) {
-      this.style.setProperty("--f-sb-mg-gb", this.mg);
+      this.style.setProperty("--f-sb-mis", this.mg);
+      this.style.setProperty("--f-sb-mie", this.mg);
+      this.style.setProperty("--f-sb-mbs", this.mg);
+      this.style.setProperty("--f-sb-mbe", this.mg);
     }
-
     if (this.px) {
       this.style.setProperty("--f-sb-pis", this.px);
       this.style.setProperty("--f-sb-pie", this.px);
@@ -593,10 +592,9 @@ export class StyleBox extends Base {
     if (this.op) this.style.setProperty("--f-sb-op", this.op);
     if (this.td) this.style.setProperty("--f-sb-td", this.td);
     if (this.br) this.style.setProperty("--f-sb-br", this.br);
-
     if (this.fz) this.style.setProperty("--f-sb-fsz", this.fz);
     if (this.fw) this.style.setProperty("--f-sb-fw", this.fw);
     if (this.lh) this.style.setProperty("--f-sb-lh", this.lh);
-    return html`<div class="box"><slot></slot></div>`;
+    return html`<slot></slot>`;
   }
 }

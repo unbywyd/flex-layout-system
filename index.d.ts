@@ -44,6 +44,8 @@ export type StyleBoxProps = Base & {
   inline?: boolean;
   block?: boolean;
   color?: string;
+  inherit?: boolean;
+  scale?: string;
 };
 
 export type FitBoxProps = Base & {
