@@ -102,6 +102,7 @@ export type FlexGridProps = Base & {
 export type FlexCellProps = Base & {
   order?: number;
   grow?: number;
+  basis?: string;
   shrink?: number;
   width?: string;
   fill?: boolean;
