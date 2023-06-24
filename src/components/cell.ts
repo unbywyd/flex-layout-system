@@ -13,20 +13,23 @@ export class FlexCell extends Base {
     :host {
       --f-c-mw: none;
       --f-c-b: auto;
-      --f-g-pd: 0;
+      --f-c-b: auto;
       --f-c-db: ${unsafeCSS(FlexCell.defaultProps.display)};
       --f-c-o: 0;
       --f-c-g: 0;
       --f-c-sh: 1;
-
+      
       box-sizing: border-box;
       display: var(--f-c-db);
-      padding: var(--f-g-pd);
+      padding: var(--f-g-pd, 0);
       flex-basis: var(--f-c-b);
       max-width: var(--f-c-mw);
       order: var(--f-c-o);
       flex-grow: var(--f-c-g);
       flex-shrink: var(--f-c-sh);
+    }
+    ::slotted(*) {
+      --f-g-pd: 0;
     }
     :host([as="center"]) {
       align-self: center;
