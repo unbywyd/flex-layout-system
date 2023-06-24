@@ -11,22 +11,22 @@ export class FlexCell extends Base {
   };
   static styles = css`
     :host {
-      box-sizing: border-box;
-      display: var(--f-c-db, ${unsafeCSS(FlexCell.defaultProps.display)});
-      padding: var(--f-g-pd, 0);
-      flex-basis: var(--f-c-b, auto);
-      max-width: var(--f-c-b, none);
-      order: var(--f-c-o, 0);
-      flex-grow: var(--f-c-g, 0);
-      flex-shrink: var(--f-c-sh, 1);
-    }
-    ::slotted(*) {
+      --f-c-mw: none;
+      --f-c-b: auto;
       --f-g-pd: 0;
       --f-c-db: ${unsafeCSS(FlexCell.defaultProps.display)};
-      --f-c-b: auto;
       --f-c-o: 0;
       --f-c-g: 0;
       --f-c-sh: 1;
+
+      box-sizing: border-box;
+      display: var(--f-c-db);
+      padding: var(--f-g-pd);
+      flex-basis: var(--f-c-b);
+      max-width: var(--f-c-mw);
+      order: var(--f-c-o);
+      flex-grow: var(--f-c-g);
+      flex-shrink: var(--f-c-sh);
     }
     :host([as="center"]) {
       align-self: center;
@@ -249,9 +249,16 @@ export class FlexCell extends Base {
   @property({ type: String, reflect: true })
   width: string | null = null;
 
+  @property({ type: String, reflect: true })
+  basis: string | null = null;
+
   render() {
+    if (this.basis) {
+      this.style.setProperty("--f-c-b", this.basis);
+    }
     if (this.width) {
       this.style.setProperty("--f-c-b", this.width);
+      this.style.setProperty("--f-c-mw", this.width);
     }
     if ((this.order && this.order < 0) || this.order > 10) {
       this.style.setProperty("--f-c-o", this.order.toString());

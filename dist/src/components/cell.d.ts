@@ -8,5 +8,6 @@ export declare class FlexCell extends Base {
     grow: number | null;
     shrink: number | null;
     width: string | null;
+    basis: string | null;
     render(): import("lit-html").TemplateResult<1>;
 }
