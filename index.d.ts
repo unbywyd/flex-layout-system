@@ -114,7 +114,15 @@ export type FlexCellProps = Base & {
   flex?: boolean;
   iflex?: boolean;
   iblock?: boolean;
-  as?: "center" | "start" | "end" | "stretch" | "baseline" | "auto" | "normal" | "unset";
+  as?:
+    | "center"
+    | "start"
+    | "end"
+    | "stretch"
+    | "baseline"
+    | "auto"
+    | "normal"
+    | "unset";
 };
 export type FlexCanvasProps = Base & {
   width?: string;
@@ -161,29 +169,77 @@ declare global {
   namespace JSX {
     interface IntrinsicElements {
       "flex-box": FlexBoxProps &
-        React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+        React.DetailedHTMLProps<
+          React.HTMLAttributes<HTMLElement>,
+          HTMLElement
+        > &
+        React.AriaAttributes;
       "flex-canvas": FlexCanvasProps &
-        React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+        React.DetailedHTMLProps<
+          React.HTMLAttributes<HTMLElement>,
+          HTMLElement
+        > &
+        React.AriaAttributes;
       "flex-cell": FlexCellProps &
-        React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+        React.DetailedHTMLProps<
+          React.HTMLAttributes<HTMLElement>,
+          HTMLElement
+        > &
+        React.AriaAttributes;
       "flex-grid": FlexGridProps &
-        React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+        React.DetailedHTMLProps<
+          React.HTMLAttributes<HTMLElement>,
+          HTMLElement
+        > &
+        React.AriaAttributes;
       "flex-media": FlexMediaProps &
-        React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+        React.DetailedHTMLProps<
+          React.HTMLAttributes<HTMLElement>,
+          HTMLElement
+        > &
+        React.AriaAttributes;
       "stacked-box": StackedBoxProps &
-        React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+        React.DetailedHTMLProps<
+          React.HTMLAttributes<HTMLElement>,
+          HTMLElement
+        > &
+        React.AriaAttributes;
       "stacked-cell": StackedCellProps &
-        React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+        React.DetailedHTMLProps<
+          React.HTMLAttributes<HTMLElement>,
+          HTMLElement
+        > &
+        React.AriaAttributes;
       "fit-box": FitBoxProps &
-        React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+        React.DetailedHTMLProps<
+          React.HTMLAttributes<HTMLElement>,
+          HTMLElement
+        > &
+        React.AriaAttributes;
       "a-ratio": AspectRatioProps &
-        React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+        React.DetailedHTMLProps<
+          React.HTMLAttributes<HTMLElement>,
+          HTMLElement
+        > &
+        React.AriaAttributes;
       "flex-divider": FlexDividerProps &
-        React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+        React.DetailedHTMLProps<
+          React.HTMLAttributes<HTMLElement>,
+          HTMLElement
+        > &
+        React.AriaAttributes;
       "space-box": SpaceBoxProps &
-        React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+        React.DetailedHTMLProps<
+          React.HTMLAttributes<HTMLElement>,
+          HTMLElement
+        > &
+        React.AriaAttributes;
       "s-box": StyleBoxProps &
-        React.DetailedHTMLProps<React.HTMLAttributes<HTMLElement>, HTMLElement>;
+        React.DetailedHTMLProps<
+          React.HTMLAttributes<HTMLElement>,
+          HTMLElement
+        > &
+        React.AriaAttributes;
     }
   }
 }
