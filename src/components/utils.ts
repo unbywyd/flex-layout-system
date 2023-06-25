@@ -693,43 +693,27 @@ export class StyleBox extends Base {
     }
     if (this.pis) {
       this.style.setProperty("--f-sb-pis", this.pis);
-    } else {
-      this.style.removeProperty("--f-sb-pis");
     }
     if (this.pie) {
       this.style.setProperty("--f-sb-pie", this.pie);
-    } else {
-      this.style.removeProperty("--f-sb-pie");
     }
     if (this.pbs) {
       this.style.setProperty("--f-sb-pbs", this.pbs);
-    } else {
-      this.style.removeProperty("--f-sb-pbs");
     }
     if (this.pbe) {
       this.style.setProperty("--f-sb-pbe", this.pbe);
-    } else {
-      this.style.removeProperty("--f-sb-pbe");
     }
     if (this.mis) {
       this.style.setProperty("--f-sb-mis", this.mis);
-    } else {
-      this.style.removeProperty("--f-sb-mis");
     }
     if (this.mie) {
       this.style.setProperty("--f-sb-mie", this.mie);
-    } else {
-      this.style.removeProperty("--f-sb-mie");
     }
     if (this.mbs) {
       this.style.setProperty("--f-sb-mbs", this.mbs);
-    } else {
-      this.style.removeProperty("--f-sb-mbs");
     }
     if (this.mbe) {
       this.style.setProperty("--f-sb-mbe", this.mbe);
-    } else {
-      this.style.removeProperty("--f-sb-mbe");
     }
     if (this.ta) {
       this.style.setProperty("--f-sb-ta", this.ta);
