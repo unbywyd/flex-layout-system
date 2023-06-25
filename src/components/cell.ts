@@ -18,7 +18,7 @@ export class FlexCell extends Base {
       --f-c-o: 0;
       --f-c-g: 0;
       --f-c-sh: 1;
-      
+
       box-sizing: border-box;
       display: var(--f-c-db);
       padding: var(--f-g-pd, 0);
@@ -139,105 +139,6 @@ export class FlexCell extends Base {
     :host([stretch]) {
       flex-grow: 1;
     }
-    :host([order="0"]) {
-      order: 0;
-    }
-    :host([order="1"]) {
-      order: 1;
-    }
-    :host([order="2"]) {
-      order: 2;
-    }
-    :host([order="3"]) {
-      order: 3;
-    }
-    :host([order="4"]) {
-      order: 4;
-    }
-    :host([order="5"]) {
-      order: 5;
-    }
-    :host([order="6"]) {
-      order: 6;
-    }
-    :host([order="7"]) {
-      order: 7;
-    }
-    :host([order="8"]) {
-      order: 8;
-    }
-    :host([order="9"]) {
-      order: 9;
-    }
-    :host([order="10"]) {
-      order: 10;
-    }
-    :host([grow="0"]) {
-      flex-grow: 0;
-    }
-    :host([grow="1"]) {
-      flex-grow: 1;
-    }
-    :host([grow="2"]) {
-      flex-grow: 2;
-    }
-    :host([grow="3"]) {
-      flex-grow: 3;
-    }
-    :host([grow="4"]) {
-      flex-grow: 4;
-    }
-    :host([grow="5"]) {
-      flex-grow: 5;
-    }
-    :host([grow="6"]) {
-      flex-grow: 6;
-    }
-    :host([grow="7"]) {
-      flex-grow: 7;
-    }
-    :host([grow="8"]) {
-      flex-grow: 8;
-    }
-    :host([grow="9"]) {
-      flex-grow: 9;
-    }
-    :host([grow="10"]) {
-      flex-grow: 10;
-    }
-    :host([shrink="0"]) {
-      flex-shrink: 0;
-    }
-    :host([shrink="1"]) {
-      flex-shrink: 1;
-    }
-    :host([shrink="2"]) {
-      flex-shrink: 2;
-    }
-    :host([shrink="3"]) {
-      flex-shrink: 3;
-    }
-    :host([shrink="4"]) {
-      flex-shrink: 4;
-    }
-    :host([shrink="5"]) {
-      flex-shrink: 5;
-    }
-    :host([shrink="6"]) {
-      flex-shrink: 6;
-    }
-    :host([shrink="7"]) {
-      flex-shrink: 7;
-    }
-    :host([shrink="8"]) {
-      flex-shrink: 8;
-    }
-    :host([shrink="9"]) {
-      flex-shrink: 9;
-    }
-    :host([shrink="10"]) {
-      flex-shrink: 10;
-    }
   `;
 
   @property({ type: Number, reflect: true })
@@ -256,21 +157,32 @@ export class FlexCell extends Base {
   basis: string | null = null;
 
   render() {
-    if (this.basis) {
-      this.style.setProperty("--f-c-b", this.basis);
-    }
     if (this.width) {
       this.style.setProperty("--f-c-b", this.width);
       this.style.setProperty("--f-c-mw", this.width);
+    } else {
+      this.style.removeProperty("--f-c-w");
+      this.style.removeProperty("--f-c-mw");
     }
-    if ((this.order && this.order < 0) || this.order > 10) {
+    if (this.basis) {
+      this.style.setProperty("--f-c-b", this.basis);
+    } else if (!this.width) {
+      this.style.removeProperty("--f-c-b");
+    }
+    if (this.order !== null) {
       this.style.setProperty("--f-c-o", this.order.toString());
+    } else {
+      this.style.removeProperty("--f-c-o");
     }
-    if ((this.grow && this.grow > 10) || this.grow < 0) {
+    if (this.grow !== null) {
       this.style.setProperty("--f-c-g", this.grow.toString());
+    } else {
+      this.style.removeProperty("--f-c-g");
     }
-    if ((this.shrink && this.shrink > 10) || this.shrink < 0) {
+    if (this.shrink !== null) {
       this.style.setProperty("--f-c-sh", this.shrink.toString());
+    } else {
+      this.style.removeProperty("--f-c-sh");
     }
     return html`<slot></slot>`;
   }

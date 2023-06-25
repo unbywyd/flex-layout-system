@@ -51,12 +51,18 @@ export class FlexCanvas extends Base {
   render() {
     if (this.pd) {
       this.style.setProperty("--f-cs-pd", this.pd);
+    } else {
+      this.style.removeProperty("--f-cs-pd");
     }
     if (this.width) {
       this.style.setProperty("--f-cs-mw", this.width);
+    } else {
+      this.style.removeProperty("--f-cs-mw");
     }
     if (this.mg) {
       this.style.setProperty("--f-cs-mg", this.mg);
+    } else {
+      this.style.removeProperty("--f-cs-mg");
     }
     return html`<slot></slot>`;
   }

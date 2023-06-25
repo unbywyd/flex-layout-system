@@ -31,6 +31,8 @@ export class FlexGrid extends Base {
   render() {
     if (this.gap) {
       this.style.setProperty("--f-g-gap", this.gap);
+    } else {
+      this.style.removeProperty("--f-g-gap");
     }
     return html`<slot></slot>`;
   }

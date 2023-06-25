@@ -120,6 +120,8 @@ export class FlexMediaBox extends Base {
         let str = sizes.map((el) => `[${el}]`).join("");
         this.sizes = str;
       }
+    } else {
+      this.sizes = null;
     }
   }
   render() {

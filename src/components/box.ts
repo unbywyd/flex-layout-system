@@ -212,6 +212,8 @@ export class FlexBox extends Base {
   render() {
     if (this.gap) {
       this.style.setProperty("--f-b-gap", this.gap);
+    } else {
+      this.style.removeProperty("--f-b-gap");
     }
     if (this.row && this.column) {
       throw new Error("flex-box cannot be both row and column");

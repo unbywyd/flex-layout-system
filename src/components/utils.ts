@@ -82,12 +82,36 @@ export class StackedCell extends Base {
   oc: string | null = null;
 
   render() {
-    if (this.oc) this.style.setProperty("--f-sc-oc", this.oc);
-    if (this.xa) this.style.setProperty("--f-sc-s", this.xa);
-    if (this.xb) this.style.setProperty("--f-sc-e", this.xb);
-    if (this.ya) this.style.setProperty("--f-sc-t", this.ya);
-    if (this.yb) this.style.setProperty("--f-sc-b", this.yb);
-    if (this.z) this.style.setProperty("--f-sc-z", this.z);
+    if (this.oc) {
+      this.style.setProperty("--f-sc-oc", this.oc);
+    } else {
+      this.style.removeProperty("--f-sc-oc");
+    }
+    if (this.xa) {
+      this.style.setProperty("--f-sc-s", this.xa);
+    } else {
+      this.style.removeProperty("--f-sc-s");
+    }
+    if (this.xb) {
+      this.style.setProperty("--f-sc-e", this.xb);
+    } else {
+      this.style.removeProperty("--f-sc-e");
+    }
+    if (this.ya) {
+      this.style.setProperty("--f-sc-t", this.ya);
+    } else {
+      this.style.removeProperty("--f-sc-t");
+    }
+    if (this.yb) {
+      this.style.setProperty("--f-sc-b", this.yb);
+    } else {
+      this.style.removeProperty("--f-sc-b");
+    }
+    if (this.z) {
+      this.style.setProperty("--f-sc-z", this.z);
+    } else {
+      this.style.removeProperty("--f-sc-z");
+    }
     return html`<slot></slot>`;
   }
 }
@@ -160,8 +184,16 @@ export class FitBox extends Base {
   height: string | null = null;
 
   render() {
-    if (this.width) this.style.setProperty("--f-fb-w", this.width);
-    if (this.height) this.style.setProperty("--f-fb-h", this.height);
+    if (this.width) {
+      this.style.setProperty("--f-fb-w", this.width);
+    } else {
+      this.style.removeProperty("--f-fb-w");
+    }
+    if (this.height) {
+      this.style.setProperty("--f-fb-h", this.height);
+    } else {
+      this.style.removeProperty("--f-fb-h");
+    }
     return html`<slot></slot>`;
   }
 }
@@ -319,10 +351,26 @@ export class FlexDivider extends Base {
   size: string | null = null;
 
   render() {
-    if (this.size) this.style.setProperty("--f-vd-ops-size", this.size);
-    if (this.color) this.style.setProperty("--f-divider-bg", this.color);
-    if (this.width) this.style.setProperty("--f-divider-size", this.width);
-    if (this.mg) this.style.setProperty("--f-divider-m", this.mg);
+    if (this.size) {
+      this.style.setProperty("--f-vd-ops-size", this.size);
+    } else {
+      this.style.removeProperty("--f-vd-ops-size");
+    }
+    if (this.color) {
+      this.style.setProperty("--f-divider-bg", this.color);
+    } else {
+      this.style.removeProperty("--f-divider-bg");
+    }
+    if (this.width) {
+      this.style.setProperty("--f-divider-size", this.width);
+    } else {
+      this.style.removeProperty("--f-divider-size");
+    }
+    if (this.mg) {
+      this.style.setProperty("--f-divider-m", this.mg);
+    } else {
+      this.style.removeProperty("--f-divider-m");
+    }
     return html``;
   }
 }
@@ -348,11 +396,23 @@ export class SpaceBox extends Base {
   size: string | null = null;
 
   render() {
-    if (this.width) this.style.setProperty("--f-sbx-w", this.width);
-    if (this.height) this.style.setProperty("--f-sbx-h", this.height);
     if (this.size) {
       this.style.setProperty("--f-sbx-w", this.size);
       this.style.setProperty("--f-sbx-h", this.size);
+    } else {
+      this.style.removeProperty("--f-sbx-w");
+      this.style.removeProperty("--f-sbx-h");
+    }
+
+    if (this.width) {
+      this.style.setProperty("--f-sbx-w", this.width);
+    } else if (!this.size) {
+      this.style.removeProperty("--f-sbx-w");
+    }
+    if (this.height) {
+      this.style.setProperty("--f-sbx-h", this.height);
+    } else {
+      this.style.removeProperty("--f-sbx-h");
     }
     return html``;
   }
@@ -540,10 +600,32 @@ export class StyleBox extends Base {
   render() {
     if (this.scale) {
       this.style.setProperty("transform", `scale(${this.scale})`);
+    } else {
+      // check if scale is set, remote it
+      let transform = this.style.getPropertyValue("transform");
+      if (transform) {
+        transform = transform.replace(/scale\((.*)\)/g, "");
+        if (transform.trim() === "") {
+          this.style.removeProperty("transform");
+        } else {
+          this.style.setProperty("transform", transform);
+        }
+      }
     }
     if (this.color) {
       this.style.setProperty("--f-sb-color", this.color);
+    } else {
+      this.style.removeProperty("--f-sb-color");
     }
+    this.style.removeProperty("--f-sb-pis");
+    this.style.removeProperty("--f-sb-pie");
+    this.style.removeProperty("--f-sb-pbs");
+    this.style.removeProperty("--f-sb-pbe");
+    this.style.removeProperty("--f-sb-mis");
+    this.style.removeProperty("--f-sb-mie");
+    this.style.removeProperty("--f-sb-mbs");
+    this.style.removeProperty("--f-sb-mbe");
+
     if (this.pd) {
       this.style.setProperty("--f-sb-pis", this.pd);
       this.style.setProperty("--f-sb-pie", this.pd);
@@ -556,6 +638,7 @@ export class StyleBox extends Base {
       this.style.setProperty("--f-sb-mbs", this.mg);
       this.style.setProperty("--f-sb-mbe", this.mg);
     }
+
     if (this.px) {
       this.style.setProperty("--f-sb-pis", this.px);
       this.style.setProperty("--f-sb-pie", this.px);
@@ -573,28 +656,116 @@ export class StyleBox extends Base {
       this.style.setProperty("--f-sb-mbe", this.my);
     }
 
-    if (this.tt) this.style.setProperty("--f-sb-tt", this.tt);
-    if (this.w) this.style.setProperty("--f-sb-w", this.w);
-    if (this.h) this.style.setProperty("--f-sb-h", this.h);
-    if (this.mw) this.style.setProperty("--f-sb-mw", this.mw);
-    if (this.mxw) this.style.setProperty("--f-sb-mxw", this.mxw);
-    if (this.mh) this.style.setProperty("--f-sb-mh", this.mh);
-    if (this.mxh) this.style.setProperty("--f-sb-mxh", this.mxh);
-    if (this.pis) this.style.setProperty("--f-sb-pis", this.pis);
-    if (this.pie) this.style.setProperty("--f-sb-pie", this.pie);
-    if (this.pbs) this.style.setProperty("--f-sb-pbs", this.pbs);
-    if (this.pbe) this.style.setProperty("--f-sb-pbe", this.pbe);
-    if (this.mis) this.style.setProperty("--f-sb-mis", this.mis);
-    if (this.mie) this.style.setProperty("--f-sb-mie", this.mie);
-    if (this.mbs) this.style.setProperty("--f-sb-mbs", this.mbs);
-    if (this.mbe) this.style.setProperty("--f-sb-mbe", this.mbe);
-    if (this.ta) this.style.setProperty("--f-sb-ta", this.ta);
-    if (this.op) this.style.setProperty("--f-sb-op", this.op);
-    if (this.td) this.style.setProperty("--f-sb-td", this.td);
-    if (this.br) this.style.setProperty("--f-sb-br", this.br);
-    if (this.fz) this.style.setProperty("--f-sb-fsz", this.fz);
-    if (this.fw) this.style.setProperty("--f-sb-fw", this.fw);
-    if (this.lh) this.style.setProperty("--f-sb-lh", this.lh);
+    if (this.tt) {
+      this.style.setProperty("--f-sb-tt", this.tt);
+    } else {
+      this.style.removeProperty("--f-sb-tt");
+    }
+    if (this.w) {
+      this.style.setProperty("--f-sb-w", this.w);
+    } else {
+      this.style.removeProperty("--f-sb-w");
+    }
+    if (this.h) {
+      this.style.setProperty("--f-sb-h", this.h);
+    } else {
+      this.style.removeProperty("--f-sb-h");
+    }
+    if (this.mw) {
+      this.style.setProperty("--f-sb-mw", this.mw);
+    } else {
+      this.style.removeProperty("--f-sb-mw");
+    }
+    if (this.mxw) {
+      this.style.setProperty("--f-sb-mxw", this.mxw);
+    } else {
+      this.style.removeProperty("--f-sb-mxw");
+    }
+    if (this.mh) {
+      this.style.setProperty("--f-sb-mh", this.mh);
+    } else {
+      this.style.removeProperty("--f-sb-mh");
+    }
+    if (this.mxh) {
+      this.style.setProperty("--f-sb-mxh", this.mxh);
+    } else {
+      this.style.removeProperty("--f-sb-mxh");
+    }
+    if (this.pis) {
+      this.style.setProperty("--f-sb-pis", this.pis);
+    } else {
+      this.style.removeProperty("--f-sb-pis");
+    }
+    if (this.pie) {
+      this.style.setProperty("--f-sb-pie", this.pie);
+    } else {
+      this.style.removeProperty("--f-sb-pie");
+    }
+    if (this.pbs) {
+      this.style.setProperty("--f-sb-pbs", this.pbs);
+    } else {
+      this.style.removeProperty("--f-sb-pbs");
+    }
+    if (this.pbe) {
+      this.style.setProperty("--f-sb-pbe", this.pbe);
+    } else {
+      this.style.removeProperty("--f-sb-pbe");
+    }
+    if (this.mis) {
+      this.style.setProperty("--f-sb-mis", this.mis);
+    } else {
+      this.style.removeProperty("--f-sb-mis");
+    }
+    if (this.mie) {
+      this.style.setProperty("--f-sb-mie", this.mie);
+    } else {
+      this.style.removeProperty("--f-sb-mie");
+    }
+    if (this.mbs) {
+      this.style.setProperty("--f-sb-mbs", this.mbs);
+    } else {
+      this.style.removeProperty("--f-sb-mbs");
+    }
+    if (this.mbe) {
+      this.style.setProperty("--f-sb-mbe", this.mbe);
+    } else {
+      this.style.removeProperty("--f-sb-mbe");
+    }
+    if (this.ta) {
+      this.style.setProperty("--f-sb-ta", this.ta);
+    } else {
+      this.style.removeProperty("--f-sb-ta");
+    }
+    if (this.op) {
+      this.style.setProperty("--f-sb-op", this.op);
+    } else {
+      this.style.removeProperty("--f-sb-op");
+    }
+    if (this.td) {
+      this.style.setProperty("--f-sb-td", this.td);
+    } else {
+      this.style.removeProperty("--f-sb-td");
+    }
+    if (this.br) {
+      this.style.setProperty("--f-sb-br", this.br);
+    } else {
+      this.style.removeProperty("--f-sb-br");
+    }
+    if (this.fz) {
+      this.style.setProperty("--f-sb-fsz", this.fz);
+    } else {
+      this.style.removeProperty("--f-sb-fsz");
+    }
+    if (this.fw) {
+      this.style.setProperty("--f-sb-fw", this.fw);
+    } else {
+      this.style.removeProperty("--f-sb-fw");
+    }
+    if (this.lh) {
+      this.style.setProperty("--f-sb-lh", this.lh);
+    } else {
+      this.style.removeProperty("--f-sb-lh");
+    }
     return html`<slot></slot>`;
   }
 }
