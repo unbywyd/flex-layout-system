@@ -22,7 +22,13 @@ export class FlexGrid extends Base {
       --f-g-pd: var(--f-g-gap);
     }
     :host ::slotted(*) {
-      margin: calc(-1 * var(--f-g-gap));
+      margin: 0 calc(-1 * var(--f-g-gap));
+    }
+    :host ::slotted(*:last-child) {
+      margin-bottom: calc(-1 * var(--f-g-gap));
+    }
+    :host ::slotted(*:first-child) {
+      margin-top: calc(-1 * var(--f-g-gap));
     }
   `;
 

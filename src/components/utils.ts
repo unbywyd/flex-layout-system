@@ -479,14 +479,24 @@ export class StyleBox extends Base {
       margin-block-start: var(--f-sb-mbs);
       margin-block-end: var(--f-sb-mbe);
     }
-
+    :host([nowrap]) {
+      white-space: nowrap;
+    }
+    :host([wrap]) {
+      white-space: pre-wrap;
+    }
     :host([inline]) {
       --f-sb-display: inline;
     }
     :host([block]) {
       --f-sb-display: block;
     }
-
+    :host([crop]) {
+      overflow: hidden;
+    }
+    :host([scrollable]) {
+      overflow: auto;
+    }
     :host([inherit][td]) ::slotted(*) {
       text-decoration: inherit;
     }
