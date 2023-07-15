@@ -84,6 +84,10 @@ import {
   StyleBox,
 } from "flex-layout-system-react";
 
+// If you want to use the responsive utilities based on CSS Media Queries, import the following:
+// Note: Note that styles are imported from the flex-layout-system package
+import "flex-layout-system/dist/css-responsive.min.css";
+
 function App() {
   return (
     <FlexCanvas width="1200px">
