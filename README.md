@@ -107,3 +107,45 @@ function App() {
 
 export default App;
 ```
+
+### Angular
+
+If you want to use this library in your Angular project, you can use the following:
+
+- You need to install a main package `flex-layout-system` [npm](https://www.npmjs.com/package/flex-layout-system)
+
+```bash
+npm install flex-layout-system
+```
+
+- Import the package in your Angular project
+
+```js
+import "flex-layout-system";
+```
+
+- Use the components in your Angular project
+
+```js
+  import "flex-layout-system";
+  import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+
+  @NgModule({
+    ...
+    schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  })
+```
+
+- If you want to use the responsive utilities based on CSS Media Queries, import the following:
+
+```js
+import "flex-layout-system/dist/css-responsive.min.css";
+```
+
+or in your `angular.json` file
+
+```json
+"styles": [
+  "node_modules/flex-layout-system/dist/css-responsive.min.css"
+]
+```
