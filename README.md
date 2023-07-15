@@ -10,7 +10,7 @@ By importing Flex Layout System just once, you can seamlessly integrate it into 
 
 ## Get Started
 
-### Browser / Compiled version
+### Browser / Compiled version / Sources Web Components
 
 To get started with Flex Layout System, follow these simple steps:
 
@@ -60,7 +60,7 @@ If yow want to use this library in your HTML file (browser), you can use the fol
 
 If you want to use this library in your React project, you can use the following:
 
-- You need to install a package for React `flex-layout-system-react`
+- You need to install a package for React `flex-layout-system-react` [npm](https://www.npmjs.com/package/flex-layout-system-react)
 
 ```bash
 npm install flex-layout-system-react
