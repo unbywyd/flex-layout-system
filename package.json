@@ -3,9 +3,7 @@
     "@babel/core": "^7.22.1",
     "@babel/plugin-proposal-decorators": "^7.22.3",
     "@babel/preset-env": "^7.22.4",
-    "@babel/preset-react": "^7.22.3",
     "@types/node": "^20.2.5",
-    "@types/react": "^18.2.12",
     "@types/webpack": "^5.28.1",
     "@webpack-cli/generators": "^3.0.4",
     "autoprefixer": "^10.4.14",
@@ -15,7 +13,6 @@
     "css-loader": "^6.8.1",
     "css-minimizer-webpack-plugin": "^5.0.0",
     "declaration-bundler-webpack-plugin": "^1.0.3",
-    "lit": "^2.7.4",
     "mini-css-extract-plugin": "^2.7.6",
     "postcss": "^8.4.24",
     "postcss-loader": "^7.3.2",
@@ -29,9 +26,10 @@
     "typescript": "^5.0.4",
     "webpack": "^5.84.1",
     "webpack-cli": "^5.1.1",
-    "webpack-dev-server": "^4.15.0",
-    "wepack-cli": "^0.0.1-security",
-    "react": "^18.2.0"
+    "webpack-dev-server": "^4.15.0"
+  },
+  "dependencies": {
+    "lit": "^2.7.4"
   },
   "browserslist": [
     ">2%",
@@ -39,11 +37,10 @@
     "Firefox > 63",
     "Chrome > 67"
   ],
-  "dependencies": {},
-  "version": "0.3.6",
-  "description": "Flex Layout System",
+  "version": "1.0.0",
+  "description": "Flex Layout System (Source)",
   "name": "flex-layout-system",
-  "main": "dist/index.min.js",
+  "main": "dist/index.js",
   "keywords": [
     "responsive design",
     "grid system",
@@ -60,11 +57,9 @@
   "homepage": "https://flex-layout-system.netlify.app/",
   "repository": "git+https://github.com/unbywyd/flex-layout-system",
   "files": [
-    "dist",
-    "src",
-    "index.d.ts"
+    "*"
   ],
-  "types": "dist/src/**/*.d.ts",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "webpack --mode=production --node-env=production",
     "build:dev": "webpack --mode=development",

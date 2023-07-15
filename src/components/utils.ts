@@ -4,13 +4,12 @@
  * SPDX-License-Identifier: BSD-3-Clause
  */
 
-import { LitElement, html, css, unsafeCSS } from "lit";
+import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { Base } from "./base";
 
 @customElement("stacked-box")
-export class StackedBox extends Base {
-  static styles = css`
+export class StackedBox extends LitElement {
+  static override styles = css`
     :host {
       display: block;
       box-sizing: border-box;
@@ -25,43 +24,51 @@ export class StackedBox extends Base {
       position: absolute;
     }
   `;
-  render() {
+
+  @property({ type: Boolean, reflect: true })
+  crop: boolean | null = null;
+
+  override render() {
     return html` <slot></slot> `;
   }
 }
 
 @customElement("stacked-cell")
-export class StackedCell extends Base {
-  static styles = css`
+export class StackedCell extends LitElement {
+  static override styles = css`
     :host {
-      position: absolute;
-      box-sizing: border-box;
-      inset-inline-start: var(--f-sc-s, auto);
-      inset-inline-end: var(--f-sc-e, auto);
-      inset-block-start: var(--f-sc-t, auto);
-      inset-block-end: var(--f-sc-b, auto);
-      z-index: var(--f-sc-z, auto);
-    }
-    :host([rel]) {
-      position: relative;
-    }
-
-    :host ::slotted(*) {
       --f-sc-s: auto;
       --f-sc-e: auto;
       --f-sc-t: auto;
       --f-sc-b: auto;
       --f-sc-z: auto;
+      position: absolute;
+      box-sizing: border-box;
+      inset-inline-start: var(--f-sc-s);
+      inset-inline-end: var(--f-sc-e);
+      inset-block-start: var(--f-sc-t);
+      inset-block-end: var(--f-sc-b);
+      z-index: var(--f-sc-z);
     }
-
+    :host([rel]) {
+      position: relative;
+    }
     :host([overlay]) {
       background: var(--f-sc-oc, rgba(0, 0, 0, 0.5));
     }
-
     :host([stretch]) {
       inset: 0;
     }
   `;
+
+  @property({ type: Boolean, reflect: true })
+  rel: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  overlay: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  stretch: boolean | null = null;
 
   @property({ type: String, reflect: true })
   xa: string | null = null;
@@ -79,11 +86,11 @@ export class StackedCell extends Base {
   z: string | null = null;
 
   @property({ type: String, reflect: true })
-  oc: string | null = null;
+  overcolor: string | null = null;
 
-  render() {
-    if (this.oc) {
-      this.style.setProperty("--f-sc-oc", this.oc);
+  override render() {
+    if (this.overcolor) {
+      this.style.setProperty("--f-sc-oc", this.overcolor);
     } else {
       this.style.removeProperty("--f-sc-oc");
     }
@@ -117,21 +124,23 @@ export class StackedCell extends Base {
 }
 
 @customElement("fit-box")
-export class FitBox extends Base {
-  static styles = css`
+export class FitBox extends LitElement {
+  static override styles = css`
     :host {
+      --f-fb-w: 100%;
+      --f-fb-h: auto;
       display: block;
       box-sizing: border-box;
       position: relative;
-      width: var(--f-fb-w, 100%);
-      height: var(--f-fb-h, auto);
+      width: var(--f-fb-w);
+      height: var(--f-fb-h);
     }
     :host([flex]) {
       display: flex;
     }
     :host([stretch]) {
-      width: 100%;
-      height: 100%;
+      width: 100% !important;
+      height: 100% !important;
       flex-grow: 1;
     }
     :host([crop]) {
@@ -146,10 +155,8 @@ export class FitBox extends Base {
       align-items: center;
     }
     :host([fill]) ::slotted(*) {
-      width: 100%;
-      height: 100%;
-      --f-fb-w: 100%;
-      --f-fb-h: auto;
+      width: 100% !important;
+      height: 100% !important;
     }
     :host([round]) {
       overflow: hidden;
@@ -158,6 +165,8 @@ export class FitBox extends Base {
     :host([cover]) ::slotted(img) {
       object-fit: cover;
       object-position: center;
+      width: 100% !important;
+      height: 100%;
     }
     :host([contain]) ::slotted(img) {
       width: auto;
@@ -166,16 +175,33 @@ export class FitBox extends Base {
       max-height: 100%;
       object-fit: contain;
     }
-    :host([stretch][force]) {
-      width: 100% !important;
-      height: 100% !important;
-    }
-    :host([force][fill]) ::slotted(*) {
-      width: 100% !important;
-      height: 100% !important;
-      display: block !important;
-    }
   `;
+  @property({ type: Boolean, reflect: true })
+  stretch: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  flex: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  crop: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  scrollable: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  center: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  fill: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  round: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  cover: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  contain: boolean | null = null;
 
   @property({ type: String, reflect: true })
   width: string | null = null;
@@ -183,7 +209,7 @@ export class FitBox extends Base {
   @property({ type: String, reflect: true })
   height: string | null = null;
 
-  render() {
+  override render() {
     if (this.width) {
       this.style.setProperty("--f-fb-w", this.width);
     } else {
@@ -199,24 +225,25 @@ export class FitBox extends Base {
 }
 
 @customElement("a-ratio")
-export class AspectRatio extends Base {
+export class AspectRatio extends LitElement {
   static defaultProps: {
     display: string;
   } = {
     display: "flex",
   };
 
-  static styles = css`
+  static override styles = css`
     :host {
-      box-sizing: border-box;
-      aspect-ratio: var(--f-ar-v, auto);
-    }
-    :host ::slotted(*) {
       --f-ar-v: auto;
+      box-sizing: border-box;
+      aspect-ratio: var(--f-ar-v);
+    }
+    :host[crop] {
+      overflow: hidden;
     }
     :host([fit]) ::slotted(*) {
-      width: 100%;
-      height: 100%;
+      width: 100% !important;
+      height: 100% !important;
     }
     :host([center]) ::slotted(img) {
       object-fit: contain;
@@ -282,21 +309,27 @@ export class AspectRatio extends Base {
   `;
 
   @property({ type: Boolean, reflect: true })
-  center: boolean = true;
+  fit: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  crop: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  center: boolean | null = null;
 
   @property({ type: String, reflect: true })
   ratio: string | null = null;
 
-  render() {
+  override render() {
     return html`<slot></slot>`;
   }
 }
 
 @customElement("flex-divider")
-export class FlexDivider extends Base {
-  static styles = css`
+export class FlexDivider extends LitElement {
+  static override styles = css`
     :host {
-      --f-divider-size: 1px;
+      --f-divider-size: 2px;
       --f-divider-bg-dark: rgba(255, 255, 255, 0.12);
       --f-divider-bg-light: rgba(0, 0, 0, 0.12);
       box-sizing: border-box;
@@ -338,6 +371,18 @@ export class FlexDivider extends Base {
     }
   `;
 
+  @property({ type: Boolean, reflect: true })
+  dark: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  v: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  h: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  stretch: boolean | null = null;
+
   @property({ type: String, reflect: true })
   mg: string | null = null;
 
@@ -350,7 +395,7 @@ export class FlexDivider extends Base {
   @property({ type: String, reflect: true })
   size: string | null = null;
 
-  render() {
+  override render() {
     if (this.size) {
       this.style.setProperty("--f-vd-ops-size", this.size);
     } else {
@@ -376,13 +421,16 @@ export class FlexDivider extends Base {
 }
 
 @customElement("space-box")
-export class SpaceBox extends Base {
-  static styles = css`
+export class SpaceBox extends LitElement {
+  static override styles = css`
     :host {
+      --f-sbx-db: block;
+      --f-sbx-w: 100%;
+      --f-sbx-h: auto;
       box-sizing: border-box;
-      display: var(--f-sbx-db, block);
-      width: var(--f-sbx-w, 100%);
-      height: var(--f-sbx-h, auto);
+      display: var(--f-sbx-db);
+      width: var(--f-sbx-w);
+      height: var(--f-sbx-h);
     }
   `;
 
@@ -395,7 +443,7 @@ export class SpaceBox extends Base {
   @property({ type: String, reflect: true })
   size: string | null = null;
 
-  render() {
+  override render() {
     if (this.size) {
       this.style.setProperty("--f-sbx-w", this.size);
       this.style.setProperty("--f-sbx-h", this.size);
@@ -419,8 +467,8 @@ export class SpaceBox extends Base {
 }
 
 @customElement("s-box")
-export class StyleBox extends Base {
-  static styles = css`
+export class StyleBox extends LitElement {
+  static override styles = css`
     :host {
       --f-sb-pis: 0;
       --f-sb-pie: 0;
@@ -432,6 +480,12 @@ export class StyleBox extends Base {
       --f-sb-mbe: 0;
       --f-sb-display: var(--f-sb-fallback-display, inline-block);
       --f-sb-color: var(--f-sb-fallback-color, inherit);
+      --f-sb-bgc: var(--f-sb-fallback-background-color, transparent);
+      --f-sb-bgi: var(--f-sb-fallback-background-image, none);
+      --f-sb-bgr: var(--f-sb-fallback-background-repeat, no-repeat);
+      --f-sb-bgp: var(--f-sb-fallback-background-position, 0 0);
+      --f-sb-bgs: var(--f-sb-fallback-background-size, auto);
+      --f-sb-bga: var(--f-sb-fallback-background-attachment, scroll);
       --f-sb-fsz: var(--f-sb-fallback-font-size, 1rem);
 
       --f-sb-lh: var(--f-sb-fallback-line-height, normal);
@@ -453,6 +507,12 @@ export class StyleBox extends Base {
       box-sizing: border-box;
       display: var(--f-sb-display);
       color: var(--f-sb-color);
+      background-color: var(--f-sb-bgc);
+      background-image: var(--f-sb-bgi);
+      background-repeat: var(--f-sb-bgr);
+      background-position: var(--f-sb-bgp);
+      background-size: var(--f-sb-bgs);
+      background-attachment: var(--f-sb-bga);
       font-size: var(--f-sb-fsz);
       line-height: var(--f-sb-lh);
       font-weight: var(--f-sb-fw);
@@ -517,11 +577,50 @@ export class StyleBox extends Base {
     }
   `;
 
+  @property({ type: Boolean, reflect: true })
+  inline: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  block: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  crop: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  scrollable: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  inherit: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  nowrap: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  wrap: boolean | null = null;
+
   @property({ type: String, reflect: true })
   color: string | null = null;
 
   @property({ type: String, reflect: true })
-  scale: string | null = null;
+  bgc: string | null = null;
+
+  @property({ type: String, reflect: true })
+  bgi: string | null = null;
+
+  @property({ type: String, reflect: true })
+  bgr: string | null = null;
+
+  @property({ type: String, reflect: true })
+  bgp: string | null = null;
+
+  @property({ type: String, reflect: true })
+  bgs: string | null = null;
+
+  @property({ type: String, reflect: true })
+  bga: string | null = null;
+
+  @property({ type: String, reflect: true })
+  transform: string | null = null;
 
   @property({ type: String, reflect: true })
   fz: string | null = null;
@@ -607,20 +706,47 @@ export class StyleBox extends Base {
   @property({ type: String, reflect: true })
   my: string | null = null;
 
-  render() {
-    if (this.scale) {
-      this.style.setProperty("transform", `scale(${this.scale})`);
+  override render() {
+    if (this.transform) {
+      this.style.setProperty("transform", this.transform);
     } else {
-      // check if scale is set, remote it
-      let transform = this.style.getPropertyValue("transform");
-      if (transform) {
-        transform = transform.replace(/scale\((.*)\)/g, "");
-        if (transform.trim() === "") {
-          this.style.removeProperty("transform");
-        } else {
-          this.style.setProperty("transform", transform);
-        }
-      }
+      this.style.removeProperty("transform");
+    }
+
+    if (this.bgi) {
+      this.style.setProperty("--f-sb-bgi", this.bgi);
+    } else {
+      this.style.removeProperty("--f-sb-bgi");
+    }
+
+    if (this.bgr) {
+      this.style.setProperty("--f-sb-bgr", this.bgr);
+    } else {
+      this.style.removeProperty("--f-sb-bgr");
+    }
+
+    if (this.bgp) {
+      this.style.setProperty("--f-sb-bgp", this.bgp);
+    } else {
+      this.style.removeProperty("--f-sb-bgp");
+    }
+
+    if (this.bgs) {
+      this.style.setProperty("--f-sb-bgs", this.bgs);
+    } else {
+      this.style.removeProperty("--f-sb-bgs");
+    }
+
+    if (this.bga) {
+      this.style.setProperty("--f-sb-bga", this.bga);
+    } else {
+      this.style.removeProperty("--f-sb-bga");
+    }
+
+    if (this.bgc) {
+      this.style.setProperty("--f-sb-bgc", this.bgc);
+    } else {
+      this.style.removeProperty("--f-sb-bgc");
     }
     if (this.color) {
       this.style.setProperty("--f-sb-color", this.color);
@@ -760,6 +886,54 @@ export class StyleBox extends Base {
     } else {
       this.style.removeProperty("--f-sb-lh");
     }
+    return html`<slot></slot>`;
+  }
+}
+
+@customElement("sr-only")
+export class ScreenReaderOnly extends LitElement {
+  static override styles = css`
+    :host {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border-width: 0 !important;
+    }
+    :host([focusable]:focus) {
+      position: relative !important;
+      width: auto !important;
+      height: auto !important;
+      clip: initial !important;
+      margin: inherit !important;
+      padding: inherit !important;
+      border: initial !important;
+      overflow: initial !important;
+      white-space: initial !important;
+    }
+  `;
+
+  @property({ type: Boolean, reflect: true })
+  focusable: boolean = false;
+
+  override render() {
+    return html`<slot></slot>`;
+  }
+}
+
+@customElement("ltr-only")
+export class LtrOnly extends LitElement {
+  static override styles = css`
+    :host {
+      display: inline-block;
+      direction: ltr;
+    }
+  `;
+  override render() {
     return html`<slot></slot>`;
   }
 }

@@ -1,10 +1,9 @@
-import { LitElement, html, css, unsafeCSS } from "lit";
+import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { Base } from "./base";
 
 @customElement("flex-grid")
-export class FlexGrid extends Base {
-  static styles = css`
+export class FlexGrid extends LitElement {
+  static override styles = css`
     :host {
       box-sizing: border-box;
       display: block;
@@ -14,7 +13,9 @@ export class FlexGrid extends Base {
     :host([flex]) {
       display: flex;
     }
-
+    :host([crop]) {
+      overflow: hidden;
+    }
     :host([compact]) {
       padding: 0;
     }
@@ -32,9 +33,18 @@ export class FlexGrid extends Base {
     }
   `;
 
+  @property({ type: Boolean, reflect: true })
+  crop: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  flex: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  compact: boolean | null = null;
+
   @property({ type: String, reflect: true })
   gap: string | null = null;
-  render() {
+  override render() {
     if (this.gap) {
       this.style.setProperty("--f-g-gap", this.gap);
     } else {

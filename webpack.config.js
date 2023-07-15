@@ -11,11 +11,10 @@ const stylesHandler = MiniCssExtractPlugin.loader;
 
 const config = {
   entry: {
-    index: "./src/index.ts",
-    base: "./src/base.ts",
-    full: "./src/full.ts",
-    "css-responsive": "./src/css-responsive.ts",
-    "js-responsive": "./src/js-responsive.ts",
+    browser: "./index.ts",
+    'browser-layout': "./layout.ts",
+    "css-responsive": "./css-responsive.ts",
+    "js-responsive": "./js-responsive.ts",
   },
   output: {
     filename: "[name].min.js",
@@ -33,7 +32,7 @@ const config = {
     ],
     compress: true,
     liveReload: true,
-    port: 9002,
+    port: 9003,
     host: '127.0.0.1'
   },
   optimization: {

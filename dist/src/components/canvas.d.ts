@@ -1,5 +1,5 @@
-import { Base } from "./base";
-export declare class FlexCanvas extends Base {
+import { LitElement } from "lit";
+export declare class FlexCanvas extends LitElement {
     static defaultProps: {
         maxWidth: string;
         display: string;
@@ -7,6 +7,8 @@ export declare class FlexCanvas extends Base {
         padding: string;
     };
     static styles: import("lit").CSSResult;
+    crop: boolean | null;
+    flex: boolean | null;
     width: string | null;
     mg: string | null;
     pd: string | null;

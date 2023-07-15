@@ -2,7 +2,6 @@ import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 
 import "../utils/resize-observer";
-import { Base } from "./base";
 
 declare global {
   interface HTMLElement {
@@ -12,16 +11,16 @@ declare global {
 }
 
 @customElement("flex-media")
-export class FlexMediaBox extends Base {
+export class FlexMedia extends LitElement {
   _targetEl: HTMLElement | Window | null = null;
   _resizeListener: any = null;
-  static styles = css`
+  static override styles = css`
     :host {
       box-sizing: border-box;
       display: block;
     }
   `;
-  connectedCallback() {
+  override connectedCallback() {
     super.connectedCallback();
     this._targetEl = this.getTargetElement();
     if (this._targetEl instanceof Window) {
@@ -30,11 +29,15 @@ export class FlexMediaBox extends Base {
       });
       this.onResize(window.innerWidth);
     } else {
-      this._targetEl.startResizeListener();
+      if (this._targetEl) {
+        this._targetEl.startResizeListener();
+      }
       this._resizeListener = (event: any) => {
         this.onResize((event.detail as DOMRectReadOnly).width);
       };
-      this._targetEl.addEventListener("resize", this._resizeListener);
+      if (this._targetEl) {
+        this._targetEl.addEventListener("resize", this._resizeListener);
+      }
     }
   }
   onResize(width: number) {
@@ -56,7 +59,7 @@ export class FlexMediaBox extends Base {
   @property({ type: String, reflect: true })
   sizes: string | null = null;
 
-  disconnectedCallback() {
+  override disconnectedCallback() {
     super.disconnectedCallback();
     if (this._targetEl && this._targetEl instanceof HTMLElement) {
       this._targetEl.stopResizeListener();
@@ -124,7 +127,7 @@ export class FlexMediaBox extends Base {
       this.sizes = null;
     }
   }
-  render() {
+  override render() {
     return html`<slot></slot>`;
   }
 }

@@ -10,6 +10,8 @@ By importing Flex Layout System just once, you can seamlessly integrate it into 
 
 ## Get Started
 
+### Browser / Compiled version
+
 To get started with Flex Layout System, follow these simple steps:
 
 Step 1: Install the package Run the following command in your project to install the Flex Layout System package from npm:
@@ -21,13 +23,8 @@ npm install flex-layout-system
 Step 2: Importing and using the components In your TypeScript/JS file. For example, to use the base layout without utilities and styles, import the following:
 
 ```js
-// TS project / Import including types
+// Import including types
 import "flex-layout-system";
-
-// JS project
-import "flex-layout-system/dist/base.min.js";
-// or 
-import "flex-layout-system/dist/full.min.js";
 
 // Optional. If you want to use the responsive utilities based on CSS Media Queries, import the following:
 import "flex-layout-system/dist/css-responsive.min.css";
@@ -41,10 +38,10 @@ If yow want to use this library in your HTML file (browser), you can use the fol
 ```html
 <!-- Only one of the following is required. -->
 <!-- If you want to use the base layout, import the following: -->
-<script src="https://unpkg.com/flex-layout-system/dist/base.min.js"></script>
+<script src="https://unpkg.com/flex-layout-system/dist/browser-layout.min.js"></script>
 
 <!-- If you want to use the layout with utilities, import the following: -->
-<script src="https://unpkg.com/flex-layout-system/dist/full.min.js"></script>
+<script src="https://unpkg.com/flex-layout-system/dist/browser.min.js"></script>
 
 <!-- Optional. If you want to use the responsive utilities based on CSS Media Queries, import the following: -->
 <link
@@ -57,4 +54,52 @@ If yow want to use this library in your HTML file (browser), you can use the fol
   rel="stylesheet"
   href="https://unpkg.com/flex-layout-system/dist/js-responsive.min.css"
 />
+```
+
+### React
+
+If you want to use this library in your React project, you can use the following:
+
+- You need to install a package for React `flex-layout-system-react`
+
+```bash
+npm install flex-layout-system-react
+```
+
+- Import the package in your React project
+
+```js
+import "flex-layout-system-react";
+```
+
+- Use the components in your React project
+
+```jsx
+import React from "react";
+import {
+  FlexBox,
+  FlexCanvas,
+  FlexGrid,
+  FlexCell,
+  StyleBox,
+} from "flex-layout-system-react";
+
+function App() {
+  return (
+    <FlexCanvas width="1200px">
+      <FlexGrid gap="20px">
+        <FlexBox>
+          <FlexCell>
+            <StyleBox bgc="#CCC" pd="20px"></StyleBox>
+          </FlexCell>
+          <FlexCell>
+            <StyleBox bgc="#CCC" pd="20px"></StyleBox>
+          </FlexCell>
+        </FlexBox>
+      </FlexGrid>
+    </FlexCanvas>
+  );
+}
+
+export default App;
 ```

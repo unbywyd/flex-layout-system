@@ -1,9 +1,8 @@
 import { LitElement, html, css, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { Base } from "./base";
 
 @customElement("flex-canvas")
-export class FlexCanvas extends Base {
+export class FlexCanvas extends LitElement {
   static defaultProps: {
     maxWidth: string;
     display: string;
@@ -16,13 +15,10 @@ export class FlexCanvas extends Base {
     padding: "0",
   };
 
-  static styles = css`
+  static override styles = css`
     :host {
       box-sizing: border-box;
-      display: var(
-        --f-cs-db,
-        ${unsafeCSS(FlexCanvas.defaultProps.display)}
-      );
+      display: var(--f-cs-db, ${unsafeCSS(FlexCanvas.defaultProps.display)});
       margin: var(--f-cs-mg, ${unsafeCSS(FlexCanvas.defaultProps.margin)});
       max-width: var(--f-cs-mw, ${unsafeCSS(FlexCanvas.defaultProps.maxWidth)});
       padding: var(--f-cs-pd, ${unsafeCSS(FlexCanvas.defaultProps.padding)});
@@ -30,7 +26,9 @@ export class FlexCanvas extends Base {
     :host([flex]) {
       display: flex;
     }
-
+    :host([crop]) {
+      overflow: hidden;
+    }
     :host ::slotted(*) {
       --f-cs-db: ${unsafeCSS(FlexCanvas.defaultProps.display)};
       --f-cs-mg: ${unsafeCSS(FlexCanvas.defaultProps.margin)};
@@ -38,6 +36,12 @@ export class FlexCanvas extends Base {
       --f-cs-pd: ${unsafeCSS(FlexCanvas.defaultProps.padding)};
     }
   `;
+
+  @property({ type: Boolean, reflect: true })
+  crop: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  flex: boolean | null = null;
 
   @property({ type: String, reflect: true })
   width: string | null = null;
@@ -48,7 +52,7 @@ export class FlexCanvas extends Base {
   @property({ type: String, reflect: true })
   pd: string | null = null;
 
-  render() {
+  override render() {
     if (this.pd) {
       this.style.setProperty("--f-cs-pd", this.pd);
     } else {
@@ -67,4 +71,3 @@ export class FlexCanvas extends Base {
     return html`<slot></slot>`;
   }
 }
-

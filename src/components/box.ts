@@ -1,9 +1,35 @@
 import { LitElement, html, css, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { Base } from "./base";
+
+export enum EnumAlignContent {
+  Start = "flex-start",
+  End = "flex-end",
+  Center = "center",
+  SpaceBetween = "space-between",
+  SpaceAround = "space-around",
+  SpaceEvenly = "space-evenly",
+  Stretch = "stretch",
+}
+
+export enum EnumAlignItems {
+  Start = "flex-start",
+  End = "flex-end",
+  Center = "center",
+  Baseline = "baseline",
+  Stretch = "stretch",
+}
+
+export enum EnumJustifyContent {
+  Start = "flex-start",
+  End = "flex-end",
+  Center = "center",
+  SpaceBetween = "space-between",
+  SpaceAround = "space-around",
+  SpaceEvenly = "space-evenly",
+}
 
 @customElement("flex-box")
-export class FlexBox extends Base {
+export class FlexBox extends LitElement {
   static defaultProps: {
     reverse: boolean;
     display: "flex" | "inline-flex";
@@ -27,7 +53,7 @@ export class FlexBox extends Base {
     }
     return this.row ? "row" : "column";
   }
-  static styles = css`
+  static override styles = css`
     :host([nowrap]) {
       flex-wrap: nowrap;
     }
@@ -84,12 +110,6 @@ export class FlexBox extends Base {
     }
     :host([ai="stretch"]) {
       align-items: stretch;
-    }
-    :host([jc="flex-start"]) {
-      justify-content: flex-start;
-    }
-    :host([jc="flex-end"]) {
-      justify-content: flex-end;
     }
     :host([jc="center"]) {
       justify-content: center;
@@ -170,6 +190,22 @@ export class FlexBox extends Base {
       width: 100%;
     }
 
+    :host([fullscreen]) ::slotted(*) {
+      min-height: 100vh;
+    }
+
+    :host([minh]) ::slotted(*) {
+      min-height: 100%;
+    }
+
+    :host([fullh]) ::slotted(*) {
+      height: 100%;
+    }
+
+    :host([fullw]) ::slotted(*) {
+      width: 100%;
+    }
+
     :host(:not([column])) ::slotted(f-divider:not([h]):not([v])) {
       min-width: var(--f-vd-w, var(--f-divider-size));
       width: var(--f-vd-w, var(--f-divider-size));
@@ -200,6 +236,66 @@ export class FlexBox extends Base {
     }
   `;
 
+  @property({ type: String, reflect: true })
+  jc: EnumJustifyContent | null = null;
+
+  @property({ type: String, reflect: true })
+  ai: EnumAlignItems | null = null;
+
+  @property({ type: String, reflect: true })
+  ac: EnumAlignContent | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  start: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  end: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  spread: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  middle: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  center: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  inline: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  wrap: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  nowrap: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  reverse: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  minh: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  fullh: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  fullw: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  fullscreen: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  stretch: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  snug: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  fill: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  fit: boolean | null = null;
+
   @property({ type: Boolean, reflect: true })
   row: boolean | null = null;
 
@@ -209,7 +305,7 @@ export class FlexBox extends Base {
   @property({ type: String, reflect: true })
   gap: string | null = null;
 
-  render() {
+  override render() {
     if (this.gap) {
       this.style.setProperty("--f-b-gap", this.gap);
     } else {

@@ -1,12 +1,12 @@
+import { LitElement } from "lit";
 import "../utils/resize-observer";
-import { Base } from "./base";
 declare global {
     interface HTMLElement {
         startResizeListener(): void;
         stopResizeListener(): void;
     }
 }
-export declare class FlexMediaBox extends Base {
+export declare class FlexMedia extends LitElement {
     _targetEl: HTMLElement | Window | null;
     _resizeListener: any;
     static styles: import("lit").CSSResult;

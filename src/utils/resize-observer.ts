@@ -30,7 +30,7 @@ export class ResizeObserverWrapper {
 
   addElement(element: Element) {
     this.create();
-    if (element instanceof Element) {
+    if (element instanceof Element && this.observer) {
       this.observer.observe(element, {
         box: this.options?.resizeObserverOptions?.box || "content-box",
       });
@@ -39,7 +39,9 @@ export class ResizeObserverWrapper {
 
   removeElement(element: Element) {
     if (!(element instanceof Element)) return;
-    this.observer.unobserve(element as Element);
+    if (this.observer) {
+      this.observer.unobserve(element as Element);
+    }
   }
 
   destroy() {

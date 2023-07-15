@@ -1,15 +1,25 @@
 import { LitElement, html, css, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { Base } from "./base";
+
+export enum EnumAlignSelf {
+  Start = "flex-start",
+  End = "flex-end",
+  Center = "center",
+  Baseline = "baseline",
+  Stretch = "stretch",
+  Auto = "auto",
+  Normal = "normal",
+  Unset = "unset",
+}
 
 @customElement("flex-cell")
-export class FlexCell extends Base {
+export class FlexCell extends LitElement {
   static defaultProps: {
     display: string;
   } = {
     display: "block",
   };
-  static styles = css`
+  static override styles = css`
     :host {
       --f-c-mw: none;
       --f-c-b: auto;
@@ -141,6 +151,36 @@ export class FlexCell extends Base {
     }
   `;
 
+  @property({ type: Boolean, reflect: true })
+  scrollable: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  flex: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  iflex: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  iblock: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  fill: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  fit: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  snug: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  auto: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  stretch: boolean | null = null;
+
+  @property({ type: String, reflect: true })
+  as: EnumAlignSelf | null = null;
+
   @property({ type: Number, reflect: true })
   order: number | null = null;
 
@@ -156,7 +196,7 @@ export class FlexCell extends Base {
   @property({ type: String, reflect: true })
   basis: string | null = null;
 
-  render() {
+  override render() {
     if (this.width) {
       this.style.setProperty("--f-c-b", this.width);
       this.style.setProperty("--f-c-mw", this.width);
