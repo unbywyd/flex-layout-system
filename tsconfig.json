@@ -2,7 +2,12 @@
   "compilerOptions": {
     "target": "es2019",
     "module": "ESNext",
-    "lib": ["es2020", "DOM", "DOM.Iterable", "ES2021"],
+    "lib": [
+      "es2020",
+      "DOM",
+      "DOM.Iterable",
+      "ES2021"
+    ],
     "noImplicitAny": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
@@ -24,6 +29,8 @@
     "outDir": "./dist",
     "rootDir": "."
   },
-
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": [
+    "**/*.ts",
+    "**/*.tsx"
+  ]
 }
