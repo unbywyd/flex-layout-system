@@ -8,7 +8,9 @@ declare global {
     startResizeListener(): void;
     stopResizeListener(): void;
   }
-}
+} 
+
+const _window = (typeof window !== "undefined" ? window : {}) as any;
 
 @customElement("flex-media")
 export class FlexMedia extends LitElement {
@@ -24,10 +26,10 @@ export class FlexMedia extends LitElement {
     super.connectedCallback();
     this._targetEl = this.getTargetElement();
     if (this._targetEl instanceof Window) {
-      window.addEventListener("resize", (event: any) => {
+      _window.addEventListener("resize", (event: any) => {
         this.onResize((event.target as Window).innerWidth);
       });
-      this.onResize(window.innerWidth);
+      this.onResize(_window.innerWidth);
     } else {
       if (this._targetEl) {
         this._targetEl.startResizeListener();
@@ -44,7 +46,7 @@ export class FlexMedia extends LitElement {
     this.setMedia(width);
   }
   getTargetElement(): HTMLElement | null | Window {
-    if (this.target === "window") return window;
+    if (this.target === "window") return _window;
     if (this.target) {
       return document.querySelector(this.target) as HTMLElement;
     }
@@ -64,7 +66,7 @@ export class FlexMedia extends LitElement {
     if (this._targetEl && this._targetEl instanceof HTMLElement) {
       this._targetEl.stopResizeListener();
     } else if (this._resizeListener) {
-      window.removeEventListener("resize", this._resizeListener);
+      _window.removeEventListener("resize", this._resizeListener);
     }
   }
   getMediaString(): Array<{
@@ -91,8 +93,8 @@ export class FlexMedia extends LitElement {
     if (nums.length > availableNames.length) {
       console.error(
         "Too many breakpoints defined, max is " +
-          (availableNames.length - 1) +
-          " from sm to xxl"
+        (availableNames.length - 1) +
+        " from sm to xxl"
       );
     }
     let mediaString = [];

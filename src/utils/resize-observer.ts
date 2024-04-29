@@ -4,6 +4,8 @@ declare global {
   }
 }
 
+const _window = (typeof window !== "undefined" ? window : {}) as Window;
+
 export class ResizeObserverWrapper {
   observer: ResizeObserver | null;
 
@@ -16,7 +18,7 @@ export class ResizeObserverWrapper {
   create() {
     if (this.observer) return;
     this.observer = new ResizeObserver((entries) => {
-      window.requestAnimationFrame(() => {
+      _window.requestAnimationFrame(() => {
         for (let entry of entries) {
           entry.target.dispatchEvent(
             new CustomEvent("resize", {
@@ -52,14 +54,18 @@ export class ResizeObserverWrapper {
   }
 }
 
-const resizeObserverInstance = window.FlexResizeObserver
-  ? window.FlexResizeObserver
+const resizeObserverInstance = _window.FlexResizeObserver
+  ? _window.FlexResizeObserver
   : new ResizeObserverWrapper();
 
-HTMLElement.prototype.startResizeListener = function () {
-  resizeObserverInstance.addElement(this);
-};
 
-HTMLElement.prototype.stopResizeListener = function () {
-  resizeObserverInstance.removeElement(this);
-};
+if (typeof HTMLElement !== "undefined") {
+
+  HTMLElement.prototype.startResizeListener = function () {
+    resizeObserverInstance.addElement(this);
+  };
+
+  HTMLElement.prototype.stopResizeListener = function () {
+    resizeObserverInstance.removeElement(this);
+  };
+}

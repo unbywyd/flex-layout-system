@@ -108,6 +108,21 @@ function App() {
 export default App;
 ```
 
+### NextJS
+
+```js
+"use client"; // This is required for NextJS, you need to add this line at the top of the file but not in page.ts file, you need to create a new file in the components folder and import it in the page.ts file with this line
+
+import "flex-layout-system/jsx.types.d"; // Import types
+import "flex-layout-system"; // Import components
+
+// Just use the web components in your JSX file, for example:
+<flex-box jc="space-between">
+  <span>1</span>
+  <span>1</span>
+</flex-box>;
+```
+
 ### Angular
 
 If you want to use this library in your Angular project, you can use the following:

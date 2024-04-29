@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import "../utils/resize-observer";
+const _window = (typeof window !== "undefined" ? window : {});
 let FlexMedia = class FlexMedia extends LitElement {
     constructor() {
         super(...arguments);
@@ -23,10 +24,10 @@ let FlexMedia = class FlexMedia extends LitElement {
         super.connectedCallback();
         this._targetEl = this.getTargetElement();
         if (this._targetEl instanceof Window) {
-            window.addEventListener("resize", (event) => {
+            _window.addEventListener("resize", (event) => {
                 this.onResize(event.target.innerWidth);
             });
-            this.onResize(window.innerWidth);
+            this.onResize(_window.innerWidth);
         }
         else {
             if (this._targetEl) {
@@ -45,7 +46,7 @@ let FlexMedia = class FlexMedia extends LitElement {
     }
     getTargetElement() {
         if (this.target === "window")
-            return window;
+            return _window;
         if (this.target) {
             return document.querySelector(this.target);
         }
@@ -57,7 +58,7 @@ let FlexMedia = class FlexMedia extends LitElement {
             this._targetEl.stopResizeListener();
         }
         else if (this._resizeListener) {
-            window.removeEventListener("resize", this._resizeListener);
+            _window.removeEventListener("resize", this._resizeListener);
         }
     }
     getMediaString() {
