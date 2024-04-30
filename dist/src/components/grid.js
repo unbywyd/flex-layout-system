@@ -18,13 +18,14 @@ let FlexGrid = class FlexGrid extends LitElement {
         this.gap = null;
     }
     render() {
+        const styleEl = document.createElement("span");
         if (this.gap) {
-            this.style.setProperty("--f-g-gap", this.gap);
+            styleEl.style.setProperty("--f-g-gap", this.gap);
         }
         else {
-            this.style.removeProperty("--f-g-gap");
+            styleEl.style.setProperty("--f-g-gap", "0");
         }
-        return html `<slot></slot>`;
+        return html `<style>:host { ${styleEl.style.cssText}}</style><slot></slot>`;
     }
 };
 FlexGrid.styles = css `

@@ -45,11 +45,12 @@ export class FlexGrid extends LitElement {
   @property({ type: String, reflect: true })
   gap: string | null = null;
   override render() {
+    const styleEl = document.createElement("span");
     if (this.gap) {
-      this.style.setProperty("--f-g-gap", this.gap);
+      styleEl.style.setProperty("--f-g-gap", this.gap);
     } else {
-      this.style.removeProperty("--f-g-gap");
+      styleEl.style.setProperty("--f-g-gap", "0");
     }
-    return html`<slot></slot>`;
+    return html`<style>:host { ${styleEl.style.cssText}}</style><slot></slot>`;
   }
 }

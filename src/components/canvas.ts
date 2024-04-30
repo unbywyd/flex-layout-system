@@ -1,4 +1,4 @@
-import { LitElement, html, css, unsafeCSS } from "lit";
+import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 
 @customElement("flex-canvas")
@@ -18,22 +18,13 @@ export class FlexCanvas extends LitElement {
   static override styles = css`
     :host {
       box-sizing: border-box;
-      display: var(--f-cs-db, ${unsafeCSS(FlexCanvas.defaultProps.display)});
-      margin: var(--f-cs-mg, ${unsafeCSS(FlexCanvas.defaultProps.margin)});
-      max-width: var(--f-cs-mw, ${unsafeCSS(FlexCanvas.defaultProps.maxWidth)});
-      padding: var(--f-cs-pd, ${unsafeCSS(FlexCanvas.defaultProps.padding)});
+      display: block;
     }
     :host([flex]) {
       display: flex;
     }
     :host([crop]) {
       overflow: hidden;
-    }
-    :host ::slotted(*) {
-      --f-cs-db: ${unsafeCSS(FlexCanvas.defaultProps.display)};
-      --f-cs-mg: ${unsafeCSS(FlexCanvas.defaultProps.margin)};
-      --f-cs-mw: ${unsafeCSS(FlexCanvas.defaultProps.maxWidth)};
-      --f-cs-pd: ${unsafeCSS(FlexCanvas.defaultProps.padding)};
     }
   `;
 
@@ -53,21 +44,23 @@ export class FlexCanvas extends LitElement {
   pd: string | null = null;
 
   override render() {
+    const styleEl = document.createElement("span");
+
     if (this.pd) {
-      this.style.setProperty("--f-cs-pd", this.pd);
+      styleEl.style.setProperty("--f-cs-pd", this.pd);
     } else {
-      this.style.removeProperty("--f-cs-pd");
+      styleEl.style.setProperty("--f-cs-pd", FlexCanvas.defaultProps.padding);
     }
     if (this.width) {
-      this.style.setProperty("--f-cs-mw", this.width);
+      styleEl.style.setProperty("--f-cs-mw", this.width);
     } else {
-      this.style.removeProperty("--f-cs-mw");
+      styleEl.style.setProperty("--f-cs-mw", FlexCanvas.defaultProps.maxWidth);
     }
     if (this.mg) {
-      this.style.setProperty("--f-cs-mg", this.mg);
+      styleEl.style.setProperty("--f-cs-mg", this.mg);
     } else {
-      this.style.removeProperty("--f-cs-mg");
+      styleEl.style.setProperty("--f-cs-mg", FlexCanvas.defaultProps.margin);
     }
-    return html`<slot></slot>`;
+    return html`<style>:host { ${styleEl.style.cssText}}</style><slot></slot>`;
   }
 }

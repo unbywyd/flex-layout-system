@@ -71,16 +71,17 @@ let FlexBox = FlexBox_1 = class FlexBox extends LitElement {
         return this.row ? "row" : "column";
     }
     render() {
+        const styleEl = document.createElement("span");
         if (this.gap) {
-            this.style.setProperty("--f-b-gap", this.gap);
+            styleEl.style.setProperty("--f-b-gap", this.gap);
         }
         else {
-            this.style.removeProperty("--f-b-gap");
+            styleEl.style.setProperty("--f-b-gap", FlexBox_1.defaultProps.gap);
         }
         if (this.row && this.column) {
             throw new Error("flex-box cannot be both row and column");
         }
-        return html `<slot></slot>`;
+        return html `<style>:host { ${styleEl.style.cssText}}</style><slot></slot>`;
     }
 };
 FlexBox.defaultProps = {
@@ -191,7 +192,7 @@ FlexBox.styles = css `
     }
     :host {
       box-sizing: border-box;
-      display: var(--f-b-db, ${unsafeCSS(FlexBox_1.defaultProps.display)});
+      display: flex;
       flex-direction: var(
         --f-b-dir,
         ${unsafeCSS(FlexBox_1.defaultProps.reverse
@@ -208,17 +209,6 @@ FlexBox.styles = css `
         --f-b-ac,
         ${unsafeCSS(FlexBox_1.defaultProps.alignContent)}
       );
-    }
-
-    :host ::slotted(*) {
-      --f-b-dir: ${unsafeCSS(FlexBox_1.defaultProps.reverse
-    ? FlexBox_1.defaultProps.mode + "-reverse"
-    : FlexBox_1.defaultProps.mode)};
-      --f-b-db: ${unsafeCSS(FlexBox_1.defaultProps.display)};
-      --f-b-jc: ${unsafeCSS(FlexBox_1.defaultProps.justifyContent)};
-      --f-b-ai: ${unsafeCSS(FlexBox_1.defaultProps.alignItems)};
-      --f-b-ac: ${unsafeCSS(FlexBox_1.defaultProps.alignContent)};
-      --f-b-gap: ${unsafeCSS(FlexBox_1.defaultProps.gap)};
     }
 
     :host([column][stretch]) ::slotted(*) {
@@ -238,25 +228,6 @@ FlexBox.styles = css `
     }
 
     :host([fullw]) ::slotted(*) {
-      width: 100%;
-    }
-
-    :host(:not([column])) ::slotted(f-divider:not([h]):not([v])) {
-      min-width: var(--f-vd-w, var(--f-divider-size));
-      width: var(--f-vd-w, var(--f-divider-size));
-      height: var(--f-vd-ops-size, auto);
-      margin: 0 var(--f-divider-m, 0);
-    }
-
-    :host([column]) ::slotted(f-divider:not([h]):not([v])) {
-      min-height: var(--f-divider-h, var(--f-divider-size));
-      height: var(--f-divider-h, var(--f-divider-size));
-      margin: var(--f-divider-m, 0) 0;
-      width: var(--f-vd-ops-size, auto);
-      max-width: var(--f-vd-ops-size, 100%);
-    }
-
-    :host([column]) ::slotted(f-divider[stretch]:not([h]):not([v])) {
       width: 100%;
     }
 

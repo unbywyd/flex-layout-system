@@ -45,14 +45,13 @@ export declare class AspectRatio extends LitElement {
 }
 export declare class FlexDivider extends LitElement {
     static styles: import("lit").CSSResult;
-    dark: boolean | null;
     v: boolean | null;
     h: boolean | null;
     stretch: boolean | null;
     mg: string | null;
-    width: string | null;
     color: string | null;
     size: string | null;
+    width: string | null;
     render(): import("lit-html").TemplateResult<1>;
 }
 export declare class SpaceBox extends LitElement {
@@ -64,6 +63,7 @@ export declare class SpaceBox extends LitElement {
 }
 export declare class StyleBox extends LitElement {
     static styles: import("lit").CSSResult;
+    display: string | null;
     inline: boolean | null;
     block: boolean | null;
     crop: boolean | null;
@@ -107,6 +107,7 @@ export declare class StyleBox extends LitElement {
     py: string | null;
     mx: string | null;
     my: string | null;
+    fg: string | null;
     render(): import("lit-html").TemplateResult<1>;
 }
 export declare class ScreenReaderOnly extends LitElement {

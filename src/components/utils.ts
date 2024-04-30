@@ -37,11 +37,6 @@ export class StackedBox extends LitElement {
 export class StackedCell extends LitElement {
   static override styles = css`
     :host {
-      --f-sc-s: auto;
-      --f-sc-e: auto;
-      --f-sc-t: auto;
-      --f-sc-b: auto;
-      --f-sc-z: auto;
       position: absolute;
       box-sizing: border-box;
       inset-inline-start: var(--f-sc-s);
@@ -89,37 +84,39 @@ export class StackedCell extends LitElement {
   overcolor: string | null = null;
 
   override render() {
+    const styleEl = document.createElement("span");
+
     if (this.overcolor) {
-      this.style.setProperty("--f-sc-oc", this.overcolor);
+      styleEl.style.setProperty("--f-sc-oc", this.overcolor);
     } else {
-      this.style.removeProperty("--f-sc-oc");
+      styleEl.style.setProperty("--f-sc-oc", "rgba(0, 0, 0, 0.5)");
     }
     if (this.xa) {
-      this.style.setProperty("--f-sc-s", this.xa);
+      styleEl.style.setProperty("--f-sc-s", this.xa);
     } else {
-      this.style.removeProperty("--f-sc-s");
+      styleEl.style.setProperty("--f-sc-s", "auto");
     }
     if (this.xb) {
-      this.style.setProperty("--f-sc-e", this.xb);
+      styleEl.style.setProperty("--f-sc-e", this.xb);
     } else {
-      this.style.removeProperty("--f-sc-e");
+      styleEl.style.setProperty("--f-sc-e", "auto");
     }
     if (this.ya) {
-      this.style.setProperty("--f-sc-t", this.ya);
+      styleEl.style.setProperty("--f-sc-t", this.ya);
     } else {
-      this.style.removeProperty("--f-sc-t");
+      styleEl.style.setProperty("--f-sc-t", "auto");
     }
     if (this.yb) {
-      this.style.setProperty("--f-sc-b", this.yb);
+      styleEl.style.setProperty("--f-sc-b", this.yb);
     } else {
-      this.style.removeProperty("--f-sc-b");
+      styleEl.style.setProperty("--f-sc-b", "auto");
     }
     if (this.z) {
-      this.style.setProperty("--f-sc-z", this.z);
+      styleEl.style.setProperty("--f-sc-z", this.z);
     } else {
-      this.style.removeProperty("--f-sc-z");
+      styleEl.style.setProperty("--f-sc-z", "auto");
     }
-    return html`<slot></slot>`;
+    return html`<style>:host { ${styleEl.style.cssText}}</style><slot></slot>`;
   }
 }
 
@@ -127,8 +124,6 @@ export class StackedCell extends LitElement {
 export class FitBox extends LitElement {
   static override styles = css`
     :host {
-      --f-fb-w: 100%;
-      --f-fb-h: auto;
       display: block;
       box-sizing: border-box;
       position: relative;
@@ -210,17 +205,19 @@ export class FitBox extends LitElement {
   height: string | null = null;
 
   override render() {
+    const styleEl = document.createElement("span");
+
     if (this.width) {
-      this.style.setProperty("--f-fb-w", this.width);
+      styleEl.style.setProperty("--f-fb-w", this.width);
     } else {
-      this.style.removeProperty("--f-fb-w");
+      styleEl.style.setProperty("--f-fb-w", "100%");
     }
     if (this.height) {
-      this.style.setProperty("--f-fb-h", this.height);
+      styleEl.style.setProperty("--f-fb-h", this.height);
     } else {
-      this.style.removeProperty("--f-fb-h");
+      styleEl.style.setProperty("--f-fb-h", "auto");
     }
-    return html`<slot></slot>`;
+    return html`<style>:host { ${styleEl.style.cssText}}</style><slot></slot>`;
   }
 }
 
@@ -229,8 +226,8 @@ export class AspectRatio extends LitElement {
   static defaultProps: {
     display: string;
   } = {
-    display: "flex",
-  };
+      display: "flex",
+    };
 
   static override styles = css`
     :host {
@@ -328,51 +325,34 @@ export class AspectRatio extends LitElement {
 @customElement("flex-divider")
 export class FlexDivider extends LitElement {
   static override styles = css`
-    :host {
-      --f-divider-size: 2px;
-      --f-divider-bg-dark: rgba(255, 255, 255, 0.12);
-      --f-divider-bg-light: rgba(0, 0, 0, 0.12);
+    :host {    
       box-sizing: border-box;
-      display: var(--f-divider-db, block);
+      display: block;
       align-self: center;
     }
     :host([v]) {
-      min-width: var(--f-vd-w, var(--f-divider-size));
-      width: var(--f-vd-w, var(--f-divider-size));
-      height: var(--f-vd-ops-size, auto);
-      margin: 0 var(--f-divider-m, 0);
+      margin-inline: var(--f-divider-m, 0);
+      width: var(--f-divider-size, 1px);
+      height: var(--f-divider-width, 100%);
     }
-
     :host([h]) {
-      min-height: var(--f-divider-h, var(--f-divider-size));
-      height: var(--f-divider-h, var(--f-divider-size));
-      margin: var(--f-divider-m, 0) 0;
-      width: var(--f-vd-ops-size, auto);
-      max-width: var(--f-vd-ops-size, 100%);
+      margin-block: var(--f-divider-m, 0);
+      height: var(--f-divider-size, 1px);
+      width: var(--f-divider-width, 100%);
+    }
+    :host {
+      background-color: var(--f-divider-bg, currentColor);
+    }
+    :host([stretch][v]) {
+      height: auto;      
     }
     :host([stretch][h]) {
-      width: 100%;
+      width: auto;
     }
     :host([stretch]) {
       align-self: stretch;
     }
-
-    :host([dark]) {
-      background-color: var(
-        --f-divider-bg,
-        var(--f-divider-fallback-bg-dark, var(--f-divider-bg-dark))
-      );
-    }
-    :host(:not([dark])) {
-      background-color: var(
-        --f-divider-bg,
-        var(--f-divider-fallback-bg-light, var(--f-divider-bg-light))
-      );
-    }
   `;
-
-  @property({ type: Boolean, reflect: true })
-  dark: boolean | null = null;
 
   @property({ type: Boolean, reflect: true })
   v: boolean | null = null;
@@ -387,36 +367,39 @@ export class FlexDivider extends LitElement {
   mg: string | null = null;
 
   @property({ type: String, reflect: true })
-  width: string | null = null;
-
-  @property({ type: String, reflect: true })
   color: string | null = null;
 
   @property({ type: String, reflect: true })
   size: string | null = null;
 
+  @property({ type: String, reflect: true })
+  width: string | null = null;
+
   override render() {
+    const styleEl = document.createElement("span");
+
     if (this.size) {
-      this.style.setProperty("--f-vd-ops-size", this.size);
+      styleEl.style.setProperty("--f-divider-size", this.size);
     } else {
-      this.style.removeProperty("--f-vd-ops-size");
-    }
-    if (this.color) {
-      this.style.setProperty("--f-divider-bg", this.color);
-    } else {
-      this.style.removeProperty("--f-divider-bg");
+      styleEl.style.setProperty("--f-divider-size", `var(--f-divider-fallback-size, 1px)`);
     }
     if (this.width) {
-      this.style.setProperty("--f-divider-size", this.width);
+      styleEl.style.setProperty("--f-divider-width", this.width);
     } else {
-      this.style.removeProperty("--f-divider-size");
+      styleEl.style.setProperty("--f-divider-width", `var(--f-divider-fallback-width, 100%)`);
+    }
+
+    if (this.color) {
+      styleEl.style.setProperty("--f-divider-bg", this.color);
+    } else {
+      styleEl.style.setProperty("--f-divider-bg", `var(--f-divider-fallback-color, currentColor)`);
     }
     if (this.mg) {
-      this.style.setProperty("--f-divider-m", this.mg);
+      styleEl.style.setProperty("--f-divider-m", this.mg);
     } else {
-      this.style.removeProperty("--f-divider-m");
+      styleEl.style.setProperty("--f-divider-m", `var(--f-divider-fallback-margin, 0)`);
     }
-    return html``;
+    return html`<style>:host {${styleEl.style.cssText}}</style>`;
   }
 }
 
@@ -424,11 +407,8 @@ export class FlexDivider extends LitElement {
 export class SpaceBox extends LitElement {
   static override styles = css`
     :host {
-      --f-sbx-db: block;
-      --f-sbx-w: 100%;
-      --f-sbx-h: auto;
       box-sizing: border-box;
-      display: var(--f-sbx-db);
+      display: block;
       width: var(--f-sbx-w);
       height: var(--f-sbx-h);
     }
@@ -444,66 +424,38 @@ export class SpaceBox extends LitElement {
   size: string | null = null;
 
   override render() {
-    if (this.size) {
-      this.style.setProperty("--f-sbx-w", this.size);
-      this.style.setProperty("--f-sbx-h", this.size);
-    } else {
-      this.style.removeProperty("--f-sbx-w");
-      this.style.removeProperty("--f-sbx-h");
-    }
+    const styleEl = document.createElement("span");
 
     if (this.width) {
-      this.style.setProperty("--f-sbx-w", this.width);
+      styleEl.style.setProperty("--f-sbx-w", this.width);
     } else if (!this.size) {
-      this.style.removeProperty("--f-sbx-w");
+      styleEl.style.setProperty("--f-sbx-w", "100%");
     }
     if (this.height) {
-      this.style.setProperty("--f-sbx-h", this.height);
+      styleEl.style.setProperty("--f-sbx-h", this.height);
     } else {
-      this.style.removeProperty("--f-sbx-h");
+      styleEl.style.setProperty("--f-sbx-h", "auto");
     }
-    return html``;
+    if (this.size) {
+      styleEl.style.setProperty("--f-sbx-w", this.size);
+      styleEl.style.setProperty("--f-sbx-h", this.size);
+    } else {
+      if (!this.width) {
+        styleEl.style.setProperty("--f-sbx-w", "100%");
+      }
+      if (!this.height) {
+        styleEl.style.setProperty("--f-sbx-h", "auto");
+      }
+    }
+    return html`<style>:host {${styleEl.style.cssText}}</style>`;
   }
 }
+
 
 @customElement("s-box")
 export class StyleBox extends LitElement {
   static override styles = css`
     :host {
-      --f-sb-pis: 0;
-      --f-sb-pie: 0;
-      --f-sb-mis: 0;
-      --f-sb-mie: 0;
-      --f-sb-pbs: 0;
-      --f-sb-pbe: 0;
-      --f-sb-mbs: 0;
-      --f-sb-mbe: 0;
-      --f-sb-display: var(--f-sb-fallback-display, inline-block);
-      --f-sb-color: var(--f-sb-fallback-color, inherit);
-      --f-sb-bgc: var(--f-sb-fallback-background-color, transparent);
-      --f-sb-bgi: var(--f-sb-fallback-background-image, none);
-      --f-sb-bgr: var(--f-sb-fallback-background-repeat, no-repeat);
-      --f-sb-bgp: var(--f-sb-fallback-background-position, 0 0);
-      --f-sb-bgs: var(--f-sb-fallback-background-size, auto);
-      --f-sb-bga: var(--f-sb-fallback-background-attachment, scroll);
-      --f-sb-fsz: var(--f-sb-fallback-font-size, 1rem);
-
-      --f-sb-lh: var(--f-sb-fallback-line-height, normal);
-      --f-sb-fw: var(--f-sb-fallback-font-weight, normal);
-      --f-sb-tt: var(--f-sb-fallback-text-transform, none);
-      --f-sb-td: var(--f-sb-fallback-text-decoration, none);
-
-      --f-sb-w: var(--f-sb-fallback-width, auto);
-      --f-sb-h: var(--f-sb-fallback-height, auto);
-      --f-sb-mw: var(--f-sb-fallback-min-width, auto);
-      --f-sb-mxw: var(--f-sb-fallback-max-width, auto);
-      --f-sb-mh: var(--f-sb-fallback-min-height, auto);
-      --f-sb-mxh: var(--f-sb-fallback-max-height, auto);
-
-      --f-sb-ta: var(--f-sb-fallback-text-align, start);
-      --f-sb-op: var(--f-sb-fallback-opacity, 1);
-      --f-sb-br: var(--f-sb-fallback-border-radius, 0);
-
       box-sizing: border-box;
       display: var(--f-sb-display);
       color: var(--f-sb-color);
@@ -518,7 +470,7 @@ export class StyleBox extends LitElement {
       font-weight: var(--f-sb-fw);
       text-decoration: var(--f-sb-td);
       text-transform: var(--f-sb-tt);
-
+      flex-grow: var(--f-sb-fg);
       width: var(--f-sb-w);
       height: var(--f-sb-h);
       min-width: var(--f-sb-mw);
@@ -576,6 +528,9 @@ export class StyleBox extends LitElement {
       text-transform: inherit;
     }
   `;
+
+  @property({ type: String, reflect: true })
+  display: string | null = null;
 
   @property({ type: Boolean, reflect: true })
   inline: boolean | null = null;
@@ -706,187 +661,202 @@ export class StyleBox extends LitElement {
   @property({ type: String, reflect: true })
   my: string | null = null;
 
+  @property({ type: String, reflect: true })
+  fg: string | null = null;
+
   override render() {
+    const styleEl = document.createElement("span");
+
+    const value = (val: any) => {
+      return this.inherit ? "inherit" : val;
+    }
+    if (this.display) {
+      styleEl.style.setProperty("--f-sb-display", this.display);
+    } else {
+      styleEl.style.setProperty("--f-sb-display", `var(--f-sb-fallback-display, inline-block)`);
+    }
+    if (this.fg) {
+      styleEl.style.setProperty("--f-sb-fg", this.fg);
+    } else {
+      styleEl.style.setProperty("--f-sb-fg", `var(--f-sb-fallback-color, inherit)`);
+    }
     if (this.transform) {
-      this.style.setProperty("transform", this.transform);
+      styleEl.style.setProperty("transform", this.transform);
     } else {
-      this.style.removeProperty("transform");
+      styleEl.style.removeProperty("transform");
     }
-
     if (this.bgi) {
-      this.style.setProperty("--f-sb-bgi", this.bgi);
+      styleEl.style.setProperty("--f-sb-bgi", this.bgi);
     } else {
-      this.style.removeProperty("--f-sb-bgi");
+      styleEl.style.setProperty("--f-sb-bgi", `var(--f-sb-fallback-background-image, ${value("none")})`);
     }
-
     if (this.bgr) {
-      this.style.setProperty("--f-sb-bgr", this.bgr);
+      styleEl.style.setProperty("--f-sb-bgr", this.bgr);
     } else {
-      this.style.removeProperty("--f-sb-bgr");
+      styleEl.style.setProperty("--f-sb-bgr", `var(--f-sb-fallback-background-repeat, ${value("no-repeat")})`);
     }
-
     if (this.bgp) {
-      this.style.setProperty("--f-sb-bgp", this.bgp);
+      styleEl.style.setProperty("--f-sb-bgp", this.bgp);
     } else {
-      this.style.removeProperty("--f-sb-bgp");
+      styleEl.style.setProperty("--f-sb-bgp", `var(--f-sb-fallback-background-position, ${value("0 0")})`);
     }
-
     if (this.bgs) {
-      this.style.setProperty("--f-sb-bgs", this.bgs);
+      styleEl.style.setProperty("--f-sb-bgs", this.bgs);
     } else {
-      this.style.removeProperty("--f-sb-bgs");
+      styleEl.style.setProperty("--f-sb-bgs", `var(--f-sb-fallback-background-size, ${value("auto")})`);
     }
-
     if (this.bga) {
-      this.style.setProperty("--f-sb-bga", this.bga);
+      styleEl.style.setProperty("--f-sb-bga", this.bga);
     } else {
-      this.style.removeProperty("--f-sb-bga");
+      styleEl.style.setProperty("--f-sb-bga", `var(--f-sb-fallback-background-attachment, ${value("scroll")})`);
     }
-
     if (this.bgc) {
-      this.style.setProperty("--f-sb-bgc", this.bgc);
+      styleEl.style.setProperty("--f-sb-bgc", this.bgc);
     } else {
-      this.style.removeProperty("--f-sb-bgc");
+      styleEl.style.setProperty("--f-sb-bgc", `var(--f-sb-fallback-background-color, ${value("transparent")})`);
     }
     if (this.color) {
-      this.style.setProperty("--f-sb-color", this.color);
+      styleEl.style.setProperty("--f-sb-color", this.color);
     } else {
-      this.style.removeProperty("--f-sb-color");
+      styleEl.style.setProperty("--f-sb-color", "var(--f-sb-fallback-color, inherit)");
     }
-    this.style.removeProperty("--f-sb-pis");
-    this.style.removeProperty("--f-sb-pie");
-    this.style.removeProperty("--f-sb-pbs");
-    this.style.removeProperty("--f-sb-pbe");
-    this.style.removeProperty("--f-sb-mis");
-    this.style.removeProperty("--f-sb-mie");
-    this.style.removeProperty("--f-sb-mbs");
-    this.style.removeProperty("--f-sb-mbe");
+
+    styleEl.style.setProperty("--f-sb-pis", '0');
+    styleEl.style.setProperty("--f-sb-pie", '0');
+    styleEl.style.setProperty("--f-sb-pbs", '0');
+    styleEl.style.setProperty("--f-sb-pbe", '0');
+
+    styleEl.style.setProperty("--f-sb-mis", '0');
+    styleEl.style.setProperty("--f-sb-mie", '0');
+    styleEl.style.setProperty("--f-sb-mbs", '0');
+    styleEl.style.setProperty("--f-sb-mbe", '0');
 
     if (this.pd) {
-      this.style.setProperty("--f-sb-pis", this.pd);
-      this.style.setProperty("--f-sb-pie", this.pd);
-      this.style.setProperty("--f-sb-pbs", this.pd);
-      this.style.setProperty("--f-sb-pbe", this.pd);
+      styleEl.style.setProperty("--f-sb-pis", this.pd);
+      styleEl.style.setProperty("--f-sb-pie", this.pd);
+      styleEl.style.setProperty("--f-sb-pbs", this.pd);
+      styleEl.style.setProperty("--f-sb-pbe", this.pd);
     }
     if (this.mg) {
-      this.style.setProperty("--f-sb-mis", this.mg);
-      this.style.setProperty("--f-sb-mie", this.mg);
-      this.style.setProperty("--f-sb-mbs", this.mg);
-      this.style.setProperty("--f-sb-mbe", this.mg);
+      styleEl.style.setProperty("--f-sb-mis", this.mg);
+      styleEl.style.setProperty("--f-sb-mie", this.mg);
+      styleEl.style.setProperty("--f-sb-mbs", this.mg);
+      styleEl.style.setProperty("--f-sb-mbe", this.mg);
     }
 
     if (this.px) {
-      this.style.setProperty("--f-sb-pis", this.px);
-      this.style.setProperty("--f-sb-pie", this.px);
+      styleEl.style.setProperty("--f-sb-pis", this.px);
+      styleEl.style.setProperty("--f-sb-pie", this.px);
     }
     if (this.py) {
-      this.style.setProperty("--f-sb-pbs", this.py);
-      this.style.setProperty("--f-sb-pbe", this.py);
+      styleEl.style.setProperty("--f-sb-pbs", this.py);
+      styleEl.style.setProperty("--f-sb-pbe", this.py);
     }
     if (this.mx) {
-      this.style.setProperty("--f-sb-mis", this.mx);
-      this.style.setProperty("--f-sb-mie", this.mx);
+      styleEl.style.setProperty("--f-sb-mis", this.mx);
+      styleEl.style.setProperty("--f-sb-mie", this.mx);
     }
     if (this.my) {
-      this.style.setProperty("--f-sb-mbs", this.my);
-      this.style.setProperty("--f-sb-mbe", this.my);
+      styleEl.style.setProperty("--f-sb-mbs", this.my);
+      styleEl.style.setProperty("--f-sb-mbe", this.my);
     }
 
     if (this.tt) {
-      this.style.setProperty("--f-sb-tt", this.tt);
+      styleEl.style.setProperty("--f-sb-tt", this.tt);
     } else {
-      this.style.removeProperty("--f-sb-tt");
+      styleEl.style.setProperty("--f-sb-tt", `var(--f-sb-fallback-text-transform, ${value("none")})`);
     }
     if (this.w) {
-      this.style.setProperty("--f-sb-w", this.w);
+      styleEl.style.setProperty("--f-sb-w", this.w);
     } else {
-      this.style.removeProperty("--f-sb-w");
+      styleEl.style.setProperty("--f-sb-w", `var(--f-sb-fallback-width, ${value("auto")})`);
     }
     if (this.h) {
-      this.style.setProperty("--f-sb-h", this.h);
+      styleEl.style.setProperty("--f-sb-h", this.h);
     } else {
-      this.style.removeProperty("--f-sb-h");
+      styleEl.style.setProperty("--f-sb-h", `var(--f-sb-fallback-height, ${value("auto")})`);
     }
     if (this.mw) {
-      this.style.setProperty("--f-sb-mw", this.mw);
+      styleEl.style.setProperty("--f-sb-mw", this.mw);
     } else {
-      this.style.removeProperty("--f-sb-mw");
+      styleEl.style.setProperty("--f-sb-mw", `var(--f-sb-fallback-min-width, ${value("auto")})`);
     }
     if (this.mxw) {
-      this.style.setProperty("--f-sb-mxw", this.mxw);
+      styleEl.style.setProperty("--f-sb-mxw", this.mxw);
     } else {
-      this.style.removeProperty("--f-sb-mxw");
+      styleEl.style.setProperty("--f-sb-mxw", `var(--f-sb-fallback-max-width, ${value("auto")})`);
     }
     if (this.mh) {
-      this.style.setProperty("--f-sb-mh", this.mh);
+      styleEl.style.setProperty("--f-sb-mh", this.mh);
     } else {
-      this.style.removeProperty("--f-sb-mh");
+      styleEl.style.setProperty("--f-sb-mh", `var(--f-sb-fallback-min-height, ${value("auto")})`);
     }
     if (this.mxh) {
-      this.style.setProperty("--f-sb-mxh", this.mxh);
+      styleEl.style.setProperty("--f-sb-mxh", this.mxh);
     } else {
-      this.style.removeProperty("--f-sb-mxh");
+      styleEl.style.setProperty("--f-sb-mxh", `var(--f-sb-fallback-max-height, ${value("auto")})`);
     }
     if (this.pis) {
-      this.style.setProperty("--f-sb-pis", this.pis);
+      styleEl.style.setProperty("--f-sb-pis", this.pis);
     }
     if (this.pie) {
-      this.style.setProperty("--f-sb-pie", this.pie);
+      styleEl.style.setProperty("--f-sb-pie", this.pie);
     }
     if (this.pbs) {
-      this.style.setProperty("--f-sb-pbs", this.pbs);
+      styleEl.style.setProperty("--f-sb-pbs", this.pbs);
     }
     if (this.pbe) {
-      this.style.setProperty("--f-sb-pbe", this.pbe);
+      styleEl.style.setProperty("--f-sb-pbe", this.pbe);
     }
     if (this.mis) {
-      this.style.setProperty("--f-sb-mis", this.mis);
+      styleEl.style.setProperty("--f-sb-mis", this.mis);
     }
     if (this.mie) {
-      this.style.setProperty("--f-sb-mie", this.mie);
+      styleEl.style.setProperty("--f-sb-mie", this.mie);
     }
     if (this.mbs) {
-      this.style.setProperty("--f-sb-mbs", this.mbs);
+      styleEl.style.setProperty("--f-sb-mbs", this.mbs);
     }
     if (this.mbe) {
-      this.style.setProperty("--f-sb-mbe", this.mbe);
+      styleEl.style.setProperty("--f-sb-mbe", this.mbe);
     }
     if (this.ta) {
-      this.style.setProperty("--f-sb-ta", this.ta);
+      styleEl.style.setProperty("--f-sb-ta", this.ta);
     } else {
-      this.style.removeProperty("--f-sb-ta");
+      styleEl.style.setProperty("--f-sb-ta", `var(--f-sb-fallback-text-align, ${value("start")})`);
     }
     if (this.op) {
-      this.style.setProperty("--f-sb-op", this.op);
+      styleEl.style.setProperty("--f-sb-op", this.op);
     } else {
-      this.style.removeProperty("--f-sb-op");
+      styleEl.style.setProperty("--f-sb-op", `var(--f-sb-fallback-opacity, ${value("1")})`);
     }
     if (this.td) {
-      this.style.setProperty("--f-sb-td", this.td);
+      styleEl.style.setProperty("--f-sb-td", this.td);
     } else {
-      this.style.removeProperty("--f-sb-td");
+      styleEl.style.setProperty("--f-sb-td", `var(--f-sb-fallback-text-decoration, ${value("none")})`);
     }
     if (this.br) {
-      this.style.setProperty("--f-sb-br", this.br);
+      styleEl.style.setProperty("--f-sb-br", this.br);
     } else {
-      this.style.removeProperty("--f-sb-br");
+      styleEl.style.setProperty("--f-sb-br", `var(--f-sb-fallback-border-radius, ${value("0")})`);
     }
     if (this.fz) {
-      this.style.setProperty("--f-sb-fsz", this.fz);
+      styleEl.style.setProperty("--f-sb-fsz", this.fz);
     } else {
-      this.style.removeProperty("--f-sb-fsz");
+      styleEl.style.setProperty("--f-sb-fsz", `var(--f-sb-fallback-font-size, ${value("1rem")})`);
     }
     if (this.fw) {
-      this.style.setProperty("--f-sb-fw", this.fw);
+      styleEl.style.setProperty("--f-sb-fw", this.fw);
     } else {
-      this.style.removeProperty("--f-sb-fw");
+      styleEl.style.setProperty("--f-sb-fw", `var(--f-sb-fallback-font-weight, ${value("normal")})`);
     }
     if (this.lh) {
-      this.style.setProperty("--f-sb-lh", this.lh);
+      styleEl.style.setProperty("--f-sb-lh", this.lh);
     } else {
-      this.style.removeProperty("--f-sb-lh");
+      styleEl.style.setProperty("--f-sb-lh", `var(--f-sb-fallback-line-height, ${value("normal")})`);
     }
-    return html`<slot></slot>`;
+    const styles = styleEl.style.cssText;
+    return html`<style>:host {${styles}}</style><slot></slot>`;
   }
 }
 

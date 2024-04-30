@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var FlexCanvas_1;
-import { LitElement, html, css, unsafeCSS } from "lit";
+import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 let FlexCanvas = FlexCanvas_1 = class FlexCanvas extends LitElement {
     constructor() {
@@ -20,25 +20,26 @@ let FlexCanvas = FlexCanvas_1 = class FlexCanvas extends LitElement {
         this.pd = null;
     }
     render() {
+        const styleEl = document.createElement("span");
         if (this.pd) {
-            this.style.setProperty("--f-cs-pd", this.pd);
+            styleEl.style.setProperty("--f-cs-pd", this.pd);
         }
         else {
-            this.style.removeProperty("--f-cs-pd");
+            styleEl.style.setProperty("--f-cs-pd", FlexCanvas_1.defaultProps.padding);
         }
         if (this.width) {
-            this.style.setProperty("--f-cs-mw", this.width);
+            styleEl.style.setProperty("--f-cs-mw", this.width);
         }
         else {
-            this.style.removeProperty("--f-cs-mw");
+            styleEl.style.setProperty("--f-cs-mw", FlexCanvas_1.defaultProps.maxWidth);
         }
         if (this.mg) {
-            this.style.setProperty("--f-cs-mg", this.mg);
+            styleEl.style.setProperty("--f-cs-mg", this.mg);
         }
         else {
-            this.style.removeProperty("--f-cs-mg");
+            styleEl.style.setProperty("--f-cs-mg", FlexCanvas_1.defaultProps.margin);
         }
-        return html `<slot></slot>`;
+        return html `<style>:host { ${styleEl.style.cssText}}</style><slot></slot>`;
     }
 };
 FlexCanvas.defaultProps = {
@@ -50,22 +51,13 @@ FlexCanvas.defaultProps = {
 FlexCanvas.styles = css `
     :host {
       box-sizing: border-box;
-      display: var(--f-cs-db, ${unsafeCSS(FlexCanvas_1.defaultProps.display)});
-      margin: var(--f-cs-mg, ${unsafeCSS(FlexCanvas_1.defaultProps.margin)});
-      max-width: var(--f-cs-mw, ${unsafeCSS(FlexCanvas_1.defaultProps.maxWidth)});
-      padding: var(--f-cs-pd, ${unsafeCSS(FlexCanvas_1.defaultProps.padding)});
+      display: block;
     }
     :host([flex]) {
       display: flex;
     }
     :host([crop]) {
       overflow: hidden;
-    }
-    :host ::slotted(*) {
-      --f-cs-db: ${unsafeCSS(FlexCanvas_1.defaultProps.display)};
-      --f-cs-mg: ${unsafeCSS(FlexCanvas_1.defaultProps.margin)};
-      --f-cs-mw: ${unsafeCSS(FlexCanvas_1.defaultProps.maxWidth)};
-      --f-cs-pd: ${unsafeCSS(FlexCanvas_1.defaultProps.padding)};
     }
   `;
 __decorate([

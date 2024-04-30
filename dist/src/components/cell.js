@@ -7,8 +7,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var FlexCell_1;
-import { LitElement, html, css, unsafeCSS } from "lit";
+import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 export var EnumAlignSelf;
 (function (EnumAlignSelf) {
@@ -21,7 +20,7 @@ export var EnumAlignSelf;
     EnumAlignSelf["Normal"] = "normal";
     EnumAlignSelf["Unset"] = "unset";
 })(EnumAlignSelf || (EnumAlignSelf = {}));
-let FlexCell = FlexCell_1 = class FlexCell extends LitElement {
+let FlexCell = class FlexCell extends LitElement {
     constructor() {
         super(...arguments);
         this.scrollable = null;
@@ -41,39 +40,42 @@ let FlexCell = FlexCell_1 = class FlexCell extends LitElement {
         this.basis = null;
     }
     render() {
+        const styleEl = document.createElement("span");
         if (this.width) {
-            this.style.setProperty("--f-c-b", this.width);
-            this.style.setProperty("--f-c-mw", this.width);
+            styleEl.style.setProperty("--f-c-b", this.width);
+            styleEl.style.setProperty("--f-c-mw", this.width);
+            styleEl.style.setProperty("--f-c-minw", this.width);
         }
         else {
-            this.style.removeProperty("--f-c-w");
-            this.style.removeProperty("--f-c-mw");
+            styleEl.style.setProperty("--f-c-b", 'auto');
+            styleEl.style.setProperty("--f-c-mw", 'none');
+            styleEl.style.setProperty("--f-c-minw", '0');
         }
         if (this.basis) {
-            this.style.setProperty("--f-c-b", this.basis);
+            styleEl.style.setProperty("--f-c-b", this.basis);
         }
         else if (!this.width) {
-            this.style.removeProperty("--f-c-b");
+            styleEl.style.setProperty("--f-c-b", 'auto');
         }
         if (this.order !== null) {
-            this.style.setProperty("--f-c-o", this.order.toString());
+            styleEl.style.setProperty("--f-c-o", this.order.toString());
         }
         else {
-            this.style.removeProperty("--f-c-o");
+            styleEl.style.setProperty("--f-c-o", '0');
         }
         if (this.grow !== null) {
-            this.style.setProperty("--f-c-g", this.grow.toString());
+            styleEl.style.setProperty("--f-c-g", this.grow.toString());
         }
         else {
-            this.style.removeProperty("--f-c-g");
+            styleEl.style.setProperty("--f-c-g", '0');
         }
         if (this.shrink !== null) {
-            this.style.setProperty("--f-c-sh", this.shrink.toString());
+            styleEl.style.setProperty("--f-c-sh", this.shrink.toString());
         }
         else {
-            this.style.removeProperty("--f-c-sh");
+            styleEl.style.setProperty("--f-c-sh", '1');
         }
-        return html `<slot></slot>`;
+        return html `<style>:host { ${styleEl.style.cssText}}</style><slot></slot>`;
     }
 };
 FlexCell.defaultProps = {
@@ -81,25 +83,15 @@ FlexCell.defaultProps = {
 };
 FlexCell.styles = css `
     :host {
-      --f-c-mw: none;
-      --f-c-b: auto;
-      --f-c-b: auto;
-      --f-c-db: ${unsafeCSS(FlexCell_1.defaultProps.display)};
-      --f-c-o: 0;
-      --f-c-g: 0;
-      --f-c-sh: 1;
-
       box-sizing: border-box;
       display: var(--f-c-db);
       padding: var(--f-g-pd, 0);
       flex-basis: var(--f-c-b);
       max-width: var(--f-c-mw);
+      min-width: var(--f-c-minw, 0);
       order: var(--f-c-o);
       flex-grow: var(--f-c-g);
       flex-shrink: var(--f-c-sh);
-    }
-    ::slotted(*) {
-      --f-g-pd: 0;
     }
     :host([as="center"]) {
       align-self: center;
@@ -270,7 +262,7 @@ __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", Object)
 ], FlexCell.prototype, "basis", void 0);
-FlexCell = FlexCell_1 = __decorate([
+FlexCell = __decorate([
     customElement("flex-cell")
 ], FlexCell);
 export { FlexCell };

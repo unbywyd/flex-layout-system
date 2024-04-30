@@ -6,23 +6,37 @@
     <title>Webpack App</title>
     <script src="dist/browser.min.js"></script>
 
-    <style>
-        .box-1 {
-            background-color: red;
-        }
 
-        .box-2 {
-            background-color: blue;
+    <style>
+        body {
+            --f-sb-fallback-color: green;
         }
     </style>
-
 </head>
 
 <body>
 
-    <s-box pd="10px">
-        sdfsdf
+    <s-box pd="10px" color="red">
+
     </s-box>
+
+    <flex-box reverse column gap="50px">
+        <flex-cell width="30px">asd</flex-cell>
+    </flex-box>
+
+    <flex-grid compact gap="50px">
+        <flex-box>
+            <flex-cell>asd</flex-cell>
+            <flex-cell><flex-grid gap="20px">
+                    <flex-box>
+                        <flex-cell>asd</flex-cell>
+                        <flex-cell>asd</flex-cell>
+                    </flex-box>
+                </flex-grid></flex-cell>
+            <flex-cell>asd</flex-cell>
+        </flex-box>
+    </flex-grid>
+
 </body>
 
 </html>
