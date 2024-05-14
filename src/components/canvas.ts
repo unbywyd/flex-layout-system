@@ -19,6 +19,9 @@ export class FlexCanvas extends LitElement {
     :host {
       box-sizing: border-box;
       display: block;
+      margin: var(--f-cs-mg);
+      padding: var(--f-cs-pd);
+      max-width: var(--f-cs-mw);
     }
     :host([flex]) {
       display: flex;
