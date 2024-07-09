@@ -23,8 +23,10 @@ export var EnumAlignSelf;
 let FlexCell = class FlexCell extends LitElement {
     constructor() {
         super(...arguments);
+        this.center = null;
         this.scrollable = null;
         this.flex = null;
+        this.stretchild = null;
         this.iflex = null;
         this.iblock = null;
         this.fill = null;
@@ -93,8 +95,16 @@ FlexCell.styles = css `
       flex-grow: var(--f-c-g);
       flex-shrink: var(--f-c-sh);
     }
+      
     :host([as="center"]) {
       align-self: center;
+    }
+    :host([crop]) {
+      overflow: hidden;
+    }
+    :host([stretchild]) ::slotted(*) {
+      width: 100% !important;
+      height: 100% !important;
     }
     :host([as="start"]) {
       align-self: flex-start;
@@ -201,7 +211,15 @@ FlexCell.styles = css `
     :host([stretch]) {
       flex-grow: 1;
     }
+    :host([center]) {
+      justify-content: center;
+      align-items: center;
+    }
   `;
+__decorate([
+    property({ type: Boolean, reflect: true }),
+    __metadata("design:type", Object)
+], FlexCell.prototype, "center", void 0);
 __decorate([
     property({ type: Boolean, reflect: true }),
     __metadata("design:type", Object)
@@ -210,6 +228,10 @@ __decorate([
     property({ type: Boolean, reflect: true }),
     __metadata("design:type", Object)
 ], FlexCell.prototype, "flex", void 0);
+__decorate([
+    property({ type: Boolean, reflect: true }),
+    __metadata("design:type", Object)
+], FlexCell.prototype, "stretchild", void 0);
 __decorate([
     property({ type: Boolean, reflect: true }),
     __metadata("design:type", Object)

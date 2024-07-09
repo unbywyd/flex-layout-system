@@ -14,8 +14,10 @@ export declare class FlexCell extends LitElement {
         display: string;
     };
     static styles: import("lit").CSSResult;
+    center: boolean | null;
     scrollable: boolean | null;
     flex: boolean | null;
+    stretchild: boolean | null;
     iflex: boolean | null;
     iblock: boolean | null;
     fill: boolean | null;

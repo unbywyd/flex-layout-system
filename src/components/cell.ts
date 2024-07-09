@@ -17,8 +17,8 @@ export class FlexCell extends LitElement {
   static defaultProps: {
     display: string;
   } = {
-    display: "block",
-  };
+      display: "block",
+    };
   static override styles = css`
     :host {
       box-sizing: border-box;
@@ -31,8 +31,16 @@ export class FlexCell extends LitElement {
       flex-grow: var(--f-c-g);
       flex-shrink: var(--f-c-sh);
     }
+      
     :host([as="center"]) {
       align-self: center;
+    }
+    :host([crop]) {
+      overflow: hidden;
+    }
+    :host([stretchild]) ::slotted(*) {
+      width: 100% !important;
+      height: 100% !important;
     }
     :host([as="start"]) {
       align-self: flex-start;
@@ -139,13 +147,23 @@ export class FlexCell extends LitElement {
     :host([stretch]) {
       flex-grow: 1;
     }
+    :host([center]) {
+      justify-content: center;
+      align-items: center;
+    }
   `;
+
+  @property({ type: Boolean, reflect: true })
+  center: boolean | null = null;
 
   @property({ type: Boolean, reflect: true })
   scrollable: boolean | null = null;
 
   @property({ type: Boolean, reflect: true })
   flex: boolean | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  stretchild: boolean | null = null;
 
   @property({ type: Boolean, reflect: true })
   iflex: boolean | null = null;

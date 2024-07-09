@@ -37,7 +37,7 @@
     "Firefox > 63",
     "Chrome > 67"
   ],
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Flex Layout System (Source)",
   "name": "flex-layout-system",
   "main": "dist/index.js",
@@ -63,7 +63,7 @@
   "scripts": {
     "build": "webpack --mode=production --node-env=production",
     "build:dev": "webpack --mode=development",
-    "build:prod": "webpack --mode=production --node-env=production",
+    "build:prod": "tsc && webpack --mode=production --node-env=production",
     "watch": "webpack --watch",
     "serve": "webpack serve"
   }
