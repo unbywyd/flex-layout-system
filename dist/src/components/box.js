@@ -211,6 +211,10 @@ FlexBox.styles = css `
       );
     }
 
+    :host([gap]) ::slotted(*) {
+      --f-g-pd: 0;
+    }
+
     :host([column][stretch]) ::slotted(*) {
       width: 100%;
     }

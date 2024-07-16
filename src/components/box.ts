@@ -173,6 +173,10 @@ export class FlexBox extends LitElement {
       );
     }
 
+    :host([gap]) ::slotted(*) {
+      --f-g-pd: 0;
+    }
+
     :host([column][stretch]) ::slotted(*) {
       width: 100%;
     }
@@ -281,7 +285,8 @@ export class FlexBox extends LitElement {
     } else {
       styleEl.style.setProperty("--f-b-gap", FlexBox.defaultProps.gap);
     }
-    
+
+
     if (this.row && this.column) {
       throw new Error("flex-box cannot be both row and column");
     }

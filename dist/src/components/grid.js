@@ -47,6 +47,7 @@ FlexGrid.styles = css `
     :host ::slotted(*) {
       --f-g-pd: var(--f-g-gap);
     }
+    
     :host ::slotted(*) {
       margin: 0 calc(-1 * var(--f-g-gap));
     }
