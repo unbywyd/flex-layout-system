@@ -1,4 +1,5 @@
 import { LitElement } from "lit";
+import { BreakpointSize } from "../config";
 export declare enum EnumAlignContent {
     Start = "flex-start",
     End = "flex-end",
@@ -58,5 +59,15 @@ export declare class FlexBox extends LitElement {
     row: boolean | null;
     column: boolean | null;
     gap: string | null;
+    smBp: BreakpointSize;
+    gapSm: string | null;
+    columnSm: boolean | null;
+    rowSm: boolean | null;
+    jcSm: EnumJustifyContent | null;
+    aiSm: EnumAlignItems | null;
+    acSm: EnumAlignContent | null;
+    wrapSm: boolean | null;
+    nowrapSm: boolean | null;
+    reverseSm: boolean | null;
     render(): import("lit-html").TemplateResult<1>;
 }

@@ -1,13 +1,14 @@
-import { LitElement, html, css } from "lit";
+import { LitElement, html, css, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import { BreakpointSize } from "../config";
+import { generateRootMediaRules } from "../utils/media";
 
 @customElement("flex-grid")
 export class FlexGrid extends LitElement {
   static override styles = css`
     :host {
       box-sizing: border-box;
-      display: block;
-      overflow: hidden;
+      display: block;    
       padding: var(--f-g-gap, 0);
     }
     :host([flex]) {
@@ -32,6 +33,10 @@ export class FlexGrid extends LitElement {
     :host ::slotted(*:first-child) {
       margin-top: calc(-1 * var(--f-g-gap));
     }
+    ${unsafeCSS(generateRootMediaRules([{
+    prop: 'gap',
+    css: `--f-g-gap: var(--f-g-gap-sm);`
+  }]))}
   `;
 
   @property({ type: Boolean, reflect: true })
@@ -45,6 +50,12 @@ export class FlexGrid extends LitElement {
 
   @property({ type: String, reflect: true })
   gap: string | null = null;
+
+  @property({ type: String, reflect: true, attribute: "gap-sm" })
+  gapSm: string | null = null;
+
+  @property({ type: String, reflect: true, attribute: "sm-breakpoint" })
+  smBp: BreakpointSize = BreakpointSize.sm;
   override render() {
     const styleEl = document.createElement("span");
     if (this.gap) {
@@ -52,6 +63,13 @@ export class FlexGrid extends LitElement {
     } else {
       styleEl.style.setProperty("--f-g-gap", "0");
     }
-    return html`<style>:host { ${styleEl.style.cssText}}</style><slot></slot>`;
+
+    if (this.gapSm) {
+      styleEl.style.setProperty("--f-g-gap-sm", this.gapSm);
+    } else {
+      styleEl.style.setProperty("--f-g-gap-sm", "0");
+    }
+
+    return html`<style>:host {${styleEl.style.cssText}}</style><slot></slot>`;
   }
 }

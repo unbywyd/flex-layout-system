@@ -17,9 +17,7 @@ $display-utilities: (
 );
 
 $text-align-utilities: (
-  left: left,
   center: center,
-  right: right,
   justify: justify,
   start: start,
   end: end,
@@ -52,7 +50,8 @@ $justify-content-utilities: (
 $columns: 12;
 $column-width: math.div(100%, $columns);
 
-.hide {
+.hide,
+.invisible {
   display: none;
 }
 
@@ -84,7 +83,7 @@ $column-width: math.div(100%, $columns);
 
 @each $size, $sizeValue in $sizes {
   @media screen and (min-width: $sizeValue) {
-    .hide-#{$size} {
+    .invisible-#{$size} {
       display: none;
     }
     @each $utility, $value in $display-utilities {
@@ -123,29 +122,9 @@ $column-width: math.div(100%, $columns);
 
   @if $size != xs {
     @media screen and (max-width: $sizeValue) {
-      .show-#{$size} {
+      .visible-#{$size} {
         display: none;
       }
     }
-  }
-}
-
-.reset-spaces {
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p,
-  ul,
-  ol,
-  li,
-  figure,
-  blockquote,
-  dl,
-  dd {
-    margin: 0;
-    padding: 0;
   }
 }

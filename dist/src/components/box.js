@@ -10,6 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var FlexBox_1;
 import { LitElement, html, css, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import { BreakpointSize } from "../config";
+import { generateRootMediaRules } from "../utils/media";
 export var EnumAlignContent;
 (function (EnumAlignContent) {
     EnumAlignContent["Start"] = "flex-start";
@@ -63,6 +65,16 @@ let FlexBox = FlexBox_1 = class FlexBox extends LitElement {
         this.row = null;
         this.column = null;
         this.gap = null;
+        this.smBp = BreakpointSize.sm;
+        this.gapSm = null;
+        this.columnSm = null;
+        this.rowSm = null;
+        this.jcSm = null;
+        this.aiSm = null;
+        this.acSm = null;
+        this.wrapSm = null;
+        this.nowrapSm = null;
+        this.reverseSm = null;
     }
     get mode() {
         if (!this.row && !this.column) {
@@ -78,10 +90,34 @@ let FlexBox = FlexBox_1 = class FlexBox extends LitElement {
         else {
             styleEl.style.setProperty("--f-b-gap", FlexBox_1.defaultProps.gap);
         }
+        if (this.gapSm) {
+            styleEl.style.setProperty("--f-b-gap-sm", this.gapSm);
+        }
+        else {
+            styleEl.style.setProperty("--f-b-gap-sm", FlexBox_1.defaultProps.gap);
+        }
+        if (this.jcSm) {
+            styleEl.style.setProperty("--f-b-jc-sm", this.jcSm);
+        }
+        else {
+            styleEl.style.setProperty("--f-b-jc-sm", FlexBox_1.defaultProps.justifyContent);
+        }
+        if (this.aiSm) {
+            styleEl.style.setProperty("--f-b-ai-sm", this.aiSm);
+        }
+        else {
+            styleEl.style.setProperty("--f-b-ai-sm", FlexBox_1.defaultProps.alignItems);
+        }
+        if (this.acSm) {
+            styleEl.style.setProperty("--f-b-ac-sm", this.acSm);
+        }
+        else {
+            styleEl.style.setProperty("--f-b-ac-sm", FlexBox_1.defaultProps.alignContent);
+        }
         if (this.row && this.column) {
             throw new Error("flex-box cannot be both row and column");
         }
-        return html `<style>:host { ${styleEl.style.cssText}}</style><slot></slot>`;
+        return html `<style>:host{${styleEl.style.cssText}}</style><slot></slot>`;
     }
 };
 FlexBox.defaultProps = {
@@ -93,126 +129,136 @@ FlexBox.defaultProps = {
     alignItems: "flex-start",
     alignContent: "flex-start",
 };
-FlexBox.styles = css `
-    :host([nowrap]) {
-      flex-wrap: nowrap;
-    }
-    :host([wrap]) {
-      flex-wrap: wrap;
-    }
-    :host([row]) {
-      flex-direction: row;
-    }
-    :host([column]) {
-      flex-direction: column;
-    }
-    :host([reverse][row]) {
-      flex-direction: row-reverse;
-    }
-    :host([reverse][column]) {
-      flex-direction: column-reverse;
-    }
-    :host([inline]) {
-      display: inline-flex;
-    }
-    :host([center]) {
-      align-items: center;
-      justify-content: center;
-    }
-    :host([middle]) {
-      align-items: center;
-    }
-    :host([spread]) {
-      justify-content: space-between;
-    }
-    :host([stretch]) {
-      align-items: stretch;
-    }
-    :host([start]) {
-      justify-content: flex-start;
-      align-items: flex-start;
-    }
-    :host([end]) {
-      justify-content: flex-end;
-      align-items: flex-end;
-    }
-    :host([ai="flex-start"]) {
-      align-items: flex-start;
-    }
-    :host([ai="flex-end"]) {
-      align-items: flex-end;
-    }
-    :host([ai="center"]) {
-      align-items: center;
-    }
-    :host([ai="baseline"]) {
-      align-items: baseline;
-    }
-    :host([ai="stretch"]) {
-      align-items: stretch;
-    }
-    :host([jc="center"]) {
-      justify-content: center;
-    }
-    :host([jc="space-between"]) {
-      justify-content: space-between;
-    }
-    :host([jc="space-around"]) {
-      justify-content: space-around;
-    }
-    :host([jc="space-evenly"]) {
-      justify-content: space-evenly;
-    }
-    :host([jc="start"]) {
-      justify-content: flex-start;
-    }
-    :host([jc="end"]) {
-      justify-content: flex-end;
-    }
-    :host([ac="start"]) {
-      align-content: flex-start;
-    }
-    :host([ac="end"]) {
-      align-content: flex-end;
-    }
-    :host([ac="center"]) {
-      align-content: center;
-    }
-    :host([ac="space-between"]) {
-      align-content: space-between;
-    }
-    :host([ac="space-around"]) {
-      align-content: space-around;
-    }
-    :host([ac="space-evenly"]) {
-      align-content: space-evenly;
-    }
-    :host([ac="stretch"]) {
-      align-content: stretch;
-    }
+FlexBox.styles = css `   
+
     :host {
       box-sizing: border-box;
-      display: flex;
-      flex-direction: var(
-        --f-b-dir,
-        ${unsafeCSS(FlexBox_1.defaultProps.reverse
-    ? FlexBox_1.defaultProps.mode + "-reverse"
-    : FlexBox_1.defaultProps.mode)}
-      );
+      --f-b-display: ${unsafeCSS(FlexBox_1.defaultProps.display)};
+      display: var(--f-b-display);
+
+      --f-b-wrap: wrap;
+      flex-wrap: var(--f-b-wrap);     
+
+      --f-b-dir: ${unsafeCSS(FlexBox_1.defaultProps.reverse ? FlexBox_1.defaultProps.mode + "-reverse" : FlexBox_1.defaultProps.mode)};
+      flex-direction: var(--f-b-dir);
       gap: var(--f-b-gap, ${unsafeCSS(FlexBox_1.defaultProps.gap)});
-      justify-content: var(
-        --f-b-jc,
-        ${unsafeCSS(FlexBox_1.defaultProps.justifyContent)}
-      );
-      align-items: var(--f-b-ai, ${unsafeCSS(FlexBox_1.defaultProps.alignItems)});
-      align-content: var(
-        --f-b-ac,
-        ${unsafeCSS(FlexBox_1.defaultProps.alignContent)}
-      );
+
+      --f-b-jc: ${unsafeCSS(FlexBox_1.defaultProps.justifyContent)};
+      justify-content: var(--f-b-jc);
+
+      --f-b-ai: ${unsafeCSS(FlexBox_1.defaultProps.alignItems)};      
+      align-items: var(--f-b-ai);
+
+      --f-b-ac: ${unsafeCSS(FlexBox_1.defaultProps.alignContent)};
+      align-content: var(--f-b-ac);
+    }
+    :host([inline]) {
+      --f-b-display: inline-flex;
+    }
+  
+    :host([center]) {
+      --f-b-ai: center;
+      --f-b-jc: center;
+    }
+    :host([middle]) {
+      --f-b-ai: center;
+    }
+    :host([spread]) {
+      --f-b-jc: space-between;
+    }
+    :host([stretch]) {
+      --f-b-ai: stretch;
+    }
+    :host([start]) {
+      --f-b-jc: flex-start;
+      --f-b-ai: flex-start;
+    }
+    :host([end]) {
+      --f-b-jc: flex-end;
+      --f-b-ai: flex-end;
+    }
+
+
+    :host([jc="center"]) {
+      --f-b-jc: center;
+    }
+    :host([jc="space-between"]) {
+      --f-b-jc: space-between;
+    }
+    :host([jc="space-around"]) {
+      --f-b-jc: space-around;
+    }
+    :host([jc="space-evenly"]) {
+      --f-b-jc: space-evenly;
+    }
+    :host([jc="start"]) {
+      --f-b-jc: flex-start;
+    }
+    :host([jc="end"]) {
+      --f-b-jc: flex-end;
+    }
+
+    :host([ai="flex-start"]) {
+      --f-b-ai: flex-start;
+    }
+    :host([ai="flex-end"]) {
+      --f-b-ai: flex-end;
+    }
+    :host([ai="center"]) {
+      --f-b-ai: center;
+    }
+    :host([ai="baseline"]) {
+      --f-b-ai: baseline;
+    }
+    :host([ai="stretch"]) {
+      --f-b-ai: stretch;
+    }
+
+    :host([ac="start"]) {
+      --f-b-ac: flex-start;
+    }
+    :host([ac="end"]) {
+      --f-b-ac: flex-end;
+    }
+    :host([ac="center"]) {
+      --f-b-ac: center;
+    }
+    :host([ac="space-between"]) {
+      --f-b-ac: space-between;
+    }
+    :host([ac="space-around"]) {
+      --f-b-ac: space-around;
+    }
+    :host([ac="space-evenly"]) {
+      --f-b-ac: space-evenly;
+    }
+    :host([ac="stretch"]) {
+      --f-b-ac: stretch;
+    }
+
+    :host([nowrap]) {
+      --f-b-wrap: nowrap;
+    }
+    :host([wrap]) {
+      --f-b-wrap: wrap;
+    }
+
+    :host([row]) {
+      --f-b-dir: row;
+    }
+    :host([column]) {
+      --f-b-dir: column;
+    }
+    :host([reverse][row]), :host([reverse]:not([column])) {
+      --f-b-dir: row-reverse;
+    }
+    :host([reverse][column]) {
+      --f-b-dir: column-reverse;
     }
 
     :host([gap]) ::slotted(*) {
       --f-g-pd: 0;
+      --f-g-gap-sm: 0;
     }
 
     :host([column][stretch]) ::slotted(*) {
@@ -244,6 +290,37 @@ FlexBox.styles = css `
     :host([snug]) ::slotted(*:not([priority])) {
       flex: 0;
     }
+    ${unsafeCSS(generateRootMediaRules([{
+        prop: "column",
+        css: "--f-b-dir: column;"
+    }, {
+        prop: "row",
+        css: "--f-b-dir: row;"
+    }, {
+        prop: "wrap",
+        css: "--f-b-wrap: wrap;"
+    }, {
+        prop: "nowrap",
+        css: "--f-b-wrap: nowrap;"
+    }, {
+        prop: 'gap',
+        css: `--f-b-gap: var(--f-b-gap-sm);`
+    }, {
+        prop: 'jc',
+        css: `--f-b-jc: var(--f-b-jc-sm);`
+    },
+    {
+        prop: 'ai',
+        css: `--f-b-ai: var(--f-b-ai-sm);`
+    },
+    {
+        prop: 'ac',
+        css: `--f-b-ac: var(--f-b-ac-sm);`
+    },
+    (size) => {
+        return `:host([sm-breakpoint='${size}'][reverse-sm][column]), :host([sm-breakpoint='${size}'][reverse-sm][column-sm]) {--f-b-dir: column-reverse;} :host([sm-breakpoint='${size}'][reverse-sm][row]), :host([sm-breakpoint='${size}'][reverse-sm]:not([column]):not([column-sm])) {--f-b-dir: row-reverse;}`;
+    }
+]))}
   `;
 __decorate([
     property({ type: String, reflect: true }),
@@ -337,6 +414,46 @@ __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", Object)
 ], FlexBox.prototype, "gap", void 0);
+__decorate([
+    property({ type: String, reflect: true, attribute: "sm-breakpoint" }),
+    __metadata("design:type", String)
+], FlexBox.prototype, "smBp", void 0);
+__decorate([
+    property({ type: String, reflect: false, attribute: "gap-sm" }),
+    __metadata("design:type", Object)
+], FlexBox.prototype, "gapSm", void 0);
+__decorate([
+    property({ type: Boolean, reflect: false, attribute: "column-sm" }),
+    __metadata("design:type", Object)
+], FlexBox.prototype, "columnSm", void 0);
+__decorate([
+    property({ type: Boolean, reflect: false, attribute: "row-sm" }),
+    __metadata("design:type", Object)
+], FlexBox.prototype, "rowSm", void 0);
+__decorate([
+    property({ type: String, reflect: false, attribute: "jc-sm" }),
+    __metadata("design:type", Object)
+], FlexBox.prototype, "jcSm", void 0);
+__decorate([
+    property({ type: String, reflect: false, attribute: "ai-sm" }),
+    __metadata("design:type", Object)
+], FlexBox.prototype, "aiSm", void 0);
+__decorate([
+    property({ type: String, reflect: false, attribute: "ac-sm" }),
+    __metadata("design:type", Object)
+], FlexBox.prototype, "acSm", void 0);
+__decorate([
+    property({ type: Boolean, reflect: false, attribute: "wrap-sm" }),
+    __metadata("design:type", Object)
+], FlexBox.prototype, "wrapSm", void 0);
+__decorate([
+    property({ type: Boolean, reflect: false, attribute: "nowrap-sm" }),
+    __metadata("design:type", Object)
+], FlexBox.prototype, "nowrapSm", void 0);
+__decorate([
+    property({ type: Boolean, reflect: false, attribute: "reverse-sm" }),
+    __metadata("design:type", Object)
+], FlexBox.prototype, "reverseSm", void 0);
 FlexBox = FlexBox_1 = __decorate([
     customElement("flex-box")
 ], FlexBox);

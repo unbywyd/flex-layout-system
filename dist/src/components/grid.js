@@ -7,8 +7,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-import { LitElement, html, css } from "lit";
+import { LitElement, html, css, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import { BreakpointSize } from "../config";
+import { generateRootMediaRules } from "../utils/media";
 let FlexGrid = class FlexGrid extends LitElement {
     constructor() {
         super(...arguments);
@@ -16,6 +18,8 @@ let FlexGrid = class FlexGrid extends LitElement {
         this.flex = null;
         this.compact = null;
         this.gap = null;
+        this.gapSm = null;
+        this.smBp = BreakpointSize.sm;
     }
     render() {
         const styleEl = document.createElement("span");
@@ -25,14 +29,19 @@ let FlexGrid = class FlexGrid extends LitElement {
         else {
             styleEl.style.setProperty("--f-g-gap", "0");
         }
-        return html `<style>:host { ${styleEl.style.cssText}}</style><slot></slot>`;
+        if (this.gapSm) {
+            styleEl.style.setProperty("--f-g-gap-sm", this.gapSm);
+        }
+        else {
+            styleEl.style.setProperty("--f-g-gap-sm", "0");
+        }
+        return html `<style>:host {${styleEl.style.cssText}}</style><slot></slot>`;
     }
 };
 FlexGrid.styles = css `
     :host {
       box-sizing: border-box;
-      display: block;
-      overflow: hidden;
+      display: block;    
       padding: var(--f-g-gap, 0);
     }
     :host([flex]) {
@@ -57,6 +66,10 @@ FlexGrid.styles = css `
     :host ::slotted(*:first-child) {
       margin-top: calc(-1 * var(--f-g-gap));
     }
+    ${unsafeCSS(generateRootMediaRules([{
+        prop: 'gap',
+        css: `--f-g-gap: var(--f-g-gap-sm);`
+    }]))}
   `;
 __decorate([
     property({ type: Boolean, reflect: true }),
@@ -74,6 +87,14 @@ __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", Object)
 ], FlexGrid.prototype, "gap", void 0);
+__decorate([
+    property({ type: String, reflect: true, attribute: "gap-sm" }),
+    __metadata("design:type", Object)
+], FlexGrid.prototype, "gapSm", void 0);
+__decorate([
+    property({ type: String, reflect: true, attribute: "sm-breakpoint" }),
+    __metadata("design:type", String)
+], FlexGrid.prototype, "smBp", void 0);
 FlexGrid = __decorate([
     customElement("flex-grid")
 ], FlexGrid);
