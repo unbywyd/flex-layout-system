@@ -8,31 +8,23 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var FlexCanvas_1;
-import { LitElement, html, css } from "lit";
+import { LitElement, html, css, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import { generateRootMediaRules, setVars } from "../utils/media";
 let FlexCanvas = FlexCanvas_1 = class FlexCanvas extends LitElement {
     constructor() {
         super(...arguments);
         this.crop = null;
-        this.flex = null;
         this.width = null;
+        this.display = FlexCanvas_1.defaultProps.display;
         this.mg = null;
         this.pd = null;
     }
     render() {
         const styleEl = document.createElement("span");
-        if (this.pd) {
-            styleEl.style.setProperty("--f-cs-pd", this.pd);
-        }
-        else {
-            styleEl.style.setProperty("--f-cs-pd", FlexCanvas_1.defaultProps.padding);
-        }
-        if (this.width) {
-            styleEl.style.setProperty("--f-cs-mw", this.width);
-        }
-        else {
-            styleEl.style.setProperty("--f-cs-mw", FlexCanvas_1.defaultProps.maxWidth);
-        }
+        setVars("display", this.display, FlexCanvas_1.defaultProps.display, styleEl, false);
+        setVars("max-width", this.width, FlexCanvas_1.defaultProps.maxWidth, styleEl, false);
+        setVars("padding", this.pd, FlexCanvas_1.defaultProps.padding, styleEl, false);
         if (this.mg) {
             styleEl.style.setProperty("--f-cs-mg", this.mg);
         }
@@ -49,32 +41,37 @@ FlexCanvas.defaultProps = {
     padding: "0",
 };
 FlexCanvas.styles = css `
-    :host {
-      box-sizing: border-box;
-      display: block;
+    :host {     
+      box-sizing: border-box;  
       margin: var(--f-cs-mg);
-      padding: var(--f-cs-pd);
-      max-width: var(--f-cs-mw);
-    }
-    :host([flex]) {
-      display: flex;
+      width: 100%;
     }
     :host([crop]) {
       overflow: hidden;
     }
+    ${unsafeCSS(generateRootMediaRules([{
+        attr: 'width',
+        cssProp: 'max-width',
+    }, {
+        attr: 'pd',
+        cssProp: 'padding',
+    }, {
+        attr: 'display',
+        cssProp: 'display',
+    }]))}  
   `;
 __decorate([
     property({ type: Boolean, reflect: true }),
     __metadata("design:type", Object)
 ], FlexCanvas.prototype, "crop", void 0);
 __decorate([
-    property({ type: Boolean, reflect: true }),
-    __metadata("design:type", Object)
-], FlexCanvas.prototype, "flex", void 0);
-__decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", Object)
 ], FlexCanvas.prototype, "width", void 0);
+__decorate([
+    property({ type: String, reflect: true }),
+    __metadata("design:type", String)
+], FlexCanvas.prototype, "display", void 0);
 __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", Object)

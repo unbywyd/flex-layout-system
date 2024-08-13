@@ -9,43 +9,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { LitElement, html, css, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { BreakpointSize } from "../config";
-import { generateRootMediaRules } from "../utils/media";
+import { generateRootMediaRules, setVars } from "../utils/media";
 let FlexGrid = class FlexGrid extends LitElement {
     constructor() {
         super(...arguments);
         this.crop = null;
-        this.flex = null;
         this.compact = null;
         this.gap = null;
-        this.gapSm = null;
-        this.smBp = BreakpointSize.sm;
+        this.display = null;
+        this.centered = null;
     }
     render() {
         const styleEl = document.createElement("span");
-        if (this.gap) {
-            styleEl.style.setProperty("--f-g-gap", this.gap);
-        }
-        else {
-            styleEl.style.setProperty("--f-g-gap", "0");
-        }
-        if (this.gapSm) {
-            styleEl.style.setProperty("--f-g-gap-sm", this.gapSm);
-        }
-        else {
-            styleEl.style.setProperty("--f-g-gap-sm", "0");
-        }
+        setVars("f-g-gap", this.gap, "0", styleEl, false);
+        setVars("display", this.display, "block", styleEl, false);
         return html `<style>:host {${styleEl.style.cssText}}</style><slot></slot>`;
     }
 };
 FlexGrid.styles = css `
     :host {
       box-sizing: border-box;
-      display: block;    
       padding: var(--f-g-gap, 0);
     }
-    :host([flex]) {
-      display: flex;
+    :host([centered]) {
+        margin: 0 auto;
     }
     :host([crop]) {
       overflow: hidden;
@@ -55,8 +42,7 @@ FlexGrid.styles = css `
     }
     :host ::slotted(*) {
       --f-g-pd: var(--f-g-gap);
-    }
-    
+    }    
     :host ::slotted(*) {
       margin: 0 calc(-1 * var(--f-g-gap));
     }
@@ -67,18 +53,17 @@ FlexGrid.styles = css `
       margin-top: calc(-1 * var(--f-g-gap));
     }
     ${unsafeCSS(generateRootMediaRules([{
-        prop: 'gap',
-        css: `--f-g-gap: var(--f-g-gap-sm);`
-    }]))}
+        attr: 'gap',
+        varName: 'f-g-gap'
+    }, {
+        attr: 'display',
+        cssProp: 'display',
+    }]))}  
   `;
 __decorate([
     property({ type: Boolean, reflect: true }),
     __metadata("design:type", Object)
 ], FlexGrid.prototype, "crop", void 0);
-__decorate([
-    property({ type: Boolean, reflect: true }),
-    __metadata("design:type", Object)
-], FlexGrid.prototype, "flex", void 0);
 __decorate([
     property({ type: Boolean, reflect: true }),
     __metadata("design:type", Object)
@@ -88,13 +73,13 @@ __decorate([
     __metadata("design:type", Object)
 ], FlexGrid.prototype, "gap", void 0);
 __decorate([
-    property({ type: String, reflect: true, attribute: "gap-sm" }),
+    property({ type: String, reflect: true }),
     __metadata("design:type", Object)
-], FlexGrid.prototype, "gapSm", void 0);
+], FlexGrid.prototype, "display", void 0);
 __decorate([
-    property({ type: String, reflect: true, attribute: "sm-breakpoint" }),
-    __metadata("design:type", String)
-], FlexGrid.prototype, "smBp", void 0);
+    property({ type: Boolean, reflect: true }),
+    __metadata("design:type", Object)
+], FlexGrid.prototype, "centered", void 0);
 FlexGrid = __decorate([
     customElement("flex-grid")
 ], FlexGrid);

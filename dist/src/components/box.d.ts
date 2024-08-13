@@ -1,73 +1,42 @@
 import { LitElement } from "lit";
-import { BreakpointSize } from "../config";
-export declare enum EnumAlignContent {
-    Start = "flex-start",
-    End = "flex-end",
-    Center = "center",
-    SpaceBetween = "space-between",
-    SpaceAround = "space-around",
-    SpaceEvenly = "space-evenly",
-    Stretch = "stretch"
+export declare enum EnumBoxType {
+    row = "row",
+    column = "column",
+    rowReverse = "row-reverse",
+    columnReverse = "column-reverse"
 }
-export declare enum EnumAlignItems {
-    Start = "flex-start",
-    End = "flex-end",
-    Center = "center",
-    Baseline = "baseline",
-    Stretch = "stretch"
-}
-export declare enum EnumJustifyContent {
-    Start = "flex-start",
-    End = "flex-end",
-    Center = "center",
-    SpaceBetween = "space-between",
-    SpaceAround = "space-around",
-    SpaceEvenly = "space-evenly"
+export declare enum EnumWrapType {
+    nowrap = "nowrap",
+    wrap = "wrap"
 }
 export declare class FlexBox extends LitElement {
     static defaultProps: {
         reverse: boolean;
         display: "flex" | "inline-flex";
-        mode: "row" | "column";
+        direction: EnumBoxType;
         justifyContent: string;
+        wrap: EnumWrapType;
         alignItems: string;
         alignContent: string;
         gap: string;
     };
-    get mode(): "row" | "column";
     static styles: import("lit").CSSResult;
-    jc: EnumJustifyContent | null;
-    ai: EnumAlignItems | null;
-    ac: EnumAlignContent | null;
+    jc: string | null;
+    ai: string | null;
+    ac: string | null;
     start: boolean | null;
     end: boolean | null;
-    spread: boolean | null;
-    middle: boolean | null;
+    centered: boolean | null;
     center: boolean | null;
-    inline: boolean | null;
-    wrap: boolean | null;
-    nowrap: boolean | null;
-    reverse: boolean | null;
-    minh: boolean | null;
-    fullh: boolean | null;
-    fullw: boolean | null;
-    fullscreen: boolean | null;
-    stretch: boolean | null;
-    snug: boolean | null;
-    fill: boolean | null;
-    fit: boolean | null;
-    row: boolean | null;
-    column: boolean | null;
+    minHeight: string | null;
+    minWidth: string | null;
+    height: string | null;
+    width: string | null;
+    wFill: boolean | null;
+    hFill: boolean | null;
     gap: string | null;
-    smBp: BreakpointSize;
-    gapSm: string | null;
-    columnSm: boolean | null;
-    rowSm: boolean | null;
-    jcSm: EnumJustifyContent | null;
-    aiSm: EnumAlignItems | null;
-    acSm: EnumAlignContent | null;
-    wrapSm: boolean | null;
-    nowrapSm: boolean | null;
-    reverseSm: boolean | null;
+    direction: string;
+    display: string;
+    wrap: string;
     render(): import("lit-html").TemplateResult<1>;
 }

@@ -10,3 +10,4 @@ export type MediaSizes = {
     [key in BreakpointSize]: number;
 };
 export declare const mediaSizes: MediaSizes;
+export declare const getMediaSizes: () => MediaSizes;

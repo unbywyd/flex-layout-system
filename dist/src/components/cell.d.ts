@@ -1,35 +1,30 @@
 import { LitElement } from "lit";
-export declare enum EnumAlignSelf {
-    Start = "flex-start",
-    End = "flex-end",
-    Center = "center",
-    Baseline = "baseline",
-    Stretch = "stretch",
-    Auto = "auto",
-    Normal = "normal",
-    Unset = "unset"
-}
 export declare class FlexCell extends LitElement {
     static defaultProps: {
         display: string;
+        align: string;
+        order: number;
+        grow: number;
+        shrink: number;
+        height: string;
+        basis: string;
+        width: string;
     };
     static styles: import("lit").CSSResult;
     center: boolean | null;
-    scrollable: boolean | null;
-    flex: boolean | null;
-    stretchild: boolean | null;
-    iflex: boolean | null;
-    iblock: boolean | null;
     fill: boolean | null;
     fit: boolean | null;
     snug: boolean | null;
     auto: boolean | null;
     stretch: boolean | null;
-    as: EnumAlignSelf | null;
+    display: string;
+    as: string | null;
     order: number | null;
     grow: number | null;
     shrink: number | null;
     width: string | null;
+    height: string | null;
     basis: string | null;
+    pd: string | null;
     render(): import("lit-html").TemplateResult<1>;
 }

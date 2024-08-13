@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import "../utils/resize-observer";
+export const MediaSizes = ["xs", "sm", "md", "lg", "xl", "xxl"];
 const _window = (typeof window !== "undefined" ? window : {});
 let FlexMedia = class FlexMedia extends LitElement {
     constructor() {
@@ -24,10 +25,11 @@ let FlexMedia = class FlexMedia extends LitElement {
         super.connectedCallback();
         this._targetEl = this.getTargetElement();
         if (this._targetEl instanceof Window) {
-            _window.addEventListener("resize", (event) => {
+            this._resizeListener = (event) => {
                 this.onResize(event.target.innerWidth);
-            });
-            this.onResize(_window.innerWidth);
+            };
+            _window === null || _window === void 0 ? void 0 : _window.addEventListener("resize", this._resizeListener);
+            this.onResize(_window === null || _window === void 0 ? void 0 : _window.innerWidth);
         }
         else {
             if (this._targetEl) {
@@ -58,7 +60,7 @@ let FlexMedia = class FlexMedia extends LitElement {
             this._targetEl.stopResizeListener();
         }
         else if (this._resizeListener) {
-            _window.removeEventListener("resize", this._resizeListener);
+            _window === null || _window === void 0 ? void 0 : _window.removeEventListener("resize", this._resizeListener);
         }
     }
     getMediaString() {
@@ -69,7 +71,7 @@ let FlexMedia = class FlexMedia extends LitElement {
         if (!regex.test(this.breakpoints)) {
             throw new Error("Invalid breakpoints string, must be comma separated list of numbers");
         }
-        let availableNames = ["xs", "sm", "md", "lg", "xl", "xxl"];
+        let availableNames = MediaSizes;
         const nums = this.breakpoints.split(",").map((item) => {
             return parseInt(item.trim());
         });

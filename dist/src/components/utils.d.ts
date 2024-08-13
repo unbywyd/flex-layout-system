@@ -1,84 +1,38 @@
 import { LitElement } from "lit";
+export declare class DisplayBox extends LitElement {
+    static styles: import("lit").CSSResult;
+    private _resizeListener;
+    display: string | null;
+    media: string | null;
+    private checkMedia;
+    connectedCallback(): void;
+    disconnectedCallback(): void;
+    render(): import("lit-html").TemplateResult<1>;
+}
 export declare class StackedBox extends LitElement {
     static styles: import("lit").CSSResult;
-    crop: boolean | null;
-    render(): import("lit-html").TemplateResult<1>;
-}
-export declare class StackedCell extends LitElement {
-    static styles: import("lit").CSSResult;
-    rel: boolean | null;
-    overlay: boolean | null;
-    stretch: boolean | null;
-    xa: string | null;
-    xb: string | null;
-    ya: string | null;
-    yb: string | null;
-    z: string | null;
-    overcolor: string | null;
-    render(): import("lit-html").TemplateResult<1>;
-}
-export declare class FitBox extends LitElement {
-    static styles: import("lit").CSSResult;
-    stretch: boolean | null;
-    flex: boolean | null;
-    crop: boolean | null;
-    scrollable: boolean | null;
-    center: boolean | null;
-    fill: boolean | null;
-    round: boolean | null;
-    cover: boolean | null;
-    contain: boolean | null;
-    width: string | null;
-    height: string | null;
-    render(): import("lit-html").TemplateResult<1>;
-}
-export declare class AspectRatio extends LitElement {
-    static defaultProps: {
-        display: string;
-    };
-    static styles: import("lit").CSSResult;
-    fit: boolean | null;
-    crop: boolean | null;
-    center: boolean | null;
-    ratio: string | null;
-    render(): import("lit-html").TemplateResult<1>;
-}
-export declare class FlexDivider extends LitElement {
-    static styles: import("lit").CSSResult;
-    v: boolean | null;
-    h: boolean | null;
-    stretch: boolean | null;
-    mg: string | null;
-    color: string | null;
     size: string | null;
-    width: string | null;
-    render(): import("lit-html").TemplateResult<1>;
-}
-export declare class SpaceBox extends LitElement {
-    static styles: import("lit").CSSResult;
-    width: string | null;
-    height: string | null;
-    size: string | null;
+    stretch: boolean;
+    wFull: boolean;
     render(): import("lit-html").TemplateResult<1>;
 }
 export declare class StyleBox extends LitElement {
     static styles: import("lit").CSSResult;
+    objectFit: string | null;
+    block: boolean;
     display: string | null;
-    inline: boolean | null;
-    block: boolean | null;
-    crop: boolean | null;
-    scrollable: boolean | null;
-    inherit: boolean | null;
-    nowrap: boolean | null;
-    wrap: boolean | null;
+    round: boolean;
+    stretch: boolean;
+    zi: string | null;
+    pos: string | null;
+    inset: string | null;
+    fill: boolean;
+    crop: boolean;
+    srOnly: boolean;
+    scrollable: boolean;
+    whiteSpace: string | null;
     color: string | null;
     bgc: string | null;
-    bgi: string | null;
-    bgr: string | null;
-    bgp: string | null;
-    bgs: string | null;
-    bga: string | null;
-    transform: string | null;
     fz: string | null;
     fw: string | null;
     lh: string | null;
@@ -103,19 +57,11 @@ export declare class StyleBox extends LitElement {
     op: string | null;
     td: string | null;
     br: string | null;
-    px: string | null;
-    py: string | null;
-    mx: string | null;
-    my: string | null;
+    pi: string | null;
+    pb: string | null;
+    mi: string | null;
+    mb: string | null;
     fg: string | null;
-    render(): import("lit-html").TemplateResult<1>;
-}
-export declare class ScreenReaderOnly extends LitElement {
-    static styles: import("lit").CSSResult;
-    focusable: boolean;
-    render(): import("lit-html").TemplateResult<1>;
-}
-export declare class LtrOnly extends LitElement {
-    static styles: import("lit").CSSResult;
+    ratio: string | null;
     render(): import("lit-html").TemplateResult<1>;
 }

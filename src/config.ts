@@ -17,3 +17,20 @@ export const mediaSizes: MediaSizes = {
     xl: 1920,
     xxl: 2560
 }
+const _window = (typeof window !== "undefined" ? window : {}) as Window;
+
+export const getMediaSizes = (): MediaSizes => {
+    const defaultSizes = (_window as any).DEFAULT_MEDIA_SIZES;
+
+    if (defaultSizes && typeof defaultSizes === "object" && defaultSizes !== null) {
+        return Object.keys(mediaSizes).reduce((acc, key) => {
+            const value = defaultSizes[key];
+            if (typeof value === "number") {
+                acc[key as keyof MediaSizes] = value;
+            }
+            return acc;
+        }, { ...mediaSizes });
+    }
+
+    return mediaSizes;
+};

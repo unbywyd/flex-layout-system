@@ -1,5 +1,6 @@
-import { LitElement, html, css } from "lit";
+import { LitElement, html, css, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
+import { generateRootMediaRules, setVars } from "../utils/media";
 
 @customElement("flex-canvas")
 export class FlexCanvas extends LitElement {
@@ -9,36 +10,41 @@ export class FlexCanvas extends LitElement {
     margin: string;
     padding: string;
   } = {
-    maxWidth: "1400px",
-    display: "block",
-    margin: "0 auto",
-    padding: "0",
-  };
+      maxWidth: "1400px",
+      display: "block",
+      margin: "0 auto",
+      padding: "0",
+    };
 
   static override styles = css`
-    :host {
-      box-sizing: border-box;
-      display: block;
+    :host {     
+      box-sizing: border-box;  
       margin: var(--f-cs-mg);
-      padding: var(--f-cs-pd);
-      max-width: var(--f-cs-mw);
-    }
-    :host([flex]) {
-      display: flex;
+      width: 100%;
     }
     :host([crop]) {
       overflow: hidden;
     }
+    ${unsafeCSS(generateRootMediaRules([{
+      attr: 'width',
+      cssProp: 'max-width',
+    }, {
+      attr: 'pd',
+      cssProp: 'padding',
+    }, {
+      attr: 'display',
+      cssProp: 'display',
+    }]))}  
   `;
 
   @property({ type: Boolean, reflect: true })
   crop: boolean | null = null;
 
-  @property({ type: Boolean, reflect: true })
-  flex: boolean | null = null;
-
   @property({ type: String, reflect: true })
   width: string | null = null;
+
+  @property({ type: String, reflect: true })
+  display: string = FlexCanvas.defaultProps.display;
 
   @property({ type: String, reflect: true })
   mg: string | null = null;
@@ -48,17 +54,10 @@ export class FlexCanvas extends LitElement {
 
   override render() {
     const styleEl = document.createElement("span");
+    setVars("display", this.display, FlexCanvas.defaultProps.display, styleEl, false);
+    setVars("max-width", this.width, FlexCanvas.defaultProps.maxWidth, styleEl, false);
+    setVars("padding", this.pd, FlexCanvas.defaultProps.padding, styleEl, false);
 
-    if (this.pd) {
-      styleEl.style.setProperty("--f-cs-pd", this.pd);
-    } else {
-      styleEl.style.setProperty("--f-cs-pd", FlexCanvas.defaultProps.padding);
-    }
-    if (this.width) {
-      styleEl.style.setProperty("--f-cs-mw", this.width);
-    } else {
-      styleEl.style.setProperty("--f-cs-mw", FlexCanvas.defaultProps.maxWidth);
-    }
     if (this.mg) {
       styleEl.style.setProperty("--f-cs-mg", this.mg);
     } else {

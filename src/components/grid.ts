@@ -1,18 +1,16 @@
 import { LitElement, html, css, unsafeCSS } from "lit";
 import { customElement, property } from "lit/decorators.js";
-import { BreakpointSize } from "../config";
-import { generateRootMediaRules } from "../utils/media";
+import { generateRootMediaRules, setVars } from "../utils/media";
 
 @customElement("flex-grid")
 export class FlexGrid extends LitElement {
   static override styles = css`
     :host {
       box-sizing: border-box;
-      display: block;    
       padding: var(--f-g-gap, 0);
     }
-    :host([flex]) {
-      display: flex;
+    :host([centered]) {
+        margin: 0 auto;
     }
     :host([crop]) {
       overflow: hidden;
@@ -22,8 +20,7 @@ export class FlexGrid extends LitElement {
     }
     :host ::slotted(*) {
       --f-g-pd: var(--f-g-gap);
-    }
-    
+    }    
     :host ::slotted(*) {
       margin: 0 calc(-1 * var(--f-g-gap));
     }
@@ -34,16 +31,16 @@ export class FlexGrid extends LitElement {
       margin-top: calc(-1 * var(--f-g-gap));
     }
     ${unsafeCSS(generateRootMediaRules([{
-    prop: 'gap',
-    css: `--f-g-gap: var(--f-g-gap-sm);`
-  }]))}
+    attr: 'gap',
+    varName: 'f-g-gap'
+  }, {
+    attr: 'display',
+    cssProp: 'display',
+  }]))}  
   `;
 
   @property({ type: Boolean, reflect: true })
   crop: boolean | null = null;
-
-  @property({ type: Boolean, reflect: true })
-  flex: boolean | null = null;
 
   @property({ type: Boolean, reflect: true })
   compact: boolean | null = null;
@@ -51,24 +48,16 @@ export class FlexGrid extends LitElement {
   @property({ type: String, reflect: true })
   gap: string | null = null;
 
-  @property({ type: String, reflect: true, attribute: "gap-sm" })
-  gapSm: string | null = null;
+  @property({ type: String, reflect: true })
+  display: string | null = null;
 
-  @property({ type: String, reflect: true, attribute: "sm-breakpoint" })
-  smBp: BreakpointSize = BreakpointSize.sm;
+  @property({ type: Boolean, reflect: true })
+  centered: boolean | null = null;
+
   override render() {
     const styleEl = document.createElement("span");
-    if (this.gap) {
-      styleEl.style.setProperty("--f-g-gap", this.gap);
-    } else {
-      styleEl.style.setProperty("--f-g-gap", "0");
-    }
-
-    if (this.gapSm) {
-      styleEl.style.setProperty("--f-g-gap-sm", this.gapSm);
-    } else {
-      styleEl.style.setProperty("--f-g-gap-sm", "0");
-    }
+    setVars("f-g-gap", this.gap, "0", styleEl, false);
+    setVars("display", this.display, "block", styleEl, false);
 
     return html`<style>:host {${styleEl.style.cssText}}</style><slot></slot>`;
   }

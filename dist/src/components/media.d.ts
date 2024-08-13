@@ -1,5 +1,6 @@
 import { LitElement } from "lit";
 import "../utils/resize-observer";
+export declare const MediaSizes: readonly ["xs", "sm", "md", "lg", "xl", "xxl"];
 declare global {
     interface HTMLElement {
         startResizeListener(): void;

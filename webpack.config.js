@@ -11,10 +11,7 @@ const stylesHandler = MiniCssExtractPlugin.loader;
 
 const config = {
   entry: {
-    browser: "./index.ts",
-    'browser-layout': "./layout.ts",
-    "css-responsive": "./css-responsive.ts",
-    "js-responsive": "./js-responsive.ts",
+    browser: "./index.ts"
   },
   output: {
     filename: "[name].min.js",

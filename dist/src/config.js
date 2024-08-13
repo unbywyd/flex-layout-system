@@ -15,4 +15,18 @@ export const mediaSizes = {
     xl: 1920,
     xxl: 2560
 };
+const _window = (typeof window !== "undefined" ? window : {});
+export const getMediaSizes = () => {
+    const defaultSizes = _window.DEFAULT_MEDIA_SIZES;
+    if (defaultSizes && typeof defaultSizes === "object" && defaultSizes !== null) {
+        return Object.keys(mediaSizes).reduce((acc, key) => {
+            const value = defaultSizes[key];
+            if (typeof value === "number") {
+                acc[key] = value;
+            }
+            return acc;
+        }, { ...mediaSizes });
+    }
+    return mediaSizes;
+};
 //# sourceMappingURL=config.js.map

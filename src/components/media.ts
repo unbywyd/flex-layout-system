@@ -3,12 +3,13 @@ import { customElement, property } from "lit/decorators.js";
 
 import "../utils/resize-observer";
 
+export const MediaSizes = ["xs", "sm", "md", "lg", "xl", "xxl"] as const;
 declare global {
   interface HTMLElement {
     startResizeListener(): void;
     stopResizeListener(): void;
   }
-} 
+}
 
 const _window = (typeof window !== "undefined" ? window : {}) as any;
 
@@ -26,10 +27,11 @@ export class FlexMedia extends LitElement {
     super.connectedCallback();
     this._targetEl = this.getTargetElement();
     if (this._targetEl instanceof Window) {
-      _window.addEventListener("resize", (event: any) => {
+      this._resizeListener = (event: any) => {
         this.onResize((event.target as Window).innerWidth);
-      });
-      this.onResize(_window.innerWidth);
+      };
+      _window?.addEventListener("resize", this._resizeListener);
+      this.onResize(_window?.innerWidth);
     } else {
       if (this._targetEl) {
         this._targetEl.startResizeListener();
@@ -66,7 +68,7 @@ export class FlexMedia extends LitElement {
     if (this._targetEl && this._targetEl instanceof HTMLElement) {
       this._targetEl.stopResizeListener();
     } else if (this._resizeListener) {
-      _window.removeEventListener("resize", this._resizeListener);
+      _window?.removeEventListener("resize", this._resizeListener);
     }
   }
   getMediaString(): Array<{
@@ -84,7 +86,7 @@ export class FlexMedia extends LitElement {
       );
     }
 
-    let availableNames = ["xs", "sm", "md", "lg", "xl", "xxl"];
+    let availableNames = MediaSizes;
 
     const nums = this.breakpoints.split(",").map((item) => {
       return parseInt(item.trim());
