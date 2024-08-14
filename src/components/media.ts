@@ -2,8 +2,9 @@ import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 
 import "../utils/resize-observer";
+import { BreakpointSize } from "../config";
 
-export const MediaSizes = ["xs", "sm", "md", "lg", "xl", "xxl"] as const;
+export const MediaSizes = Object.values(BreakpointSize);
 declare global {
   interface HTMLElement {
     startResizeListener(): void;

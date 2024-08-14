@@ -14,7 +14,7 @@ const _window = (typeof window !== "undefined" ? window : {});
 let DisplayBox = class DisplayBox extends LitElement {
     constructor() {
         super(...arguments);
-        this.display = null;
+        this.d = null;
         this.media = null;
     }
     checkMedia() {
@@ -41,7 +41,7 @@ let DisplayBox = class DisplayBox extends LitElement {
     }
     render() {
         const styleEl = document.createElement("span");
-        setVars("display", this.display, 'block', styleEl, false);
+        setVars("display", this.d, 'block', styleEl, false);
         const result = html `<style>:host { ${styleEl.style.cssText}}</style><slot></slot>`;
         if (!this.media) {
             return result;
@@ -51,14 +51,14 @@ let DisplayBox = class DisplayBox extends LitElement {
 };
 DisplayBox.styles = css `
     ${unsafeCSS(generateRootMediaRules([{
-        attr: 'display',
+        attr: 'd',
         cssProp: 'display',
     }]))}
   `;
 __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", Object)
-], DisplayBox.prototype, "display", void 0);
+], DisplayBox.prototype, "d", void 0);
 __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", Object)
@@ -86,7 +86,10 @@ StackedBox.styles = css `
       position: relative;      
       flex: 0 0 auto;
     }
-    :host([w-full]) {
+    :host([wf]) {
+      width: 100%;      
+    }
+    :host([hf]) {
       width: 100%;      
     }
     :host([stretch]) {
@@ -109,9 +112,13 @@ __decorate([
     __metadata("design:type", Boolean)
 ], StackedBox.prototype, "stretch", void 0);
 __decorate([
-    property({ type: Boolean, reflect: true, attribute: "w-full" }),
+    property({ type: Boolean, reflect: true }),
     __metadata("design:type", Boolean)
-], StackedBox.prototype, "wFull", void 0);
+], StackedBox.prototype, "fw", void 0);
+__decorate([
+    property({ type: Boolean, reflect: true }),
+    __metadata("design:type", Boolean)
+], StackedBox.prototype, "hf", void 0);
 StackedBox = __decorate([
     customElement("space-box")
 ], StackedBox);
@@ -119,12 +126,13 @@ export { StackedBox };
 let StyleBox = class StyleBox extends LitElement {
     constructor() {
         super(...arguments);
-        this.objectFit = null;
-        this.display = null;
+        this.fit = null;
+        this.unstyle = false;
+        this.d = null;
         this.zi = null;
         this.pos = null;
         this.inset = null;
-        this.whiteSpace = null;
+        this.ws = null;
         this.color = null;
         this.bgc = null;
         this.fz = null;
@@ -160,7 +168,7 @@ let StyleBox = class StyleBox extends LitElement {
     }
     render() {
         const styleEl = document.createElement("span");
-        setVars('display', this.display, 'inline-block', styleEl, false);
+        setVars('display', this.d, 'inline-block', styleEl, false);
         setVars("width", this.w, 'auto', styleEl);
         setVars("height", this.h, 'auto', styleEl);
         setVars("aspect-ratio", this.ratio, 'auto', styleEl);
@@ -194,13 +202,13 @@ let StyleBox = class StyleBox extends LitElement {
         setVal("color", this.color, styleEl);
         setVal("text-decoration", this.td, styleEl);
         setVal("text-transform", this.tt, styleEl);
-        setVal("white-space", this.whiteSpace, styleEl);
+        setVal("white-space", this.ws, styleEl);
         setVal("opacity", this.op, styleEl);
         setVal("z-index", this.zi, styleEl);
         const styles = styleEl.style.cssText;
         let cssRules = `:host{${styles}}`;
-        if (this.objectFit) {
-            cssRules += `:host([fit]) {--f-sb-object-fit: ${this.objectFit} }`;
+        if (this.fit) {
+            cssRules += `:host([fit]) {--f-sb-object-fit: ${this.fit} }`;
         }
         return html `<style>${unsafeCSS(cssRules)}</style><slot></slot>`;
     }
@@ -235,6 +243,9 @@ StyleBox.styles = css `
       overflow: hidden;
       border-radius: 50%;
     }
+    :host([unstyle]) ::slotted(*) {
+      all: unset;
+    }
     :host([crop]) {
       overflow: hidden;
     }
@@ -258,13 +269,13 @@ StyleBox.styles = css `
       border-width: 0 !important;
     }    
     ${unsafeCSS(generateRootMediaRules([{
-        attr: 'display',
+        attr: 'd',
         cssProp: 'display',
     }, {
-        attr: 'width',
+        attr: 'w',
         cssProp: 'width',
     }, {
-        attr: 'height',
+        attr: 'h',
         cssProp: 'height',
     }, {
         attr: 'ratio',
@@ -352,7 +363,11 @@ StyleBox.styles = css `
 __decorate([
     property({ type: String, reflect: true, attribute: "fit" }),
     __metadata("design:type", Object)
-], StyleBox.prototype, "objectFit", void 0);
+], StyleBox.prototype, "fit", void 0);
+__decorate([
+    property({ type: Boolean, reflect: true }),
+    __metadata("design:type", Boolean)
+], StyleBox.prototype, "unstyle", void 0);
 __decorate([
     property({ type: Boolean, reflect: true }),
     __metadata("design:type", Boolean)
@@ -360,7 +375,7 @@ __decorate([
 __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", Object)
-], StyleBox.prototype, "display", void 0);
+], StyleBox.prototype, "d", void 0);
 __decorate([
     property({ type: Boolean, reflect: true }),
     __metadata("design:type", Boolean)
@@ -400,7 +415,7 @@ __decorate([
 __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", Object)
-], StyleBox.prototype, "whiteSpace", void 0);
+], StyleBox.prototype, "ws", void 0);
 __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", Object)
@@ -422,11 +437,11 @@ __decorate([
     __metadata("design:type", Object)
 ], StyleBox.prototype, "lh", void 0);
 __decorate([
-    property({ type: String, reflect: true, attribute: "width" }),
+    property({ type: String, reflect: true }),
     __metadata("design:type", Object)
 ], StyleBox.prototype, "w", void 0);
 __decorate([
-    property({ type: String, reflect: true, attribute: 'height' }),
+    property({ type: String, reflect: true }),
     __metadata("design:type", Object)
 ], StyleBox.prototype, "h", void 0);
 __decorate([

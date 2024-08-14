@@ -7,7 +7,7 @@ const _window = (typeof window !== "undefined" ? window : {}) as Window;
 export class DisplayBox extends LitElement {
   static override styles = css`
     ${unsafeCSS(generateRootMediaRules([{
-    attr: 'display',
+    attr: 'd',
     cssProp: 'display',
   }]))}
   `;
@@ -15,7 +15,7 @@ export class DisplayBox extends LitElement {
   private _resizeListener!: EventListenerOrEventListenerObject;
 
   @property({ type: String, reflect: true })
-  display: string | null = null;
+  d: string | null = null;
 
   @property({ type: String, reflect: true })
   media: string | null = null;
@@ -47,7 +47,7 @@ export class DisplayBox extends LitElement {
 
   override render() {
     const styleEl = document.createElement("span");
-    setVars("display", this.display, 'block', styleEl, false);
+    setVars("display", this.d, 'block', styleEl, false);
 
     const result = html`<style>:host { ${styleEl.style.cssText}}</style><slot></slot>`;
     if (!this.media) {
@@ -66,7 +66,10 @@ export class StackedBox extends LitElement {
       position: relative;      
       flex: 0 0 auto;
     }
-    :host([w-full]) {
+    :host([wf]) {
+      width: 100%;      
+    }
+    :host([hf]) {
       width: 100%;      
     }
     :host([stretch]) {
@@ -87,8 +90,11 @@ export class StackedBox extends LitElement {
   @property({ type: Boolean, reflect: true })
   stretch!: boolean;
 
-  @property({ type: Boolean, reflect: true, attribute: "w-full" })
-  wFull!: boolean;
+  @property({ type: Boolean, reflect: true })
+  fw!: boolean;
+
+  @property({ type: Boolean, reflect: true })
+  hf!: boolean
 
   override render() {
     const styleEl = document.createElement("span");
@@ -130,6 +136,9 @@ export class StyleBox extends LitElement {
       overflow: hidden;
       border-radius: 50%;
     }
+    :host([unstyle]) ::slotted(*) {
+      all: unset;
+    }
     :host([crop]) {
       overflow: hidden;
     }
@@ -153,13 +162,13 @@ export class StyleBox extends LitElement {
       border-width: 0 !important;
     }    
     ${unsafeCSS(generateRootMediaRules([{
-    attr: 'display',
+    attr: 'd',
     cssProp: 'display',
   }, {
-    attr: 'width',
+    attr: 'w',
     cssProp: 'width',
   }, {
-    attr: 'height',
+    attr: 'h',
     cssProp: 'height',
   }, {
     attr: 'ratio',
@@ -245,13 +254,16 @@ export class StyleBox extends LitElement {
   }]))}
   `;
   @property({ type: String, reflect: true, attribute: "fit" })
-  objectFit: string | null = null;
+  fit: string | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  unstyle: boolean = false;
 
   @property({ type: Boolean, reflect: true })
   block!: boolean;
 
   @property({ type: String, reflect: true })
-  display: string | null = null;
+  d: string | null = null;
 
   @property({ type: Boolean, reflect: true })
   round!: boolean;
@@ -281,7 +293,7 @@ export class StyleBox extends LitElement {
   scrollable!: boolean;
 
   @property({ type: String, reflect: true })
-  whiteSpace: string | null = null;
+  ws: string | null = null;
 
   @property({ type: String, reflect: true })
   color: string | null = null;
@@ -298,10 +310,10 @@ export class StyleBox extends LitElement {
   @property({ type: String, reflect: true })
   lh: string | null = null;
 
-  @property({ type: String, reflect: true, attribute: "width" })
+  @property({ type: String, reflect: true })
   w: string | null = null;
 
-  @property({ type: String, reflect: true, attribute: 'height' })
+  @property({ type: String, reflect: true })
   h: string | null = null;
 
   @property({ type: String, reflect: true })
@@ -381,7 +393,7 @@ export class StyleBox extends LitElement {
 
   override render() {
     const styleEl = document.createElement("span");
-    setVars('display', this.display, 'inline-block', styleEl, false);
+    setVars('display', this.d, 'inline-block', styleEl, false);
     setVars("width", this.w, 'auto', styleEl);
     setVars("height", this.h, 'auto', styleEl);
     setVars("aspect-ratio", this.ratio, 'auto', styleEl);
@@ -417,14 +429,14 @@ export class StyleBox extends LitElement {
     setVal("color", this.color, styleEl);
     setVal("text-decoration", this.td, styleEl);
     setVal("text-transform", this.tt, styleEl);
-    setVal("white-space", this.whiteSpace, styleEl);
+    setVal("white-space", this.ws, styleEl);
     setVal("opacity", this.op, styleEl);
     setVal("z-index", this.zi, styleEl);
 
     const styles = styleEl.style.cssText;
     let cssRules = `:host{${styles}}`;
-    if (this.objectFit) {
-      cssRules += `:host([fit]) {--f-sb-object-fit: ${this.objectFit} }`;
+    if (this.fit) {
+      cssRules += `:host([fit]) {--f-sb-object-fit: ${this.fit} }`;
     }
     return html`<style>${unsafeCSS(cssRules)}</style><slot></slot>`;
   }

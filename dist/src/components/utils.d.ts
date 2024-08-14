@@ -2,7 +2,7 @@ import { LitElement } from "lit";
 export declare class DisplayBox extends LitElement {
     static styles: import("lit").CSSResult;
     private _resizeListener;
-    display: string | null;
+    d: string | null;
     media: string | null;
     private checkMedia;
     connectedCallback(): void;
@@ -13,14 +13,16 @@ export declare class StackedBox extends LitElement {
     static styles: import("lit").CSSResult;
     size: string | null;
     stretch: boolean;
-    wFull: boolean;
+    fw: boolean;
+    hf: boolean;
     render(): import("lit-html").TemplateResult<1>;
 }
 export declare class StyleBox extends LitElement {
     static styles: import("lit").CSSResult;
-    objectFit: string | null;
+    fit: string | null;
+    unstyle: boolean;
     block: boolean;
-    display: string | null;
+    d: string | null;
     round: boolean;
     stretch: boolean;
     zi: string | null;
@@ -30,7 +32,7 @@ export declare class StyleBox extends LitElement {
     crop: boolean;
     srOnly: boolean;
     scrollable: boolean;
-    whiteSpace: string | null;
+    ws: string | null;
     color: string | null;
     bgc: string | null;
     fz: string | null;

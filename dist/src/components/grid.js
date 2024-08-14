@@ -13,16 +13,13 @@ import { generateRootMediaRules, setVars } from "../utils/media";
 let FlexGrid = class FlexGrid extends LitElement {
     constructor() {
         super(...arguments);
-        this.crop = null;
-        this.compact = null;
         this.gap = null;
-        this.display = null;
-        this.centered = null;
+        this.d = null;
     }
     render() {
         const styleEl = document.createElement("span");
         setVars("f-g-gap", this.gap, "0", styleEl, false);
-        setVars("display", this.display, "block", styleEl, false);
+        setVars("display", this.d, "block", styleEl, false);
         return html `<style>:host {${styleEl.style.cssText}}</style><slot></slot>`;
     }
 };
@@ -56,17 +53,17 @@ FlexGrid.styles = css `
         attr: 'gap',
         varName: 'f-g-gap'
     }, {
-        attr: 'display',
+        attr: 'd',
         cssProp: 'display',
     }]))}  
   `;
 __decorate([
     property({ type: Boolean, reflect: true }),
-    __metadata("design:type", Object)
+    __metadata("design:type", Boolean)
 ], FlexGrid.prototype, "crop", void 0);
 __decorate([
     property({ type: Boolean, reflect: true }),
-    __metadata("design:type", Object)
+    __metadata("design:type", Boolean)
 ], FlexGrid.prototype, "compact", void 0);
 __decorate([
     property({ type: String, reflect: true }),
@@ -75,10 +72,10 @@ __decorate([
 __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", Object)
-], FlexGrid.prototype, "display", void 0);
+], FlexGrid.prototype, "d", void 0);
 __decorate([
     property({ type: Boolean, reflect: true }),
-    __metadata("design:type", Object)
+    __metadata("design:type", Boolean)
 ], FlexGrid.prototype, "centered", void 0);
 FlexGrid = __decorate([
     customElement("flex-grid")

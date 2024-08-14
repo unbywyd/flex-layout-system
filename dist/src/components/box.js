@@ -29,34 +29,28 @@ let FlexBox = FlexBox_1 = class FlexBox extends LitElement {
         this.jc = null;
         this.ai = null;
         this.ac = null;
-        this.start = null;
-        this.end = null;
-        this.centered = null;
-        this.center = null;
-        this.minHeight = null;
-        this.minWidth = null;
-        this.height = null;
-        this.width = null;
-        this.wFill = null;
-        this.hFill = null;
+        this.mh = null;
+        this.mw = null;
+        this.h = null;
+        this.w = null;
         this.gap = null;
-        this.direction = FlexBox_1.defaultProps.direction;
-        this.display = FlexBox_1.defaultProps.display;
+        this.dn = FlexBox_1.defaultProps.direction;
+        this.d = FlexBox_1.defaultProps.display;
         this.wrap = FlexBox_1.defaultProps.wrap;
     }
     render() {
         const styleEl = document.createElement("span");
-        setVars("display", this.display, FlexBox_1.defaultProps.display, styleEl, false);
-        setVars("flex-direction", this.direction, FlexBox_1.defaultProps.direction, styleEl);
+        setVars("display", this.d, FlexBox_1.defaultProps.display, styleEl, false);
+        setVars("flex-direction", this.dn, FlexBox_1.defaultProps.direction, styleEl);
         setVars("flex-wrap", this.wrap, FlexBox_1.defaultProps.wrap, styleEl);
         setVars("justify-content", this.jc, FlexBox_1.defaultProps.justifyContent, styleEl);
         setVars("align-items", this.ai, FlexBox_1.defaultProps.alignItems, styleEl);
         setVars("align-content", this.ac, FlexBox_1.defaultProps.alignContent, styleEl);
         setVars("gap", this.gap, FlexBox_1.defaultProps.gap, styleEl);
-        setVars("width", this.width, "auto", styleEl);
-        setVars("height", this.height, "auto", styleEl);
-        setVars("min-height", this.minHeight, 'auto', styleEl);
-        setVars("min-width", this.minWidth, 'auto', styleEl);
+        setVars("width", this.w, "auto", styleEl);
+        setVars("height", this.h, "auto", styleEl);
+        setVars("min-height", this.mh, 'auto', styleEl);
+        setVars("min-width", this.mw, 'auto', styleEl);
         return html `<style>:host{${styleEl.style.cssText} } </style><slot></slot > `;
     }
 };
@@ -76,6 +70,12 @@ FlexBox.styles = css `
     }
     :host([centered]) {
       margin: 0 auto;
+    }  
+    :host([wrap='']) {
+      flex-wrap: wrap;
+    }
+    :host([column]) {
+      flex-direction: column;
     }
     :host([center]) {
       align-items: center;
@@ -92,10 +92,10 @@ FlexBox.styles = css `
     :host([gap]) ::slotted(*) {
       --f-g-pd: 0 !important;
     }
-    :host([w-fill]) ::slotted(*) {
+    :host([wf]) ::slotted(*) {
       width: 100%;
     }
-    :host([h-fill]) ::slotted(*) {
+    :host([hf]) ::slotted(*) {
       height: 100%;
     }
     ${unsafeCSS(generateRootMediaRules([{
@@ -111,19 +111,19 @@ FlexBox.styles = css `
         attr: 'ac',
         cssProp: 'align-content',
     }, {
-        attr: 'direction',
+        attr: 'dn',
         cssProp: 'flex-direction',
     }, {
-        attr: 'display',
+        attr: 'd',
         cssProp: 'display',
     }, {
         attr: 'wrap',
         cssProp: 'flex-wrap',
     }, {
-        attr: 'width',
+        attr: 'w',
         cssProp: 'width',
     }, {
-        attr: 'height',
+        attr: 'h',
         cssProp: 'height',
     }, {
         attr: 'mh',
@@ -133,6 +133,10 @@ FlexBox.styles = css `
         cssProp: 'min-width'
     }]))}
   `;
+__decorate([
+    property({ type: Boolean }),
+    __metadata("design:type", Boolean)
+], FlexBox.prototype, "column", void 0);
 __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", Object)
@@ -147,44 +151,44 @@ __decorate([
 ], FlexBox.prototype, "ac", void 0);
 __decorate([
     property({ type: Boolean, reflect: true }),
-    __metadata("design:type", Object)
+    __metadata("design:type", Boolean)
 ], FlexBox.prototype, "start", void 0);
 __decorate([
     property({ type: Boolean, reflect: true }),
-    __metadata("design:type", Object)
+    __metadata("design:type", Boolean)
 ], FlexBox.prototype, "end", void 0);
 __decorate([
     property({ type: Boolean, reflect: true }),
-    __metadata("design:type", Object)
+    __metadata("design:type", Boolean)
 ], FlexBox.prototype, "centered", void 0);
 __decorate([
     property({ type: Boolean, reflect: true }),
-    __metadata("design:type", Object)
+    __metadata("design:type", Boolean)
 ], FlexBox.prototype, "center", void 0);
 __decorate([
-    property({ type: String, reflect: true, attribute: 'mh' }),
+    property({ type: String, reflect: true }),
     __metadata("design:type", Object)
-], FlexBox.prototype, "minHeight", void 0);
-__decorate([
-    property({ type: String, reflect: true, attribute: 'mw' }),
-    __metadata("design:type", Object)
-], FlexBox.prototype, "minWidth", void 0);
+], FlexBox.prototype, "mh", void 0);
 __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", Object)
-], FlexBox.prototype, "height", void 0);
+], FlexBox.prototype, "mw", void 0);
 __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", Object)
-], FlexBox.prototype, "width", void 0);
+], FlexBox.prototype, "h", void 0);
 __decorate([
-    property({ type: Boolean, reflect: true, attribute: 'w-fill' }),
+    property({ type: String, reflect: true }),
     __metadata("design:type", Object)
-], FlexBox.prototype, "wFill", void 0);
+], FlexBox.prototype, "w", void 0);
 __decorate([
-    property({ type: Boolean, reflect: true, attribute: 'h-fill' }),
-    __metadata("design:type", Object)
-], FlexBox.prototype, "hFill", void 0);
+    property({ type: Boolean, reflect: true }),
+    __metadata("design:type", Boolean)
+], FlexBox.prototype, "wf", void 0);
+__decorate([
+    property({ type: Boolean, reflect: true }),
+    __metadata("design:type", Boolean)
+], FlexBox.prototype, "hf", void 0);
 __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", Object)
@@ -192,11 +196,11 @@ __decorate([
 __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", String)
-], FlexBox.prototype, "direction", void 0);
+], FlexBox.prototype, "dn", void 0);
 __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", String)
-], FlexBox.prototype, "display", void 0);
+], FlexBox.prototype, "d", void 0);
 __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", String)

@@ -2,29 +2,64 @@ declare namespace JSX {
     interface IntrinsicElements {
         "flex-box": React.DetailedHTMLProps<
             React.HTMLAttributes<HTMLElement> & {
-                jc?: "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly" | null;
+                jc?: "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly" | "stretch" | null;
                 ai?: "flex-start" | "flex-end" | "center" | "baseline" | "stretch" | null;
                 ac?: "flex-start" | "flex-end" | "center" | "space-between" | "space-around" | "space-evenly" | "stretch" | null;
-                start?: boolean | null;
-                end?: boolean | null;
-                spread?: boolean | null;
-                middle?: boolean | null;
-                center?: boolean | null;
-                inline?: boolean | null;
-                wrap?: boolean | null;
-                nowrap?: boolean | null;
-                reverse?: boolean | null;
-                minh?: boolean | null;
-                fullh?: boolean | null;
-                fullw?: boolean | null;
-                fullscreen?: boolean | null;
-                stretch?: boolean | null;
-                snug?: boolean | null;
-                fill?: boolean | null;
-                fit?: boolean | null;
-                row?: boolean | null;
-                column?: boolean | null;
+                start?: boolean;
+                end?: boolean;
+                centered?: boolean;
+                center?: boolean;
+                wrap?: "nowrap" | "wrap" | true | null;
+                dn?: "row" | "column" | "row-reverse" | "column-reverse" | null;
+                d?: "flex" | "inline-flex" | null;
                 gap?: string | null;
+                w?: string | null;
+                column?: boolean;
+                h?: string | null;
+                mh?: string | null;
+                mw?: string | null;
+                wf?: boolean;
+                hf?: boolean;
+            },
+            HTMLElement
+        >;
+        "flex-canvas": React.DetailedHTMLProps<
+            React.HTMLAttributes<HTMLElement> & {
+                crop?: boolean;
+                w?: string | null;
+                d?: string | null;
+                mg?: string | null;
+                pd?: string | null;
+            },
+            HTMLElement
+        >;
+        "flex-cell": React.DetailedHTMLProps<
+            React.HTMLAttributes<HTMLElement> & {
+                scrollable?: boolean;
+                fill?: boolean;
+                fit?: boolean;
+                snug?: boolean;
+                auto?: boolean;
+                stretch?: boolean;
+                center?: boolean;
+                as?: "flex-start" | "flex-end" | "center" | "baseline" | "stretch" | "auto" | "normal" | "unset" | null;
+                order?: number | null;
+                g?: number | null;
+                sh?: number | null;
+                w?: string | null;
+                h?: string | null;
+                bs?: string | null;
+                pd?: string | null;
+            },
+            HTMLElement
+        >;
+        "flex-grid": React.DetailedHTMLProps<
+            React.HTMLAttributes<HTMLElement> & {
+                crop?: boolean;
+                compact?: boolean;
+                gap?: string | null;
+                d?: string | null;
+                centered?: boolean;
             },
             HTMLElement
         >;
@@ -36,167 +71,72 @@ declare namespace JSX {
             },
             HTMLElement
         >;
-        "flex-canvas": React.DetailedHTMLProps<
+        "d-box": React.DetailedHTMLProps<
             React.HTMLAttributes<HTMLElement> & {
-                crop?: boolean | null;
-                flex?: boolean | null;
-                width?: string | null;
-                mg?: string | null;
-                pd?: string | null;
-            },
-            HTMLElement
-        >;
-        "flex-grid": React.DetailedHTMLProps<
-            React.HTMLAttributes<HTMLElement> & {
-                crop?: boolean | null;
-                flex?: boolean | null;
-                compact?: boolean | null;
-                gap?: string | null;
-            },
-            HTMLElement
-        >;
-        "flex-cell": React.DetailedHTMLProps<
-            React.HTMLAttributes<HTMLElement> & {
-                scrollable?: boolean | null;
-                flex?: boolean | null;
-                iflex?: boolean | null;
-                iblock?: boolean | null;
-                fill?: boolean | null;
-                fit?: boolean | null;
-                snug?: boolean | null;
-                auto?: boolean | null;
-                stretch?: boolean | null;
-                as?: "flex-start" | "flex-end" | "center" | "baseline" | "stretch" | "auto" | "normal" | "unset" | null;
-                order?: number | null;
-                grow?: number | null;
-                shrink?: number | null;
-                width?: string | null;
-                basis?: string | null;
-            },
-            HTMLElement
-        >;
-        "stacked-box": React.DetailedHTMLProps<
-            React.HTMLAttributes<HTMLElement> & {
-                crop?: boolean | null;
-            },
-            HTMLElement
-        >;
-        "stacked-cell": React.DetailedHTMLProps<
-            React.HTMLAttributes<HTMLElement> & {
-                rel?: boolean | null;
-                overlay?: boolean | null;
-                stretch?: boolean | null;
-                xa?: string | null; // Свойство для inset-inline-start
-                xb?: string | null; // Свойство для inset-inline-end
-                ya?: string | null; // Свойство для inset-block-start
-                yb?: string | null; // Свойство для inset-block-end
-                z?: string | null;  // Свойство для z-index
-                overcolor?: string | null; // Свойство для background overlay color
-            },
-            HTMLElement
-        >;
-        "fit-box": React.DetailedHTMLProps<
-            React.HTMLAttributes<HTMLElement> & {
-                stretch?: boolean | null;
-                flex?: boolean | null;
-                crop?: boolean | null;
-                scrollable?: boolean | null;
-                center?: boolean | null;
-                fill?: boolean | null;
-                round?: boolean | null;
-                cover?: boolean | null;
-                contain?: boolean | null;
-                width?: string | null;
-                height?: string | null;
-            },
-            HTMLElement
-        >;
-        "a-ratio": React.DetailedHTMLProps<
-            React.HTMLAttributes<HTMLElement> & {
-                fit?: boolean | null;
-                crop?: boolean | null;
-                center?: boolean | null;
-                ratio?: string | null;
-            },
-            HTMLElement
-        >;
-        "flex-divider": React.DetailedHTMLProps<
-            React.HTMLAttributes<HTMLElement> & {
-                dark?: boolean | null;
-                v?: boolean | null;
-                h?: boolean | null;
-                stretch?: boolean | null;
-                mg?: string | null;
-                width?: string | null;
-                color?: string | null;
-                size?: string | null;
+                d?: string | null;
+                media?: string | null;
             },
             HTMLElement
         >;
         "space-box": React.DetailedHTMLProps<
             React.HTMLAttributes<HTMLElement> & {
-                width?: string | null;
-                height?: string | null;
                 size?: string | null;
+                stretch?: boolean;
+                wf?: boolean;
+                hf?: boolean;
             },
             HTMLElement
         >;
         "s-box": React.DetailedHTMLProps<
             React.HTMLAttributes<HTMLElement> & {
-                inline?: boolean | null;
-                block?: boolean | null;
-                crop?: boolean | null;
-                scrollable?: boolean | null;
-                inherit?: boolean | null;
-                nowrap?: boolean | null;
-                wrap?: boolean | null;
-                color?: string | null;
-                bgc?: string | null;
-                bgi?: string | null;
-                bgr?: string | null;
-                bgp?: string | null;
-                bgs?: string | null;
-                bga?: string | null;
-                transform?: string | null;
-                fz?: string | null;
-                fw?: string | null;
-                lh?: string | null;
-                w?: string | null;
-                h?: string | null;
-                mw?: string | null;
-                mxw?: string | null;
-                mh?: string | null;
+                block?: boolean;
+                unstyle?: boolean;
+                center?: boolean;
+                fit?: boolean;
+                round?: boolean;
+                crop?: boolean;
+                stretch?: boolean;
                 tt?: string | null;
-                mxh?: string | null;
-                pis?: string | null;
-                pie?: string | null;
-                pbs?: string | null;
-                pbe?: string | null;
-                mbs?: string | null;
-                mbe?: string | null;
-                mis?: string | null;
-                mie?: string | null;
-                mg?: string | null;
-                pd?: string | null;
-                ta?: string | null;
-                op?: string | null;
-                td?: string | null;
-                br?: string | null;
-                px?: string | null;
-                py?: string | null;
-                mx?: string | null;
-                my?: string | null;
+                scrollable?: boolean;
+                srOnly?: boolean;
+                d?: string | null;
+                ws?: string | null;
+                color?: string | null;
+                bgc?: string | null;        // background-color
+                fz?: string | null;         // font-size
+                fw?: string | null;         // font-weight
+                lh?: string | null;         // line-height
+                w?: string | null;          // width
+                h?: string | null;          // height
+                mw?: string | null;         // min-width
+                mxw?: string | null;        // max-width
+                mh?: string | null;         // min-height
+                mxh?: string | null;        // max-height
+                pis?: string | null;        // padding-inline-start
+                pie?: string | null;        // padding-inline-end
+                pbs?: string | null;        // padding-block-start
+                pbe?: string | null;        // padding-block-end
+                mbs?: string | null;        // margin-block-start
+                mbe?: string | null;        // margin-block-end
+                mis?: string | null;        // margin-inline-start
+                mie?: string | null;        // margin-inline-end
+                mg?: string | null;         // margin
+                pd?: string | null;         // padding
+                ta?: string | null;         // text-align
+                op?: string | null;         // opacity
+                td?: string | null;         // text-decoration
+                br?: string | null;         // border-radius
+                pi?: string | null;         // padding-inline
+                pb?: string | null;         // padding-block
+                mi?: string | null;         // margin-inline
+                mb?: string | null;         // margin-block
+                fg?: string | null;         // flex-grow
+                ratio?: string | null;      // aspect-ratio
+                fit?: string | null;        // fit (object-fit)
+                zi?: string | null;         // z-index
+                pos?: string | null;        // position
+                inset?: string | null;      // inset
             },
-            HTMLElement
-        >;
-        "sr-only": React.DetailedHTMLProps<
-            React.HTMLAttributes<HTMLElement> & {
-                focusable?: boolean;
-            },
-            HTMLElement
-        >;
-        "ltr-only": React.DetailedHTMLProps<
-            React.HTMLAttributes<HTMLElement>,
             HTMLElement
         >;
     }

@@ -41,6 +41,12 @@ export class FlexBox extends LitElement {
     }
     :host([centered]) {
       margin: 0 auto;
+    }  
+    :host([wrap='']) {
+      flex-wrap: wrap;
+    }
+    :host([column]) {
+      flex-direction: column;
     }
     :host([center]) {
       align-items: center;
@@ -57,10 +63,10 @@ export class FlexBox extends LitElement {
     :host([gap]) ::slotted(*) {
       --f-g-pd: 0 !important;
     }
-    :host([w-fill]) ::slotted(*) {
+    :host([wf]) ::slotted(*) {
       width: 100%;
     }
-    :host([h-fill]) ::slotted(*) {
+    :host([hf]) ::slotted(*) {
       height: 100%;
     }
     ${unsafeCSS(generateRootMediaRules([{
@@ -76,19 +82,19 @@ export class FlexBox extends LitElement {
     attr: 'ac',
     cssProp: 'align-content',
   }, {
-    attr: 'direction',
+    attr: 'dn',
     cssProp: 'flex-direction',
   }, {
-    attr: 'display',
+    attr: 'd',
     cssProp: 'display',
   }, {
     attr: 'wrap',
     cssProp: 'flex-wrap',
   }, {
-    attr: 'width',
+    attr: 'w',
     cssProp: 'width',
   }, {
-    attr: 'height',
+    attr: 'h',
     cssProp: 'height',
   }, {
     attr: 'mh',
@@ -98,6 +104,9 @@ export class FlexBox extends LitElement {
     cssProp: 'min-width'
   }]))}
   `;
+
+  @property({ type: Boolean })
+  column!: boolean;
 
   @property({ type: String, reflect: true })
   jc: string | null = null;
@@ -109,60 +118,60 @@ export class FlexBox extends LitElement {
   ac: string | null = null;
 
   @property({ type: Boolean, reflect: true })
-  start: boolean | null = null;
+  start!: boolean;
 
   @property({ type: Boolean, reflect: true })
-  end: boolean | null = null;
+  end!: boolean;
 
   @property({ type: Boolean, reflect: true })
-  centered: boolean | null = null;
+  centered!: boolean;
 
   @property({ type: Boolean, reflect: true })
-  center: boolean | null = null;
-
-  @property({ type: String, reflect: true, attribute: 'mh' })
-  minHeight: string | null = null;
-
-  @property({ type: String, reflect: true, attribute: 'mw' })
-  minWidth: string | null = null;
+  center!: boolean;
 
   @property({ type: String, reflect: true })
-  height: string | null = null;
+  mh: string | null = null;
 
   @property({ type: String, reflect: true })
-  width: string | null = null;
+  mw: string | null = null;
 
-  @property({ type: Boolean, reflect: true, attribute: 'w-fill' })
-  wFill: boolean | null = null;
+  @property({ type: String, reflect: true })
+  h: string | null = null;
 
-  @property({ type: Boolean, reflect: true, attribute: 'h-fill' })
-  hFill: boolean | null = null;
+  @property({ type: String, reflect: true })
+  w: string | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  wf!: boolean;
+
+  @property({ type: Boolean, reflect: true })
+  hf!: boolean;
 
   @property({ type: String, reflect: true })
   gap: string | null = null;
 
   @property({ type: String, reflect: true })
-  direction: string = FlexBox.defaultProps.direction;
+  dn: string = FlexBox.defaultProps.direction;
 
   @property({ type: String, reflect: true })
-  display: string = FlexBox.defaultProps.display;
+  d: string = FlexBox.defaultProps.display;
 
   @property({ type: String, reflect: true })
   wrap: string = FlexBox.defaultProps.wrap;
 
   override render() {
     const styleEl = document.createElement("span");
-    setVars("display", this.display, FlexBox.defaultProps.display, styleEl, false);
-    setVars("flex-direction", this.direction, FlexBox.defaultProps.direction, styleEl);
+    setVars("display", this.d, FlexBox.defaultProps.display, styleEl, false);
+    setVars("flex-direction", this.dn, FlexBox.defaultProps.direction, styleEl);
     setVars("flex-wrap", this.wrap, FlexBox.defaultProps.wrap, styleEl);
     setVars("justify-content", this.jc, FlexBox.defaultProps.justifyContent, styleEl);
     setVars("align-items", this.ai, FlexBox.defaultProps.alignItems, styleEl);
     setVars("align-content", this.ac, FlexBox.defaultProps.alignContent, styleEl);
     setVars("gap", this.gap, FlexBox.defaultProps.gap, styleEl);
-    setVars("width", this.width, "auto", styleEl);
-    setVars("height", this.height, "auto", styleEl);
-    setVars("min-height", this.minHeight, 'auto', styleEl);
-    setVars("min-width", this.minWidth, 'auto', styleEl);
+    setVars("width", this.w, "auto", styleEl);
+    setVars("height", this.h, "auto", styleEl);
+    setVars("min-height", this.mh, 'auto', styleEl);
+    setVars("min-width", this.mw, 'auto', styleEl);
 
     return html`<style>:host{${styleEl.style.cssText} } </style><slot></slot > `;
   }

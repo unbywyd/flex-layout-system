@@ -14,16 +14,15 @@ import { generateRootMediaRules, setVars } from "../utils/media";
 let FlexCanvas = FlexCanvas_1 = class FlexCanvas extends LitElement {
     constructor() {
         super(...arguments);
-        this.crop = null;
-        this.width = null;
-        this.display = FlexCanvas_1.defaultProps.display;
+        this.w = null;
+        this.d = FlexCanvas_1.defaultProps.display;
         this.mg = null;
         this.pd = null;
     }
     render() {
         const styleEl = document.createElement("span");
-        setVars("display", this.display, FlexCanvas_1.defaultProps.display, styleEl, false);
-        setVars("max-width", this.width, FlexCanvas_1.defaultProps.maxWidth, styleEl, false);
+        setVars("display", this.d, FlexCanvas_1.defaultProps.display, styleEl, false);
+        setVars("max-width", this.w, FlexCanvas_1.defaultProps.maxWidth, styleEl, false);
         setVars("padding", this.pd, FlexCanvas_1.defaultProps.padding, styleEl, false);
         if (this.mg) {
             styleEl.style.setProperty("--f-cs-mg", this.mg);
@@ -50,28 +49,28 @@ FlexCanvas.styles = css `
       overflow: hidden;
     }
     ${unsafeCSS(generateRootMediaRules([{
-        attr: 'width',
+        attr: 'w',
         cssProp: 'max-width',
     }, {
         attr: 'pd',
         cssProp: 'padding',
     }, {
-        attr: 'display',
+        attr: 'd',
         cssProp: 'display',
     }]))}  
   `;
 __decorate([
     property({ type: Boolean, reflect: true }),
-    __metadata("design:type", Object)
+    __metadata("design:type", Boolean)
 ], FlexCanvas.prototype, "crop", void 0);
 __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", Object)
-], FlexCanvas.prototype, "width", void 0);
+], FlexCanvas.prototype, "w", void 0);
 __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", String)
-], FlexCanvas.prototype, "display", void 0);
+], FlexCanvas.prototype, "d", void 0);
 __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", Object)

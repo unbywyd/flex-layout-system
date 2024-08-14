@@ -34,30 +34,30 @@ export class FlexGrid extends LitElement {
     attr: 'gap',
     varName: 'f-g-gap'
   }, {
-    attr: 'display',
+    attr: 'd',
     cssProp: 'display',
   }]))}  
   `;
 
   @property({ type: Boolean, reflect: true })
-  crop: boolean | null = null;
+  crop!: boolean;
 
   @property({ type: Boolean, reflect: true })
-  compact: boolean | null = null;
+  compact!: boolean;
 
   @property({ type: String, reflect: true })
   gap: string | null = null;
 
   @property({ type: String, reflect: true })
-  display: string | null = null;
+  d: string | null = null;
 
   @property({ type: Boolean, reflect: true })
-  centered: boolean | null = null;
+  centered!: boolean;
 
   override render() {
     const styleEl = document.createElement("span");
     setVars("f-g-gap", this.gap, "0", styleEl, false);
-    setVars("display", this.display, "block", styleEl, false);
+    setVars("display", this.d, "block", styleEl, false);
 
     return html`<style>:host {${styleEl.style.cssText}}</style><slot></slot>`;
   }

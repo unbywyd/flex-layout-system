@@ -14,32 +14,26 @@ import { generateRootMediaRules, setVars } from "../utils/media";
 let FlexCell = FlexCell_1 = class FlexCell extends LitElement {
     constructor() {
         super(...arguments);
-        this.center = null;
-        this.fill = null;
-        this.fit = null;
-        this.snug = null;
-        this.auto = null;
-        this.stretch = null;
-        this.display = FlexCell_1.defaultProps.display;
+        this.d = FlexCell_1.defaultProps.display;
         this.as = null;
         this.order = null;
-        this.grow = null;
-        this.shrink = null;
-        this.width = null;
-        this.height = null;
-        this.basis = null;
+        this.g = null;
+        this.sh = null;
+        this.w = null;
+        this.h = null;
+        this.bs = null;
         this.pd = null;
     }
     render() {
         const styleEl = document.createElement("span");
-        setVars("display", this.display, FlexCell_1.defaultProps.display, styleEl, false);
+        setVars("display", this.d, FlexCell_1.defaultProps.display, styleEl, false);
         setVars("align-self", this.as, FlexCell_1.defaultProps.align, styleEl);
         setVars("order", this.order, FlexCell_1.defaultProps.order, styleEl);
-        setVars("flex-grow", this.grow, FlexCell_1.defaultProps.grow, styleEl);
-        setVars("flex-shrink", this.shrink, FlexCell_1.defaultProps.shrink, styleEl);
-        setVars("width", this.width, FlexCell_1.defaultProps.width, styleEl);
-        setVars("height", this.height, FlexCell_1.defaultProps.height, styleEl);
-        setVars("flex-basis", this.basis, FlexCell_1.defaultProps.basis, styleEl);
+        setVars("flex-grow", this.g, FlexCell_1.defaultProps.grow, styleEl);
+        setVars("flex-shrink", this.sh, FlexCell_1.defaultProps.shrink, styleEl);
+        setVars("width", this.w, FlexCell_1.defaultProps.width, styleEl);
+        setVars("height", this.h, FlexCell_1.defaultProps.height, styleEl);
+        setVars("flex-basis", this.bs, FlexCell_1.defaultProps.basis, styleEl);
         setVars("padding", this.pd, "0", styleEl, false);
         return html `<style>:host { ${styleEl.style.cssText}}</style><slot></slot>`;
     }
@@ -83,7 +77,7 @@ FlexCell.styles = css `
       align-items: center;
     }
     ${unsafeCSS(generateRootMediaRules([{
-        attr: 'display',
+        attr: 'd',
         cssProp: 'display',
     }, {
         attr: 'as',
@@ -95,50 +89,50 @@ FlexCell.styles = css `
         attr: 'order',
         cssProp: 'order',
     }, {
-        attr: 'grow',
+        attr: 'g',
         cssProp: 'flex-grow',
     }, {
-        attr: 'shrink',
+        attr: 'sh',
         cssProp: 'flex-shrink',
     }, {
-        attr: 'width',
+        attr: 'w',
         cssProp: 'width',
     }, {
-        attr: 'height',
+        attr: 'h',
         cssProp: 'height',
     }, {
-        attr: 'basis',
+        attr: 'bs',
         cssProp: 'flex-basis',
     }]))}
   `;
 __decorate([
     property({ type: Boolean, reflect: true }),
-    __metadata("design:type", Object)
+    __metadata("design:type", Boolean)
 ], FlexCell.prototype, "center", void 0);
 __decorate([
     property({ type: Boolean, reflect: true }),
-    __metadata("design:type", Object)
+    __metadata("design:type", Boolean)
 ], FlexCell.prototype, "fill", void 0);
 __decorate([
     property({ type: Boolean, reflect: true }),
-    __metadata("design:type", Object)
+    __metadata("design:type", Boolean)
 ], FlexCell.prototype, "fit", void 0);
 __decorate([
     property({ type: Boolean, reflect: true }),
-    __metadata("design:type", Object)
+    __metadata("design:type", Boolean)
 ], FlexCell.prototype, "snug", void 0);
 __decorate([
     property({ type: Boolean, reflect: true }),
-    __metadata("design:type", Object)
+    __metadata("design:type", Boolean)
 ], FlexCell.prototype, "auto", void 0);
 __decorate([
     property({ type: Boolean, reflect: true }),
-    __metadata("design:type", Object)
+    __metadata("design:type", Boolean)
 ], FlexCell.prototype, "stretch", void 0);
 __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", String)
-], FlexCell.prototype, "display", void 0);
+], FlexCell.prototype, "d", void 0);
 __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", Object)
@@ -150,23 +144,23 @@ __decorate([
 __decorate([
     property({ type: Number, reflect: true }),
     __metadata("design:type", Object)
-], FlexCell.prototype, "grow", void 0);
+], FlexCell.prototype, "g", void 0);
 __decorate([
     property({ type: Number, reflect: true }),
     __metadata("design:type", Object)
-], FlexCell.prototype, "shrink", void 0);
+], FlexCell.prototype, "sh", void 0);
 __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", Object)
-], FlexCell.prototype, "width", void 0);
+], FlexCell.prototype, "w", void 0);
 __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", Object)
-], FlexCell.prototype, "height", void 0);
+], FlexCell.prototype, "h", void 0);
 __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", Object)
-], FlexCell.prototype, "basis", void 0);
+], FlexCell.prototype, "bs", void 0);
 __decorate([
     property({ type: String, reflect: true }),
     __metadata("design:type", Object)

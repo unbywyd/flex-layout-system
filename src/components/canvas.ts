@@ -26,25 +26,25 @@ export class FlexCanvas extends LitElement {
       overflow: hidden;
     }
     ${unsafeCSS(generateRootMediaRules([{
-      attr: 'width',
-      cssProp: 'max-width',
-    }, {
-      attr: 'pd',
-      cssProp: 'padding',
-    }, {
-      attr: 'display',
-      cssProp: 'display',
-    }]))}  
+    attr: 'w',
+    cssProp: 'max-width',
+  }, {
+    attr: 'pd',
+    cssProp: 'padding',
+  }, {
+    attr: 'd',
+    cssProp: 'display',
+  }]))}  
   `;
 
   @property({ type: Boolean, reflect: true })
-  crop: boolean | null = null;
+  crop!: boolean;
 
   @property({ type: String, reflect: true })
-  width: string | null = null;
+  w: string | null = null;
 
   @property({ type: String, reflect: true })
-  display: string = FlexCanvas.defaultProps.display;
+  d: string = FlexCanvas.defaultProps.display;
 
   @property({ type: String, reflect: true })
   mg: string | null = null;
@@ -54,8 +54,8 @@ export class FlexCanvas extends LitElement {
 
   override render() {
     const styleEl = document.createElement("span");
-    setVars("display", this.display, FlexCanvas.defaultProps.display, styleEl, false);
-    setVars("max-width", this.width, FlexCanvas.defaultProps.maxWidth, styleEl, false);
+    setVars("display", this.d, FlexCanvas.defaultProps.display, styleEl, false);
+    setVars("max-width", this.w, FlexCanvas.defaultProps.maxWidth, styleEl, false);
     setVars("padding", this.pd, FlexCanvas.defaultProps.padding, styleEl, false);
 
     if (this.mg) {

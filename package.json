@@ -38,23 +38,21 @@
     "Chrome > 67"
   ],
   "version": "2.0.0",
-  "description": "Flex Layout System (Source)",
+  "description": "Flex Layout",
   "name": "flex-layout-system",
   "main": "dist/index.js",
   "keywords": [
-    "responsive design",
-    "grid system",
-    "front-end development",
     "Flex layout",
-    "Web Components",
-    "web development",
-    "layout library"
+    "CSS Grid",
+    "CSS Flexbox",
+    "Responsive design",
+    "Web Components"
   ],
   "author": {
     "name": "Unbywyd",
     "url": "https://unbywyd.com"
   },
-  "homepage": "https://flex-layout-system.netlify.app/",
+  "homepage": "https://flexlayout.com/",
   "repository": "git+https://github.com/unbywyd/flex-layout-system",
   "files": [
     "*"

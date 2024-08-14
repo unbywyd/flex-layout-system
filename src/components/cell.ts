@@ -52,7 +52,7 @@ export class FlexCell extends LitElement {
       align-items: center;
     }
     ${unsafeCSS(generateRootMediaRules([{
-    attr: 'display',
+    attr: 'd',
     cssProp: 'display',
   }, {
     attr: 'as',
@@ -64,43 +64,43 @@ export class FlexCell extends LitElement {
     attr: 'order',
     cssProp: 'order',
   }, {
-    attr: 'grow',
+    attr: 'g',
     cssProp: 'flex-grow',
   }, {
-    attr: 'shrink',
+    attr: 'sh',
     cssProp: 'flex-shrink',
   }, {
-    attr: 'width',
+    attr: 'w',
     cssProp: 'width',
   }, {
-    attr: 'height',
+    attr: 'h',
     cssProp: 'height',
   }, {
-    attr: 'basis',
+    attr: 'bs',
     cssProp: 'flex-basis',
   }]))}
   `;
 
   @property({ type: Boolean, reflect: true })
-  center: boolean | null = null;
+  center!: boolean;
 
   @property({ type: Boolean, reflect: true })
-  fill: boolean | null = null;
+  fill!: boolean;
 
   @property({ type: Boolean, reflect: true })
-  fit: boolean | null = null;
+  fit!: boolean;
 
   @property({ type: Boolean, reflect: true })
-  snug: boolean | null = null;
+  snug!: boolean;
 
   @property({ type: Boolean, reflect: true })
-  auto: boolean | null = null;
+  auto!: boolean;
 
   @property({ type: Boolean, reflect: true })
-  stretch: boolean | null = null;
+  stretch!: boolean;
 
   @property({ type: String, reflect: true })
-  display: string = FlexCell.defaultProps.display;
+  d: string = FlexCell.defaultProps.display;
 
   @property({ type: String, reflect: true })
   as: string | null = null;
@@ -109,33 +109,33 @@ export class FlexCell extends LitElement {
   order: number | null = null;
 
   @property({ type: Number, reflect: true })
-  grow: number | null = null;
+  g: number | null = null;
 
   @property({ type: Number, reflect: true })
-  shrink: number | null = null;
+  sh: number | null = null;
 
   @property({ type: String, reflect: true })
-  width: string | null = null;
+  w: string | null = null;
 
   @property({ type: String, reflect: true })
-  height: string | null = null;
+  h: string | null = null;
 
   @property({ type: String, reflect: true })
-  basis: string | null = null;
+  bs: string | null = null;
 
   @property({ type: String, reflect: true })
   pd: string | null = null;
 
   override render() {
     const styleEl = document.createElement("span");
-    setVars("display", this.display, FlexCell.defaultProps.display, styleEl, false);
+    setVars("display", this.d, FlexCell.defaultProps.display, styleEl, false);
     setVars("align-self", this.as, FlexCell.defaultProps.align, styleEl);
     setVars("order", this.order, FlexCell.defaultProps.order, styleEl);
-    setVars("flex-grow", this.grow, FlexCell.defaultProps.grow, styleEl);
-    setVars("flex-shrink", this.shrink, FlexCell.defaultProps.shrink, styleEl);
-    setVars("width", this.width, FlexCell.defaultProps.width, styleEl);
-    setVars("height", this.height, FlexCell.defaultProps.height, styleEl);
-    setVars("flex-basis", this.basis, FlexCell.defaultProps.basis, styleEl);
+    setVars("flex-grow", this.g, FlexCell.defaultProps.grow, styleEl);
+    setVars("flex-shrink", this.sh, FlexCell.defaultProps.shrink, styleEl);
+    setVars("width", this.w, FlexCell.defaultProps.width, styleEl);
+    setVars("height", this.h, FlexCell.defaultProps.height, styleEl);
+    setVars("flex-basis", this.bs, FlexCell.defaultProps.basis, styleEl);
     setVars("padding", this.pd, "0", styleEl, false);
 
     return html`<style>:host { ${styleEl.style.cssText}}</style><slot></slot>`;

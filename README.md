@@ -1,166 +1,105 @@
-# Introducing Flex Layout System: Empowering Effortless Web Design
+# Introducing Flex Layout System v2: Simplifying Responsive Web Design
 
-Flex Layout System is a powerful library of web components designed to enhance web design development. It provides a range of flexible components for effortless layout creation and grid implementation. The primary objective of Flex Layout System is to simplify the process of building responsive layouts across different projects and frameworks.
+Flex Layout System v2 is a streamlined library of web components designed to make responsive web design effortless. This new version brings several improvements, including a reduced number of components, built-in responsiveness, and no external stylesheets—everything is neatly packaged within the components themselves.
 
-Key advantages of Flex Layout System include its intuitive component names, which eliminate the need for complex div structures. The "flex-box" serves as the container, while the "flex-cell" acts as the adaptable building block within the grid. This simplicity improves efficiency and promotes cleaner, more maintainable code.
+## Key Features
 
-By importing Flex Layout System just once, you can seamlessly integrate it into any project and framework. The library offers well-designed components with thoughtful nesting, making it easy to customize gaps, grids, columns, and responsiveness. Additionally, the styles of these components are applied to the host element, allowing for effortless customization and overrides. Supplementary components are also included, providing efficient tools for rapid layout design with minimal CSS requirements.
-
-**See more on official website**: [https://flex-layout-system.netlify.app/](https://flex-layout-system.netlify.app/)
+- **Simplified Components**: The number of components has been significantly reduced, making them more intuitive and powerful. Each component is thoughtfully designed to cover a wide range of use cases.
+- **Built-in Responsiveness**: Components now include built-in responsive behavior, eliminating the need for additional media queries or breakpoints.
+- **Self-contained Styles**: All styles are encapsulated within the components, ensuring consistency and reducing the need for external CSS files.
+- **Framework Agnostic**: Flex Layout System v2 is compatible with any framework or project, whether you're using React, Angular, or plain HTML/JS.
 
 ## Get Started
 
-### Browser / Compiled version / Sources Web Components
+### Browser / Compiled Version / Source Web Components
 
-To get started with Flex Layout System, follow these simple steps:
-
-Step 1: Install the package Run the following command in your project to install the Flex Layout System package from npm:
+1. **Installation**:
+   Install the Flex Layout System package via npm:
 
 ```bash
 npm install flex-layout-system
 ```
 
-Step 2: Importing and using the components In your TypeScript/JS file. For example, to use the base layout without utilities and styles, import the following:
+2. **Importing Components**:
+   In your JavaScript or TypeScript file, import the library:
 
 ```js
-// Import including types
 import "flex-layout-system";
-
-// Optional. If you want to use the responsive utilities based on CSS Media Queries, import the following:
-import "flex-layout-system/dist/css-responsive.min.css";
-
-// Optional: If you want to use the responsive utilities based on the JavaScript system using the flex-media component, import the following:
-import "flex-layout-system/dist/js-responsive.min.css";
 ```
 
-If yow want to use this library in your HTML file (browser), you can use the following:
+To use the components directly in an HTML file:
 
 ```html
-<!-- Only one of the following is required. -->
-<!-- If you want to use the base layout, import the following: -->
-<script src="https://unpkg.com/flex-layout-system/dist/browser-layout.min.js"></script>
-
-<!-- If you want to use the layout with utilities, import the following: -->
 <script src="https://unpkg.com/flex-layout-system/dist/browser.min.js"></script>
-
-<!-- Optional. If you want to use the responsive utilities based on CSS Media Queries, import the following: -->
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/flex-layout-system/dist/css-responsive.min.css"
-/>
-
-<!-- Optional: If you want to use the responsive utilities based on the JavaScript system using the flex-media component, import the following: -->
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/flex-layout-system/dist/js-responsive.min.css"
-/>
 ```
 
-### React
+## Using Flex Layout System in React / Next.js
 
-If you want to use this library in your React project, you can use the following:
-
-- You need to install a package for React `flex-layout-system-react` [npm](https://www.npmjs.com/package/flex-layout-system-react)
-
-```bash
-npm install flex-layout-system-react
-```
-
-- Import the package in your React project
+1. **Client-side Import**:
+   For Next.js, add "use client"; at the top of your component file:
 
 ```js
-import "flex-layout-system-react";
+"use client";
 ```
 
-- Use the components in your React project
-
-```jsx
-import React from "react";
-import {
-  FlexBox,
-  FlexCanvas,
-  FlexGrid,
-  FlexCell,
-  StyleBox,
-} from "flex-layout-system-react";
-
-// If you want to use the responsive utilities based on CSS Media Queries, import the following:
-// Note: Note that styles are imported from the flex-layout-system package
-import "flex-layout-system/dist/css-responsive.min.css";
-
-function App() {
-  return (
-    <FlexCanvas width="1200px">
-      <FlexGrid gap="20px">
-        <FlexBox>
-          <FlexCell>
-            <StyleBox bgc="#CCC" pd="20px"></StyleBox>
-          </FlexCell>
-          <FlexCell>
-            <StyleBox bgc="#CCC" pd="20px"></StyleBox>
-          </FlexCell>
-        </FlexBox>
-      </FlexGrid>
-    </FlexCanvas>
-  );
-}
-
-export default App;
-```
-
-### NextJS
+2. **Import Types and Components**:
+   Import the types and components for use in JSX:
 
 ```js
-"use client"; // This is required for NextJS, you need to add this line at the top of the file but not in page.ts file, you need to create a new file in the components folder and import it in the page.ts file with this line
-
-import "flex-layout-system/jsx.types.d"; // Import types
+import "flex-layout-system/jsx.types.d"; // Import JSX types
 import "flex-layout-system"; // Import components
-
-// Just use the web components in your JSX file, for example:
-<flex-box jc="space-between">
-  <span>1</span>
-  <span>1</span>
-</flex-box>;
 ```
 
-### Angular
+3. **Use Components**:
+   Use the components directly in your JSX:
 
-If you want to use this library in your Angular project, you can use the following:
+```html
+<flex-box jc="space-between">
+  <flex-cell>Item 1</flex-cell>
+  <flex-cell>Item 2</flex-cell>
+</flex-box>
+```
 
-- You need to install a main package `flex-layout-system` [npm](https://www.npmjs.com/package/flex-layout-system)
+## Using Flex Layout System in Angular
+
+1. **Installation**:
+   Install the package in your Angular project:
 
 ```bash
 npm install flex-layout-system
 ```
 
-- Import the package in your Angular project
+2. **Import Components**:
+   Import the library in your Angular module:
 
 ```js
 import "flex-layout-system";
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from "@angular/core";
+
+@NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+})
+export class AppModule {}
 ```
 
-- Use the components in your Angular project
+3. **Use Components:**
+   Integrate the components into your Angular templates as needed.
 
-```js
-  import "flex-layout-system";
-  import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+## Components Overview
 
-  @NgModule({
-    ...
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  })
-```
+Here’s a brief overview of the key components available in Flex Layout System v2:
 
-- If you want to use the responsive utilities based on CSS Media Queries, import the following:
+- **`flex-canvas`**: The primary container component, used to manage the overall dimensions of the layout. It serves as the foundational wrapper in which other components, like `flex-grid` or `flex-box`, can be nested.
+- **`flex-grid`**: The main container for creating grid-based layouts. It allows you to define a grid with customizable spacing between grid cells, providing a structured and organized layout.
+- **`flex-box`**: A flexible container component designed to manage flexbox logic. It controls the alignment, direction, wrapping, and spacing of its child elements, making it ideal for responsive layouts within the grid.
+- **`flex-cell`**: The building blocks within the `flex-grid`. These are individual cells that make up the grid structure, and they can be customized for size, order, and alignment to fit various layout needs.
+- **`flex-media`**: A specialized component that monitors the size of a local container and adjusts its content accordingly. It's particularly useful for creating responsive designs that adapt to different screen sizes or container dimensions.
+- **`d-box`**: A dynamic box that adapts its display properties based on media queries, allowing for flexible and responsive content presentation.
+- **`space-box`**: A component for adding controlled spacing within layouts. It offers options for stretching and setting specific dimensions, making it easy to manage empty spaces or gaps.
+- **`s-box`**: A versatile box component that provides extensive styling and layout control. It includes options for text alignment, padding, margins, and more, making it a flexible tool for fine-tuning the design.
 
-```js
-import "flex-layout-system/dist/css-responsive.min.css";
-```
+## Conclusion
 
-or in your `angular.json` file
+Flex Layout System v2 is a powerful tool for web developers, making it easier than ever to create responsive, clean, and maintainable layouts. With a reduced number of components and built-in styling, it's designed to fit seamlessly into any project or framework.
 
-```json
-"styles": [
-  "node_modules/flex-layout-system/dist/css-responsive.min.css"
-]
-```
+For more information and examples, visit the [official website](https://flexlayout.com).

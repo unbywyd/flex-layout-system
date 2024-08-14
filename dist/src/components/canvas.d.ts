@@ -7,9 +7,9 @@ export declare class FlexCanvas extends LitElement {
         padding: string;
     };
     static styles: import("lit").CSSResult;
-    crop: boolean | null;
-    width: string | null;
-    display: string;
+    crop: boolean;
+    w: string | null;
+    d: string;
     mg: string | null;
     pd: string | null;
     render(): import("lit-html").TemplateResult<1>;
