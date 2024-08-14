@@ -63,10 +63,16 @@ export class FlexBox extends LitElement {
     :host([gap]) ::slotted(*) {
       --f-g-pd: 0 !important;
     }
-    :host([wf]) ::slotted(*) {
+    :host([wfull]) {
       width: 100%;
     }
-    :host([hf]) ::slotted(*) {
+    :host([wfit]) ::slotted(*) {
+      width: 100%;
+    }
+    :host([hfull]) {
+      height: 100%;
+    }
+    :host([hfit]) ::slotted(*) {
       height: 100%;
     }
     ${unsafeCSS(generateRootMediaRules([{
@@ -141,11 +147,17 @@ export class FlexBox extends LitElement {
   @property({ type: String, reflect: true })
   w: string | null = null;
 
-  @property({ type: Boolean, reflect: true })
-  wf!: boolean;
+  @property({ type: Boolean, reflect: true,})
+  wfull!: boolean;
 
   @property({ type: Boolean, reflect: true })
-  hf!: boolean;
+  hfull!: boolean;
+
+  @property({ type: Boolean, reflect: true })
+  wfit!: boolean;
+
+  @property({ type: Boolean, reflect: true})
+  hfit!: boolean;
 
   @property({ type: String, reflect: true })
   gap: string | null = null;

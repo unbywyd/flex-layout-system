@@ -33,8 +33,10 @@ export declare class FlexBox extends LitElement {
     mw: string | null;
     h: string | null;
     w: string | null;
-    wf: boolean;
-    hf: boolean;
+    wfull: boolean;
+    hfull: boolean;
+    wfit: boolean;
+    hfit: boolean;
     gap: string | null;
     dn: string;
     d: string;

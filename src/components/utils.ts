@@ -66,11 +66,11 @@ export class StackedBox extends LitElement {
       position: relative;      
       flex: 0 0 auto;
     }
-    :host([wf]) {
+    :host([wfull]) {
       width: 100%;      
     }
-    :host([hf]) {
-      width: 100%;      
+    :host([hfull]) {
+      height: 100%;      
     }
     :host([stretch]) {
       flex: 1 1 auto;    
@@ -91,10 +91,10 @@ export class StackedBox extends LitElement {
   stretch!: boolean;
 
   @property({ type: Boolean, reflect: true })
-  fw!: boolean;
+  wfull!: boolean;
 
   @property({ type: Boolean, reflect: true })
-  hf!: boolean
+  hfull!: boolean;
 
   override render() {
     const styleEl = document.createElement("span");
@@ -107,12 +107,15 @@ export class StackedBox extends LitElement {
 @customElement("s-box")
 export class StyleBox extends LitElement {
   static override styles = css`
-      :host { 
+    :host { 
       --f-sb-object-fit: cover;
       box-sizing: border-box;    
     }
     :host([block]) {
       display: block;
+    }
+    :host([inline]) {
+      display: inline;
     }
     :host([center]) {
       display: flex;
@@ -149,6 +152,12 @@ export class StyleBox extends LitElement {
     }
     :host([scrollable]) {
       overflow: auto;
+    }
+    :host([wfull]) {
+      width: 100%;      
+    }
+    :host([hfull]) {
+      height: 100%;      
     }
     :host([sr-only]) {
       position: absolute !important;
@@ -253,6 +262,18 @@ export class StyleBox extends LitElement {
     cssProp: 'flex-grow',
   }]))}
   `;
+  @property({ type: Boolean, reflect: true })
+  wfull!: boolean;
+
+  @property({ type: String, reflect: true })
+  bgblur: string | null = null;
+
+  @property({ type: Boolean, reflect: true })
+  hfull!: boolean;
+
+  @property({ type: Boolean, reflect: true })
+  inline!: boolean;
+
   @property({ type: String, reflect: true, attribute: "fit" })
   fit: string | null = null;
 
@@ -432,6 +453,7 @@ export class StyleBox extends LitElement {
     setVal("white-space", this.ws, styleEl);
     setVal("opacity", this.op, styleEl);
     setVal("z-index", this.zi, styleEl);
+    setVal("backdrop-filter", this.bgblur ? `blur(${this.bgblur})` : 'none', styleEl);
 
     const styles = styleEl.style.cssText;
     let cssRules = `:host{${styles}}`;

@@ -13,12 +13,16 @@ export declare class StackedBox extends LitElement {
     static styles: import("lit").CSSResult;
     size: string | null;
     stretch: boolean;
-    fw: boolean;
-    hf: boolean;
+    wfull: boolean;
+    hfull: boolean;
     render(): import("lit-html").TemplateResult<1>;
 }
 export declare class StyleBox extends LitElement {
     static styles: import("lit").CSSResult;
+    wfull: boolean;
+    bgblur: string | null;
+    hfull: boolean;
+    inline: boolean;
     fit: string | null;
     unstyle: boolean;
     block: boolean;

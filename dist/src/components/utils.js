@@ -86,11 +86,11 @@ StackedBox.styles = css `
       position: relative;      
       flex: 0 0 auto;
     }
-    :host([wf]) {
+    :host([wfull]) {
       width: 100%;      
     }
-    :host([hf]) {
-      width: 100%;      
+    :host([hfull]) {
+      height: 100%;      
     }
     :host([stretch]) {
       flex: 1 1 auto;    
@@ -114,11 +114,11 @@ __decorate([
 __decorate([
     property({ type: Boolean, reflect: true }),
     __metadata("design:type", Boolean)
-], StackedBox.prototype, "fw", void 0);
+], StackedBox.prototype, "wfull", void 0);
 __decorate([
     property({ type: Boolean, reflect: true }),
     __metadata("design:type", Boolean)
-], StackedBox.prototype, "hf", void 0);
+], StackedBox.prototype, "hfull", void 0);
 StackedBox = __decorate([
     customElement("space-box")
 ], StackedBox);
@@ -126,6 +126,7 @@ export { StackedBox };
 let StyleBox = class StyleBox extends LitElement {
     constructor() {
         super(...arguments);
+        this.bgblur = null;
         this.fit = null;
         this.unstyle = false;
         this.d = null;
@@ -205,6 +206,7 @@ let StyleBox = class StyleBox extends LitElement {
         setVal("white-space", this.ws, styleEl);
         setVal("opacity", this.op, styleEl);
         setVal("z-index", this.zi, styleEl);
+        setVal("backdrop-filter", this.bgblur ? `blur(${this.bgblur})` : 'none', styleEl);
         const styles = styleEl.style.cssText;
         let cssRules = `:host{${styles}}`;
         if (this.fit) {
@@ -214,12 +216,15 @@ let StyleBox = class StyleBox extends LitElement {
     }
 };
 StyleBox.styles = css `
-      :host { 
+    :host { 
       --f-sb-object-fit: cover;
       box-sizing: border-box;    
     }
     :host([block]) {
       display: block;
+    }
+    :host([inline]) {
+      display: inline;
     }
     :host([center]) {
       display: flex;
@@ -256,6 +261,12 @@ StyleBox.styles = css `
     }
     :host([scrollable]) {
       overflow: auto;
+    }
+    :host([wfull]) {
+      width: 100%;      
+    }
+    :host([hfull]) {
+      height: 100%;      
     }
     :host([sr-only]) {
       position: absolute !important;
@@ -360,6 +371,22 @@ StyleBox.styles = css `
         cssProp: 'flex-grow',
     }]))}
   `;
+__decorate([
+    property({ type: Boolean, reflect: true }),
+    __metadata("design:type", Boolean)
+], StyleBox.prototype, "wfull", void 0);
+__decorate([
+    property({ type: String, reflect: true }),
+    __metadata("design:type", Object)
+], StyleBox.prototype, "bgblur", void 0);
+__decorate([
+    property({ type: Boolean, reflect: true }),
+    __metadata("design:type", Boolean)
+], StyleBox.prototype, "hfull", void 0);
+__decorate([
+    property({ type: Boolean, reflect: true }),
+    __metadata("design:type", Boolean)
+], StyleBox.prototype, "inline", void 0);
 __decorate([
     property({ type: String, reflect: true, attribute: "fit" }),
     __metadata("design:type", Object)

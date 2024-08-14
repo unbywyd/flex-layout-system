@@ -18,8 +18,10 @@ declare namespace JSX {
                 h?: string | null;
                 mh?: string | null;
                 mw?: string | null;
-                wf?: boolean;
-                hf?: boolean;
+                wfull?: boolean;
+                hfull?: boolean;
+                wfit?: boolean;
+                hfit?: boolean;
             },
             HTMLElement
         >;
@@ -82,8 +84,8 @@ declare namespace JSX {
             React.HTMLAttributes<HTMLElement> & {
                 size?: string | null;
                 stretch?: boolean;
-                wf?: boolean;
-                hf?: boolean;
+                wfull?: boolean;
+                hfull?: boolean;
             },
             HTMLElement
         >;
@@ -91,7 +93,11 @@ declare namespace JSX {
             React.HTMLAttributes<HTMLElement> & {
                 block?: boolean;
                 unstyle?: boolean;
+                inline?: boolean;
+                wfull?: boolean;
+                hfull?: boolean;
                 center?: boolean;
+                bgblur?: boolean;
                 fit?: boolean;
                 round?: boolean;
                 crop?: boolean;
@@ -132,7 +138,6 @@ declare namespace JSX {
                 mb?: string | null;         // margin-block
                 fg?: string | null;         // flex-grow
                 ratio?: string | null;      // aspect-ratio
-                fit?: string | null;        // fit (object-fit)
                 zi?: string | null;         // z-index
                 pos?: string | null;        // position
                 inset?: string | null;      // inset

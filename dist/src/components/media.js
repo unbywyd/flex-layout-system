@@ -10,7 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { LitElement, html, css } from "lit";
 import { customElement, property } from "lit/decorators.js";
 import "../utils/resize-observer";
-export const MediaSizes = ["xs", "sm", "md", "lg", "xl", "xxl"];
+import { BreakpointSize } from "../config";
+export const MediaSizes = Object.values(BreakpointSize);
 const _window = (typeof window !== "undefined" ? window : {});
 let FlexMedia = class FlexMedia extends LitElement {
     constructor() {
