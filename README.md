@@ -63,7 +63,8 @@ Simply define responsive values for your attributes, separated by commas, and th
 - gap: Adjusts the spacing between grid items for different screen sizes.
 - dn (direction): Switches from row to column layout on small screens (xs).
 - w (width): Changes cell width to 100% on smaller screens (sm).
-  and more... see the [documentation](https://flexlayout.com/docs) for a full list of attributes.
+
+and more... see the [documentation](https://flexlayout.com/docs) for a full list of attributes.
 
 ### Custom Breakpoints
 
