@@ -64,7 +64,7 @@ Simply define responsive values for your attributes, separated by commas, and th
 - dn (direction): Switches from row to column layout on small screens (xs).
 - w (width): Changes cell width to 100% on smaller screens (sm).
 
-and more... see the [documentation](https://flexlayout.com/docs) for a full list of attributes.
+and more... See the [documentation](https://flexlayout.com/docs) for a full list of attributes.
 
 ### Custom Breakpoints
 
@@ -85,11 +85,11 @@ This allows you to align the breakpoints with your unique design needs, and all 
 
 ### Why It’s Powerful
 
-- No Extra CSS: Responsive logic is baked directly into your components.
-- Consistency: Predefined breakpoints ensure layouts look great across all devices.
-- Customizability: Adjust breakpoints once, and the entire layout adapts globally.
-- Ease of Use: Declare responsive values directly in your markup, no coding required.
-- With Flex Layout System, responsiveness is not an afterthought—it’s seamless and effortless.
+- **No Extra CSS**: Responsive logic is baked directly into your components.
+- **Consistency**: Predefined breakpoints ensure layouts look great across all devices.
+- **Customizability**: Adjust breakpoints once, and the entire layout adapts globally.
+- **Ease of Use**: Declare responsive values directly in your markup, no coding required.
+- **With Flex Layout System**, responsiveness is not an afterthought—it’s seamless and effortless.
 
 ## Get Started ### Browser / Compiled Version / Source Web Components 1.
 
