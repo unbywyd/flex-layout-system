@@ -1,4 +1,4 @@
-# Flex Layout System v2
+# Flex Layout System v2: Effortless Responsive Design
 
 **Effortlessly create dynamic, responsive grids with minimal code.**
 
