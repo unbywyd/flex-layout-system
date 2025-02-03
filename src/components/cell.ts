@@ -26,9 +26,10 @@ export class FlexCell extends LitElement {
   static override styles = css`
     :host {
       box-sizing: border-box;
-    }      
-    :host:not([pd]) {    
       padding: var(--f-g-pd, 0);
+    }        
+    :host([pd]) {
+      padding: var(--f-padding);
     }
     :host([crop]) {
       overflow: hidden;

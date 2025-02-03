@@ -19,9 +19,10 @@ export const generateRootMediaRules = (props) => {
         }
         let center = '';
         for (const propEl of props) {
-            const { attr, cssProp, varName } = propEl;
+            const { attr, cssProp, varName, isImportant } = propEl;
             const _varName = varName ? varName : `f-${cssProp}`;
-            center += `:host([${attr}]){--${_varName}: var(--${_varName}-${key});}`;
+            const importantFlag = isImportant ? ' !important' : '';
+            center += `:host([${attr}]){--${_varName}: var(--${_varName}-${key})${importantFlag};}`;
         }
         const after = `}`;
         result += mediaQuery + center + after;

@@ -4,6 +4,7 @@ export type RuleObject = {
     attr: string;
     varName?: string;
     cssProp?: string;
+    isImportant?: boolean;
 }
 export type Rule = RuleObject;
 
@@ -28,9 +29,10 @@ export const generateRootMediaRules = (props: Rule[]) => {
 
         let center = '';
         for (const propEl of props) {
-            const { attr, cssProp, varName } = propEl;
+            const { attr, cssProp, varName, isImportant } = propEl;
             const _varName = varName ? varName : `f-${cssProp}`;
-            center += `:host([${attr}]){--${_varName}: var(--${_varName}-${key});}`;
+            const importantFlag = isImportant ? ' !important' : '';
+            center += `:host([${attr}]){--${_varName}: var(--${_varName}-${key})${importantFlag};}`;
         }
 
         const after = `}`;
@@ -38,7 +40,8 @@ export const generateRootMediaRules = (props: Rule[]) => {
     }
 
     return result;
-}
+};
+
 
 export type ParsedMediaProp = {
     [key in BreakpointSize]: string | null;

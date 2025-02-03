@@ -3,6 +3,7 @@ export type RuleObject = {
     attr: string;
     varName?: string;
     cssProp?: string;
+    isImportant?: boolean;
 };
 export type Rule = RuleObject;
 export declare const generateRootMediaRules: (props: Rule[]) => string;
