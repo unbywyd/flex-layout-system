@@ -321,7 +321,8 @@ StyleBox.styles = css `
     }, {
         attr: 'mb',
         cssProp: 'margin-block',
-    }, {
+    },
+    {
         attr: 'pis',
         cssProp: 'padding-inline-start',
     }, {

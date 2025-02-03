@@ -212,7 +212,8 @@ export class StyleBox extends LitElement {
   }, {
     attr: 'mb',
     cssProp: 'margin-block',
-  }, {
+  }, 
+  {
     attr: 'pis',
     cssProp: 'padding-inline-start',
   }, {

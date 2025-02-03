@@ -37,7 +37,7 @@
     "Firefox > 63",
     "Chrome > 67"
   ],
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "Flex Layout",
   "name": "flex-layout-system",
   "main": "dist/index.js",
